@@ -22,7 +22,7 @@ export default function ResultsListPage() {
 
       <div>
         {counselingCenters.map((center) => (
-          <CounselingCenterCard key={center.url} counselingCenter={center} />
+          <CounselingCenterCard key={center.id} counselingCenter={center} />
         ))}
       </div>
     </Wrapper>

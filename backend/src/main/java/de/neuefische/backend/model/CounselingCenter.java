@@ -12,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class CounselingCenter {
+    private String id;
     private String name;
     private Address address;
     private String phoneNo;
