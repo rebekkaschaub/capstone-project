@@ -1,2 +1,6 @@
 spring.data.mongodb:
   database: soulmat
+
+server:
+  error:
+    include-message: always
