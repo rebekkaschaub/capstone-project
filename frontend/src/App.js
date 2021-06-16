@@ -1,9 +1,5 @@
-function App() {
-  return (
-    <div>
-        Hello
-    </div>
-  );
-}
+import ResultsListPage from "./pages/ResultsListPage";
 
-export default App;
+export default function App() {
+  return <ResultsListPage />;
+}
