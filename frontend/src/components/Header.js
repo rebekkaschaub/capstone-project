@@ -1,8 +1,7 @@
-import App from "../App";
 import Burger from "./Burger";
 import Menu from "./Menu";
 import styled from "styled-components/macro";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -30,6 +29,7 @@ const Wrapper = styled.div`
   }
 
   h2 {
+    font-family: "Mrs Saint Delafield", cursive;
     font-weight: lighter;
     text-transform: uppercase;
     margin: 0;
