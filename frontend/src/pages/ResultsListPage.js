@@ -20,7 +20,6 @@ export default function ResultsListPage() {
 const Wrapper = styled.div`
   background-color: #ffff;
   height: 100vh;
-  padding: 10px;
 
   h2 {
     margin: 0;
