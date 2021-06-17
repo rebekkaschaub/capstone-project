@@ -1,17 +1,22 @@
 import { useParams } from "react-router-dom";
-import useCounselingCenter from "../hooks/useCounselingCenter";
+import useDetails from "../hooks/useDetails";
 
 export default function DetailsPage() {
   const { id } = useParams();
-  const { counselingCenter } = useCounselingCenter(id);
+
+  const { details } = useDetails(id);
 
   return (
     <>
-      <h3>{counselingCenter.name}</h3>
-      <p>{counselingCenter.address.street} </p>
-      <p>
-        {counselingCenter.address.postalCode} {counselingCenter.address.city}
-      </p>
+      {details && (
+        <>
+          <h3>{details.name}</h3>
+          <p>{details.address.street} </p>
+          <p>
+            {details.address.postalCode} {details.address.city}
+          </p>
+        </>
+      )}
     </>
   );
 }
