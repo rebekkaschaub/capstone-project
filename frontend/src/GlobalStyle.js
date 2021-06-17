@@ -7,6 +7,7 @@ export default createGlobalStyle`
     
     html, body{
       margin: 0;
+      padding: 8px;
       font-family: 'Montserrat', sans-serif;
       color: #1c3648;
     }

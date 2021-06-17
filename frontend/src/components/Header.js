@@ -18,8 +18,7 @@ export default function Header() {
 }
 
 const Wrapper = styled.div`
-  margin: 10px;
-  padding: 0 0.5rem;
+  margin-bottom: 15px;
   border-radius: 13px;
 
   div {
