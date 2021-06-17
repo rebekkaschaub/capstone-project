@@ -3,11 +3,9 @@ import { Link } from "react-router-dom";
 
 export default function CounselingCenterCard({ counselingCenter }) {
   return (
-    <Link to={`/counseling/${counselingCenter.id}/details`}>
-      <Wrapper>
-        <h3>{counselingCenter.name}</h3>
-      </Wrapper>
-    </Link>
+    <Wrapper component={Link} to={`/counseling/${counselingCenter.id}/details`}>
+      <h3>{counselingCenter.name}</h3>
+    </Wrapper>
   );
 }
 
@@ -17,7 +15,7 @@ const Wrapper = styled.div`
   transition: 0.3s;
   box-shadow: -2px -2px 5px 2px rgba(0, 0, 0, 0.1);
   font-size: small;
-  background-color: #ffff;
+  background-color: #f7f6e7;
   border-radius: 12px;
   text-decoration: none;
 

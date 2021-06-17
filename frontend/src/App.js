@@ -10,9 +10,8 @@ export default function App() {
       <Header />
 
       <Switch>
-        <Route path="/counseling" exact>
-          <ResultsListPage />
-        </Route>
+        <Route component={ResultsListPage} path="/counseling" exact />
+        <Route component={DetailsPage} path="/counseling/:id/details" />
       </Switch>
     </div>
   );
