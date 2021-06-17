@@ -40,6 +40,5 @@ const StyledMenu = styled.nav`
   h1 {
     margin: 0;
     font-family: "Mrs Saint Delafield", cursive;
-    //letter-spacing: 0.3rem;
   }
 `;
