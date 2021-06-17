@@ -30,8 +30,6 @@ const Wrapper = styled.div`
 
   h2 {
     font-family: "Mrs Saint Delafield", cursive;
-    font-weight: lighter;
-    text-transform: uppercase;
     margin: 0;
   }
 `;
