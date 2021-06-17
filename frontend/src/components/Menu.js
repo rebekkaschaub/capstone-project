@@ -3,7 +3,7 @@ import styled from "styled-components/macro";
 export default function Menu({ open }) {
   return (
     <StyledMenu open={open}>
-      <h1>Soulmat</h1>
+      <h1>Sympathise</h1>
       <a href="/">Notfallhilfe</a>
       <a href="/counseling">Beratungsstelle finden</a>
       <a href="/">Gemerkt</a>

@@ -1,8 +1,7 @@
-import App from "../App";
 import Burger from "./Burger";
 import Menu from "./Menu";
 import styled from "styled-components/macro";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -11,7 +10,7 @@ export default function Header() {
     <Wrapper>
       <div>
         <Burger open={open} setOpen={setOpen} />
-        <h2>Soulmat</h2>
+        <h2>Sympathise</h2>
       </div>
       <Menu open={open} setOpen={setOpen} />
     </Wrapper>
