@@ -1,4 +1,4 @@
-import Burger from "./Burger";
+import BurgerMenuIcon from "./BurgerMenuIcon";
 import Menu from "./Menu";
 import styled from "styled-components/macro";
 import { useState } from "react";
@@ -9,7 +9,7 @@ export default function Header() {
   return (
     <Wrapper>
       <div>
-        <Burger open={open} setOpen={setOpen} />
+        <BurgerMenuIcon open={open} setOpen={setOpen} />
         <h2>Soulmat</h2>
       </div>
       <Menu open={open} setOpen={setOpen} />
