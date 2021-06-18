@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "soulmat",
+  "name": "soulmat - find a counseling center for your needs",
   "icons": [
     {
       "src": "favicon.ico",

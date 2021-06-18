@@ -1,4 +1,4 @@
-import Burger from "./Burger";
+import BurgerMenuIcon from "./BurgerMenuIcon";
 import Menu from "./Menu";
 import styled from "styled-components/macro";
 import { useState } from "react";
@@ -9,7 +9,7 @@ export default function Header() {
   return (
     <Wrapper>
       <div>
-        <Burger open={open} setOpen={setOpen} />
+        <BurgerMenuIcon open={open} setOpen={setOpen} />
         <h2>Sympathise</h2>
       </div>
       <Menu open={open} setOpen={setOpen} />
@@ -28,8 +28,7 @@ const Wrapper = styled.div`
   }
 
   h2 {
-    font-weight: lighter;
-    text-transform: uppercase;
+    font-family: "Mrs Saint Delafield", cursive;
     margin: 0;
   }
 `;

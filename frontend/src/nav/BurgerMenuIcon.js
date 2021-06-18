@@ -1,6 +1,6 @@
 import styled from "styled-components/macro";
 
-export default function Burger({ open, setOpen }) {
+export default function BurgerMenuIcon({ open, setOpen }) {
   return (
     <StyledBurger open={open} onClick={() => setOpen(!open)}>
       <div />
