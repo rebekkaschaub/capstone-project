@@ -1,7 +1,7 @@
 import styled from "styled-components/macro";
 
-export default function Label({ text }) {
-  return <Item>{text}</Item>;
+export default function Label({ text, color }) {
+  return <Item color={color}>{text}</Item>;
 }
 
 const Item = styled.div`
@@ -10,7 +10,7 @@ const Item = styled.div`
   box-sizing: border-box;
   font-size: 9px;
   display: inline-block;
-  background: crimson;
+  background: ${(props) => props.color || "blue"};
   color: white;
   border-radius: 13px;
   padding: 4px;
