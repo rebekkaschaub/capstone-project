@@ -15,9 +15,9 @@ export default function CounselingCenterCard({ counselingCenter }) {
 
 const Wrapper = styled.button`
   padding: 4px;
-  margin: 10px 0;
+  margin: 8px 0;
   transition: 0.3s;
-  box-shadow: -2px -2px 5px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
   font-size: small;
   background-color: #f7f6e7;
   border: none;
