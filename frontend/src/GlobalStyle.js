@@ -7,7 +7,7 @@ export default createGlobalStyle`
     
     html, body{
       margin: 0;
-      font-family: "Roboto",sans-serif;
+      font-family: 'Montserrat', sans-serif;
       color: #1c3648;
     }
 `;
