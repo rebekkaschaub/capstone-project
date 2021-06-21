@@ -35,6 +35,7 @@ export default function DetailsPage() {
 }
 
 const Wrapper = styled.div`
+  overflow-wrap: anywhere;
   h3 {
     margin: 0;
   }

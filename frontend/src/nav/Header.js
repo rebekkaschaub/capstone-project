@@ -21,7 +21,6 @@ export default function Header() {
 
 const Wrapper = styled.div`
   margin-bottom: 10px;
-  border-radius: 13px;
 
   div {
     display: flex;
