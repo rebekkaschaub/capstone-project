@@ -34,13 +34,7 @@ public class CounselingCenterController {
     @GetMapping("/{id}")
     public CounselingCenter getCounselingCenterById(@PathVariable String id){
 
-        Optional<CounselingCenter> optionalCounselingCenter = service.getCounselingCenterById(id);
-
-        if(optionalCounselingCenter.isEmpty()){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "id does not exist");
-        }
-
-        return optionalCounselingCenter.get();
+return service.getCounselingCenterById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "id does not exist"))
 
     }
 }
