@@ -5,7 +5,7 @@ export default function InfoLabels({ details }) {
   return (
     <Labels>
       {details.specializations && (
-        <div>
+        <section>
           {details.specializations.map((specialization) => (
             <Label
               key={specialization}
@@ -13,10 +13,10 @@ export default function InfoLabels({ details }) {
               color={"crimson"}
             />
           ))}
-        </div>
+        </section>
       )}
       {details.targetGroup && (
-        <div>
+        <section>
           {details.targetGroup.map((group) => (
             <Label
               key={group.displayName}
@@ -24,10 +24,10 @@ export default function InfoLabels({ details }) {
               color={"green"}
             />
           ))}
-        </div>
+        </section>
       )}
       {details.counselingSetting && (
-        <div>
+        <section>
           {details.counselingSetting.map((setting) => (
             <Label
               key={setting.displayName}
@@ -35,14 +35,14 @@ export default function InfoLabels({ details }) {
               color={"purple"}
             />
           ))}
-        </div>
+        </section>
       )}
     </Labels>
   );
 }
 
 const Labels = styled.div`
-  div {
+  section {
     display: inline-block;
   }
 `;
