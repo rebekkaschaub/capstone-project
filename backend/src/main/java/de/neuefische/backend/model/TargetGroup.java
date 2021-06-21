@@ -22,7 +22,9 @@ public enum TargetGroup {
 
     @JsonCreator
     public static TargetGroup findValue(@JsonProperty("displayName") String displayName) {
-        return Arrays.stream(TargetGroup.values()).filter(group -> group.displayName.equals(displayName)).findFirst().get();
+        return Arrays.stream(TargetGroup.values())
+                .filter(group -> group.displayName.equals(displayName))
+                .findFirst().get();
     }
 
 
