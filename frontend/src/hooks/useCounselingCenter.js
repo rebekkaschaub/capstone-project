@@ -6,7 +6,7 @@ export default function useCounselingCenter() {
 
   useEffect(() => {
     axios
-      .get("api/counseling")
+      .get("/api/counseling")
       .then((response) => response.data)
       .then(setCounselingCenters)
       .catch((err) => console.log(err.message));

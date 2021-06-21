@@ -1,5 +1,5 @@
 spring.data.mongodb:
-  database: soulmat
+  database: sympathise
 
 server:
   error:

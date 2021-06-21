@@ -1,22 +1,19 @@
 import ResultsListPage from "./pages/ResultsListPage";
 import { Switch, Route } from "react-router-dom";
-
-import Header from "./nav/Header";
 import LandingPage from "./pages/LandingPage";
+import DetailsPage from "./pages/DetailsPage";
+import Layout from "./GlobalLayout/Layout";
 
 export default function App() {
   return (
     <div>
-      <Header />
-
-      <Switch>
-        <Route path="/" exact>
-          <LandingPage />
-        </Route>
-        <Route path="/counseling" exact>
-          <ResultsListPage />
-        </Route>
-      </Switch>
+      <Layout>
+        <Switch>
+          <Route component={LandingPage} path="/" exact />
+          <Route component={ResultsListPage} path="/counseling" exact />
+          <Route component={DetailsPage} path="/counseling/:id/details" exact />
+        </Switch>
+      </Layout>
     </div>
   );
 }

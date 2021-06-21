@@ -10,4 +10,10 @@ export default createGlobalStyle`
       font-family: 'Montserrat', sans-serif;
       color: #1c3648;
     }
+
+    input, button {
+      font-size: 1em;
+      font-family: inherit;
+      color: inherit;
+    }
 `;

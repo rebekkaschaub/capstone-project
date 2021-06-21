@@ -10,7 +10,9 @@ export default function Header() {
     <Wrapper>
       <div>
         <BurgerMenuIcon open={open} setOpen={setOpen} />
-        <h2>Soulmat</h2>
+        <h2>
+          <a href="/">Sympathise</a>
+        </h2>
       </div>
       <Menu open={open} setOpen={setOpen} />
     </Wrapper>
@@ -18,9 +20,7 @@ export default function Header() {
 }
 
 const Wrapper = styled.div`
-  margin: 10px;
-  padding: 0 0.5rem;
-  border-radius: 13px;
+  margin-bottom: 10px;
 
   div {
     display: flex;
@@ -31,5 +31,10 @@ const Wrapper = styled.div`
   h2 {
     font-family: "Mrs Saint Delafield", cursive;
     margin: 0;
+
+    a {
+      color: #1c3648;
+      text-decoration: none;
+    }
   }
 `;
