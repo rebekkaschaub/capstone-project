@@ -1,5 +1,6 @@
 package de.neuefische.backend.controller;
 
+import de.neuefische.backend.dto.CounselingCenterQueryDto;
 import de.neuefische.backend.model.Address;
 import de.neuefische.backend.model.CounselingCenter;
 import de.neuefische.backend.model.CounselingSetting;
@@ -168,5 +169,50 @@ class CounselingCenterControllerTest {
         //THEN
         assertThat(response.getStatusCode(), is(HttpStatus.NOT_FOUND));
 
+    }
+
+    @Test
+    void filterCounselingCenter() {
+        //GIVEN
+        repo.save(CounselingCenter.builder()
+                .id("123")
+                .name("SEEHAUS Suchtberatungs- und Behandlungszentrum Wandsbek")
+                .address(Address.builder().street("Hasselbrookstraße 94a").postalCode("22089").city("Hamburg").build())
+                .phoneNo("040 2000102000")
+                .email("info@seehaus-hh.de")
+                .url("http://www.therapiehilfe.de")
+                .specializations(List.of("Suchtberatung", "Vermittlung von Selbsthilfegruppen", "Gruppenarbeit", "Krisenintervention"))
+                .targetGroup(List.of(TargetGroup.INDIVIDUAL))
+                .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE)).build());
+        repo.save(CounselingCenter.builder()
+                .id("456")
+                .name("Erziehungsberatungsstelle Billstedt")
+                .address(Address.builder().street("Öjendorfer Weg 10a").postalCode("22111").city("Hamburg").build())
+                .phoneNo("040 280140-620")
+                .email("erziehungsberatung@caritas-hamburg.de")
+                .url("http://www.caritas-hamburg.de ")
+                .specializations(List.of("Erziehungsberatung", "Beratung für Kinder", "Jugendliche und Eltern (einschl. Beratung bei Trennung und Scheidung)" ))
+                .targetGroup(List.of(TargetGroup.INDIVIDUAL, TargetGroup.RELATIVES))
+                .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE)).build());
+
+        //WHEN
+
+        CounselingCenterQueryDto filter = CounselingCenterQueryDto.builder().city("Hamburg").postalCode("22089").specialization("Suchtberatung").targetGroup(List.of(TargetGroup.INDIVIDUAL)).counselingSetting(List.of(CounselingSetting.INPERSON)).build();
+        ResponseEntity<CounselingCenter[]> response = testRestTemplate.postForEntity("http://localhost:"+ port +"/api/counseling/filter", filter, CounselingCenter[].class);
+
+        //THEN
+        assertThat(response.getStatusCode(), is(HttpStatus.OK));
+        assertThat(response.getBody(), arrayContainingInAnyOrder(
+                CounselingCenter.builder()
+                        .id("123")
+                        .name("SEEHAUS Suchtberatungs- und Behandlungszentrum Wandsbek")
+                        .address(Address.builder().street("Hasselbrookstraße 94a").postalCode("22089").city("Hamburg").build())
+                        .phoneNo("040 2000102000")
+                        .email("info@seehaus-hh.de")
+                        .url("http://www.therapiehilfe.de")
+                        .specializations(List.of("Suchtberatung", "Vermittlung von Selbsthilfegruppen", "Gruppenarbeit", "Krisenintervention"))
+                        .targetGroup(List.of(TargetGroup.INDIVIDUAL))
+                        .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE))
+                        .build()));
     }
 }
