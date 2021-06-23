@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export default function useCounselingCenter() {
+export default function useCounselingCenter(queryObject) {
   const [counselingCenters, setCounselingCenters] = useState([]);
 
   useEffect(() => {
@@ -12,5 +12,12 @@ export default function useCounselingCenter() {
       .catch((err) => console.log(err.message));
   }, []);
 
-  return { counselingCenters };
+  const submitQuery = () =>
+    axios
+      .post("/api/counseling/filter", queryObject)
+      .then((response) => response.data)
+      .then(setCounselingCenters)
+      .catch(console.error);
+
+  return { counselingCenters, submitQuery };
 }
