@@ -15,7 +15,6 @@ export default function TargetGroupCheckButtons({
   }
 
   useEffect(() => {
-    console.log(targetGroup);
     handleTargetGroupCheckButtonsChange(targetGroup);
   }, [targetGroup]);
 

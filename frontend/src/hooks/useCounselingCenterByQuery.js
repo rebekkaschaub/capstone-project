@@ -1,15 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export default function useCounselingCenter() {
+export default function useCounselingCenterByQuery(queryObject) {
   const [counselingCenters, setCounselingCenters] = useState([]);
 
   useEffect(() => {
     axios
-      .get("/api/counseling")
+      .post(`/api/counseling/filter`, queryObject)
       .then((response) => response.data)
       .then(setCounselingCenters)
-      .catch((err) => console.log(err.message));
+      .catch(console.error);
   }, []);
 
   return { counselingCenters };

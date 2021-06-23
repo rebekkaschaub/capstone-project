@@ -1,8 +1,7 @@
 import CounselingCenterCard from "../components/CounselingCenterCard";
 import styled from "styled-components/macro";
-import useCounselingCenter from "../hooks/useCounselingCenter";
-import { useEffect } from "react";
 import useQuery from "../utils/useQuery";
+import useCounselingCenterByQuery from "../hooks/useCounselingCenterByQuery";
 
 export default function ResultsListPage() {
   const city = useQuery().get("city");
@@ -11,17 +10,13 @@ export default function ResultsListPage() {
   const targetGroup = useQuery().getAll("targetGroup");
   const counselingSetting = useQuery().getAll("counselingSetting");
 
-  const { counselingCenters, submitQuery } = useCounselingCenter();
-
-  useEffect(() => {
-    submitQuery({
-      city,
-      postalCode,
-      specialization,
-      targetGroup,
-      counselingSetting,
-    });
-  }, []);
+  const { counselingCenters } = useCounselingCenterByQuery({
+    city,
+    postalCode,
+    specialization,
+    targetGroup,
+    counselingSetting,
+  });
 
   return counselingCenters.length === 0 ? (
     <p>Loading</p>
