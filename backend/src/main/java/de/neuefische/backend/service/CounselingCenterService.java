@@ -2,6 +2,7 @@ package de.neuefische.backend.service;
 
 import de.neuefische.backend.dto.CounselingCenterQueryDto;
 import de.neuefische.backend.model.CounselingCenter;
+import de.neuefische.backend.model.Specialization;
 import de.neuefische.backend.repos.CounselingCenterRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -41,13 +42,13 @@ public class CounselingCenterService {
        if(queryDto.getPostalCode() != null){
             query.addCriteria(Criteria.where("address.postalCode").is(queryDto.getPostalCode()));
         }
-        if(queryDto.getSpecialization() != null){
+        if(queryDto.getSpecialization() != null && queryDto.getSpecialization() != Specialization.ALL){
             query.addCriteria(Criteria.where("specializations").is(queryDto.getSpecialization()));
         }
-        if(queryDto.getCity() != null){
+        if(!queryDto.getTargetGroup().isEmpty() && queryDto.getTargetGroup() != null){
             query.addCriteria(Criteria.where("targetGroup").in(queryDto.getTargetGroup()));
         }
-        if(queryDto.getCity() != null){
+        if(!queryDto.getCounselingSetting().isEmpty() && queryDto.getCounselingSetting() != null){
             query.addCriteria(Criteria.where("counselingSetting").in(queryDto.getCounselingSetting()));
         }
 
