@@ -1,18 +1,18 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-export default function useCounselingCenter(queryObject) {
+export default function useCounselingCenter() {
   const [counselingCenters, setCounselingCenters] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get("/api/counseling")
-      .then((response) => response.data)
-      .then(setCounselingCenters)
-      .catch((err) => console.log(err.message));
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("/api/counseling")
+  //     .then((response) => response.data)
+  //     .then(setCounselingCenters)
+  //     .catch((err) => console.log(err.message));
+  // }, []);
 
-  const submitQuery = () =>
+  const submitQuery = (queryObject) =>
     axios
       .post("/api/counseling/filter", queryObject)
       .then((response) => response.data)

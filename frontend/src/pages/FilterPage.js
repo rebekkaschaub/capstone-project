@@ -1,25 +1,49 @@
 import styled from "styled-components/macro";
-import Checkbutton from "../components/Checkbutton";
 import { useState } from "react";
-import useCounselingCenter from "../hooks/useCounselingCenter";
 import { useHistory } from "react-router-dom";
+import SelectBox from "../components/FilterForm/SelectBox";
+import Location from "../components/FilterForm/Location";
+import CounselingSettingCheckButtons from "../components/FilterForm/CounselingSettingCheckButtons";
+import TargetGroupCheckButtons from "../components/FilterForm/TargetGroupCheckButtons";
 
 export default function FilterPage() {
   const history = useHistory();
   const [queryObject, setQueryObject] = useState({
     city: null,
     postalCode: null,
-    specialization: "",
+    specialization: "ALL",
     targetGroup: [],
     counselingSetting: [],
   });
 
-  const { submitQuery } = useCounselingCenter(queryObject);
-
   function handleSubmit(event) {
     event.preventDefault();
-    submitQuery();
-    history.push(`/counseling`);
+
+    let path = `/counseling?`;
+
+    path = path.concat(`specialization=${queryObject.specialization}`);
+    if (queryObject.city) {
+      path = path.concat(`&city=${queryObject.city}`);
+    }
+    if (queryObject.postalCode) {
+      path = path.concat(`&postalCode=${queryObject.postalCode}`);
+    }
+    if (queryObject.targetGroup) {
+      let queries = "";
+      queryObject.targetGroup.map(
+        (e) => (queries = queries.concat(`&targetGroup=${e}`))
+      );
+      path = path.concat(queries);
+    }
+    if (queryObject.counselingSetting) {
+      let queries = "";
+      queryObject.counselingSetting.map(
+        (e) => (queries = queries.concat(`&counselingSetting=${e}`))
+      );
+      path = path.concat(queries);
+    }
+
+    history.push(path);
   }
 
   function handleChange(event) {
@@ -27,23 +51,19 @@ export default function FilterPage() {
     setQueryObject(query);
   }
 
-  function handleClickTargetGroup(event) {
+  function handleSettingCheckButtonsChange(element) {
     const query = {
       ...queryObject,
-      targetGroup: event.target.checked
-        ? [...queryObject.targetGroup, event.target.id]
-        : queryObject.targetGroup.filter((e) => e !== event.target.id),
+      counselingSetting: element,
     };
     setQueryObject(query);
     console.log(query);
   }
 
-  function handleClickCounselingSetting(event) {
+  function handleTargetGroupCheckButtonsChange(element) {
     const query = {
       ...queryObject,
-      counselingSetting: event.target.checked
-        ? [...queryObject.counselingSetting, event.target.id]
-        : queryObject.counselingSetting.filter((e) => e !== event.target.id),
+      targetGroup: element,
     };
     setQueryObject(query);
     console.log(query);
@@ -52,140 +72,23 @@ export default function FilterPage() {
   return (
     <Wrapper onSubmit={handleSubmit}>
       <h2>Beratungsstelle finden</h2>
-      <label>
-        <p>Beratungsschwerpunkt</p>
-        <select
-          id="specialization"
-          value={queryObject.specialization}
-          onChange={handleChange}
-        >
-          <option value="">Alle Beratungsstellen</option>
-          <option value="ALLEINERZIEHENDE">
-            Beratung alleinerziehender Mütter und Väter
-          </option>
-          <option value="EHEBERATUNG">Eheberatung</option>
-          <option value="TRENNUNG_UND_SCHEIDUNG">
-            Beratung bei Trennung und Scheidung
-          </option>
-          <option value="ERZIEHUNGSBERATUNG">Erziehungsberatung</option>
-          <option value="FAMILIENBERATUNG">Familienberatung</option>
-          <option value="FRAUEN">Hilfe und Beratung für Frauen</option>
-          <option value="GEWALTOPFER">
-            Beratung für Opfer jeglicher Gewalt
-          </option>
-          <option value="GEWALTTAETER">Beratung für Gewalttäter*innen</option>
-          <option value="STI">HIV- und STI-Beratung</option>
-          <option value="JUGENDBERATUNG">Jugendberatung</option>
-          <option value="KRISENINTERVENTION">Krisenintervention</option>
-          <option value="KINDER">Beratung für Kinder und Jugendliche</option>
-          <option value="LEBENSBERATUNG">Lebensberatung</option>
-          <option value="LSBTIQ">
-            Beratung für Lesben, Schwule, Bi-, Trans- und Intersexuelle (LSBTI)
-          </option>
-          <option value="MIGRATION">
-            Beratung für Migration, Flüchtlinge und Spätaussiedler*innen
-          </option>
-          <option value="PARTNERSCHAFT">Partnerschaftsberatung</option>
-          <option value="PSYCHISCH">
-            Beratung für Menschen mit psychischer Erkrankung
-          </option>
-          <option value="ESSSTOERUNG">
-            Beratung für Menschen mit Esstörungen
-          </option>
-          <option value="SEXUALBERATUNG">Sexualberatung</option>
-          <option value="SOZIALBERATUNG">Sozialberatung</option>
-          <option value="SUCHT">Suchtberatung</option>
-          <option value="TRAUMA">Trauma</option>
-        </select>
-      </label>
+      <SelectBox
+        handleChange={handleChange}
+        specialization={queryObject.specialization}
+      />
 
-      <Location>
-        <label className="location">
-          <p>PLZ</p>
-          <input type="text" id="postalCode" onChange={handleChange} />
-        </label>
-        <label className="location">
-          <p>Ort</p>
-          <input type="text" id="city" onChange={handleChange} />
-        </label>
-      </Location>
+      <Location handleChange={handleChange} />
 
-      <section>
-        <p>Art der Beratung</p>
-        <Checkbutton>
-          <label>
-            <input
-              type="checkbox"
-              id="INPERSON"
-              className="counselingSetting"
-              onClick={handleClickCounselingSetting}
-            />
-            <span>persönlich</span>
-          </label>
-        </Checkbutton>
+      <CounselingSettingCheckButtons
+        handleSettingCheckButtonsChange={handleSettingCheckButtonsChange}
+      />
 
-        <Checkbutton>
-          <label>
-            <input
-              type="checkbox"
-              id="PHONE"
-              className="counselingSetting"
-              onClick={handleClickCounselingSetting}
-            />
-            <span>telefonisch</span>
-          </label>
-        </Checkbutton>
+      <TargetGroupCheckButtons
+        handleTargetGroupCheckButtonsChange={
+          handleTargetGroupCheckButtonsChange
+        }
+      />
 
-        <Checkbutton>
-          <label>
-            <input
-              type="checkbox"
-              id="CHAT"
-              className="counselingSetting"
-              onClick={handleClickCounselingSetting}
-            />
-            <span>chat</span>
-          </label>
-        </Checkbutton>
-        <Checkbutton>
-          <label>
-            <input
-              type="checkbox"
-              id="GROUP"
-              className="counselingSetting"
-              onClick={handleClickCounselingSetting}
-            />
-            <span>Gruppenarbeit</span>
-          </label>
-        </Checkbutton>
-      </section>
-
-      <section>
-        <p>Zielgruppe</p>
-        <Checkbutton>
-          <label>
-            <input
-              type="checkbox"
-              id="INDIVIDUAL"
-              className="targetGroup"
-              onClick={handleClickTargetGroup}
-            />
-            <span>Betroffene</span>
-          </label>
-        </Checkbutton>
-
-        <Checkbutton>
-          <label>
-            <input
-              type="checkbox"
-              id="RELATIVES"
-              className="targetGroup"
-              onClick={handleClickTargetGroup}
-            />
-            <span>Angehörige</span>
-          </label>
-        </Checkbutton>
-      </section>
       <button>Suchen</button>
     </Wrapper>
   );
@@ -208,15 +111,7 @@ const Wrapper = styled.form`
     font-size: 16px;
   }
 
-  select {
-    width: 100%;
-    text-overflow: ellipsis;
-    font-family: inherit;
-    color: inherit;
-  }
-
-  input,
-  select {
+  input {
     border: 1px solid #1c3648;
     border-radius: 4px;
     background-color: #fff;
@@ -233,16 +128,4 @@ const Wrapper = styled.form`
     border: none;
     border-radius: 4px;
   }
-`;
-
-const Location = styled.div`
-  display: flex;
-  justify-content: space-between;
-  
-  .location {
-    width: 50%;
-    
-    input {
-      width: 90%;
-    }
 `;
