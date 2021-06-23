@@ -8,9 +8,10 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 
-@JsonFormat(shape = JsonFormat.Shape.OBJECT)
+//@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 
 public enum TargetGroup {
+
     RELATIVES("Angehörige"),
     INDIVIDUAL("Betroffene");
 
@@ -20,15 +21,15 @@ public enum TargetGroup {
         this.displayName = displayName;
     }
 
-    @JsonCreator
-    public static TargetGroup findValue(@JsonProperty("displayName") String displayName) {
-
-        return Arrays.stream(TargetGroup.values())
-                .filter(el -> el.displayName.equals(displayName))
-                .findFirst()
-                .orElseThrow(NoSuchElementException::new);
-
-    }
+//    @JsonCreator
+//    public static TargetGroup findValue(@JsonProperty("displayName") String displayName) {
+//
+//        return Arrays.stream(TargetGroup.values())
+//                .filter(el -> el.displayName.equals(displayName))
+//                .findFirst()
+//                .orElseThrow(NoSuchElementException::new);
+//
+//    }
 
 
 }

@@ -9,6 +9,7 @@ import java.util.NoSuchElementException;
 
 //@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum Specialization {
+    ALL("ALL", "Alle Beratungsstellen"),
     PSYCHISCH("PSYCH", "Psychische Erkrankungen"),
     ESSSTOERUNG("ESS", "Essstörungen"),
     SUCHT("Sucht", "Suchtberatung"),
