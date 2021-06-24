@@ -7,7 +7,6 @@ export default function TargetGroupCheckButtons({
   const [targetGroup, setTargetGroup] = useState([]);
 
   function handleChange(id) {
-    console.log(id);
     const array = targetGroup.includes(id)
       ? targetGroup.filter((e) => e !== id)
       : [...targetGroup, id];
