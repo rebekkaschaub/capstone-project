@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
-//@JsonFormat(shape = JsonFormat.Shape.OBJECT)
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum Specialization {
     ALL("ALL", "Alle Beratungsstellen"),
     PSYCHISCH("PSYCH", "Psychische Erkrankungen"),
@@ -41,14 +41,14 @@ public enum Specialization {
         this.description = description;
     }
 
-//    @JsonCreator
-//    public static Specialization findValue(@JsonProperty("abbreviation") String abbreviation, @JsonProperty("description") String description) {
-//
-//        return Arrays.stream(Specialization.values())
-//                .filter(el -> el.abbreviation.equals(abbreviation))
-//                .filter(el -> el.description.equals(description))
-//                .findFirst()
-//                .orElseThrow(NoSuchElementException::new);
-//
-//    }
+    @JsonCreator
+    public static Specialization findValue(@JsonProperty("abbreviation") String abbreviation, @JsonProperty("description") String description) {
+
+        return Arrays.stream(Specialization.values())
+                .filter(el -> el.abbreviation.equals(abbreviation))
+                .filter(el -> el.description.equals(description))
+                .findFirst()
+                .orElseThrow(NoSuchElementException::new);
+
+    }
 }
