@@ -36,8 +36,7 @@ public class CounselingCenterController {
     }
 
     @GetMapping("/search")
-    public List<CounselingCenter>  searchCounselingCenter(@RequestParam MultiValueMap<String,String> params) {
-        System.out.println(params);
+    public List<CounselingCenter> searchCounselingCenterByQuery(@RequestParam MultiValueMap<String,String> params) {
         return service.filterCounselingCenter(params);
     }
 }
