@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
-//@JsonFormat(shape = JsonFormat.Shape.OBJECT)
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum CounselingSetting {
     INPERSON("persönlich"),
     PHONE("telefonisch"),
@@ -21,11 +21,11 @@ public enum CounselingSetting {
         this.displayName = displayName;
     }
 
-//    @JsonCreator
-//    public static CounselingSetting findValue(@JsonProperty("displayName") String displayName) {
-//        return Arrays.stream(CounselingSetting.values())
-//                .filter(el -> el.displayName.equals(displayName))
-//                .findFirst()
-//                .orElseThrow(NoSuchElementException::new);
-//    }
+    @JsonCreator
+    public static CounselingSetting findValue(@JsonProperty("displayName") String displayName) {
+        return Arrays.stream(CounselingSetting.values())
+                .filter(el -> el.displayName.equals(displayName))
+                .findFirst()
+                .orElseThrow(NoSuchElementException::new);
+    }
 }

@@ -8,8 +8,8 @@ export default function InfoLabels({ details }) {
         <section>
           {details.specializations.map((specialization) => (
             <Label
-              key={specialization}
-              text={specialization}
+              key={specialization.abbreviation}
+              text={specialization.description}
               color={"crimson"}
             />
           ))}
