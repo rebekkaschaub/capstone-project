@@ -1,6 +1,5 @@
 package de.neuefische.backend.controller;
 
-import de.neuefische.backend.dto.CounselingCenterQueryDto;
 import de.neuefische.backend.model.*;
 import de.neuefische.backend.repos.CounselingCenterRepo;
 import org.junit.jupiter.api.BeforeEach;
@@ -175,7 +174,7 @@ class CounselingCenterControllerTest {
     }
 
     @Test
-    void filterCounselingCenter() {
+    void searchCounselingCenter() {
         //GIVEN
         repo.save(CounselingCenter.builder()
                 .id("1")
@@ -202,8 +201,8 @@ class CounselingCenterControllerTest {
 
         //WHEN
 
-        CounselingCenterQueryDto filter = CounselingCenterQueryDto.builder().city("Hamburg").postalCode("22089").specialization(Specialization.SUCHT).targetGroup(List.of(TargetGroup.INDIVIDUAL)).counselingSetting(List.of(CounselingSetting.INPERSON)).build();
-        ResponseEntity<CounselingCenter[]> response = testRestTemplate.postForEntity("http://localhost:"+ port +"/api/counseling/filter", filter, CounselingCenter[].class);
+        String searchUrl = "?specialization=SUCHT&specialization=PSYCHISCH&city=Hamburg&targetGroup=INDIVIDUAL&counselingSetting=PHONE&counselingSetting=GROUP";
+        ResponseEntity<CounselingCenter[]> response = testRestTemplate.getForEntity("http://localhost:"+ port +"/api/counseling/search"+searchUrl, CounselingCenter[].class);
 
         //THEN
         assertThat(response.getStatusCode(), is(HttpStatus.OK));

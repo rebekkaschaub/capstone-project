@@ -1,26 +1,13 @@
 import CounselingCenterCard from "../components/CounselingCenterCard";
 import styled from "styled-components/macro";
-import useQuery from "../utils/useQuery";
 import useCounselingCenterByQuery from "../hooks/useCounselingCenterByQuery";
 
 export default function ResultsListPage() {
-  const city = useQuery().get("city");
-  const postalCode = useQuery().get("postalCode");
-  const specialization = useQuery().get("specialization");
-  const targetGroup = useQuery().getAll("targetGroup");
-  const counselingSetting = useQuery().getAll("counselingSetting");
+  const { counselingCenters } = useCounselingCenterByQuery(
+    window.location.search
+  );
 
-  const { counselingCenters } = useCounselingCenterByQuery({
-    city,
-    postalCode,
-    specialization,
-    targetGroup,
-    counselingSetting,
-  });
-
-  return counselingCenters.length === 0 ? (
-    <p>Loading</p>
-  ) : (
+  return counselingCenters.length !== 0 ? (
     <Wrapper>
       <h2>Beratungstellen in der Nähe</h2>
       <div>
@@ -29,6 +16,8 @@ export default function ResultsListPage() {
         ))}
       </div>
     </Wrapper>
+  ) : (
+    <p>Loading</p>
   );
 }
 
