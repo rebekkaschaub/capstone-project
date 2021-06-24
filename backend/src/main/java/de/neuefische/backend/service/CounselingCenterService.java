@@ -62,6 +62,4 @@ public class CounselingCenterService {
 
         return mongoTemplate.find(query, CounselingCenter.class);
     }
-
-
 }
