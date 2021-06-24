@@ -1,23 +1,30 @@
 import CounselingCenterCard from "../components/CounselingCenterCard";
 import styled from "styled-components/macro";
-import useCounselingCenterByQuery from "../hooks/useCounselingCenterByQuery";
+import { useQuery } from "react-query";
+import { loadCounselingCenterByQuery } from "../service/CounselingCenterService";
 
 export default function ResultsListPage() {
-  const { counselingCenters } = useCounselingCenterByQuery(
-    window.location.search
+  const { isLoading, isError, data, error } = useQuery("counselingCenter", () =>
+    loadCounselingCenterByQuery(window.location.search)
   );
 
-  return counselingCenters.length !== 0 ? (
+  if (isLoading) {
+    return <span>Loading...</span>;
+  }
+
+  if (isError) {
+    return <span>Error: {error.message}</span>;
+  }
+
+  return (
     <Wrapper>
       <h2>Beratungstellen in der Nähe</h2>
       <div>
-        {counselingCenters.map((center) => (
+        {data.map((center) => (
           <CounselingCenterCard key={center.id} counselingCenter={center} />
         ))}
       </div>
     </Wrapper>
-  ) : (
-    <p>Loading</p>
   );
 }
 

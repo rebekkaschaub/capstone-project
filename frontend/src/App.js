@@ -4,10 +4,13 @@ import LandingPage from "./pages/LandingPage";
 import DetailsPage from "./pages/DetailsPage";
 import Layout from "./GlobalLayout/Layout";
 import FilterPage from "./pages/FilterPage";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 export default function App() {
+  const queryClient = new QueryClient();
+
   return (
-    <div>
+    <QueryClientProvider client={queryClient}>
       <Layout>
         <Switch>
           <Route component={LandingPage} path="/" exact />
@@ -16,6 +19,6 @@ export default function App() {
           <Route component={DetailsPage} path="/counseling/:id/details" exact />
         </Switch>
       </Layout>
-    </div>
+    </QueryClientProvider>
   );
 }
