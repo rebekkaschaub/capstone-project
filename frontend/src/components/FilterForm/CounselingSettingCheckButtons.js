@@ -15,6 +15,7 @@ export default function CounselingSettingCheckButtons({
 
   useEffect(() => {
     handleSettingCheckButtonsChange(counselingSetting);
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [counselingSetting]);
 
   return (

@@ -16,6 +16,7 @@ export default function TargetGroupCheckButtons({
 
   useEffect(() => {
     handleTargetGroupCheckButtonsChange(targetGroup);
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [targetGroup]);
 
   return (

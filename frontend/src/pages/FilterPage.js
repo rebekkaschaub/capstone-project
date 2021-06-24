@@ -57,7 +57,6 @@ export default function FilterPage() {
       counselingSetting: element,
     };
     setQueryObject(query);
-    console.log(query);
   }
 
   function handleTargetGroupCheckButtonsChange(element) {
@@ -66,7 +65,6 @@ export default function FilterPage() {
       targetGroup: element,
     };
     setQueryObject(query);
-    console.log(query);
   }
 
   return (
