@@ -2,6 +2,7 @@ import BurgerMenuIcon from "./BurgerMenuIcon";
 import Menu from "./Menu";
 import styled from "styled-components/macro";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -11,7 +12,7 @@ export default function Header() {
       <div>
         <BurgerMenuIcon open={open} setOpen={setOpen} />
         <h2>
-          <a href="/">Sympathise</a>
+          <NavLink to="/">Sympathise</NavLink>
         </h2>
       </div>
       <Menu open={open} setOpen={setOpen} />
