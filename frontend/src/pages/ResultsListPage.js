@@ -19,11 +19,15 @@ export default function ResultsListPage() {
   return (
     <Wrapper>
       <h2>Beratungstellen in der Nähe</h2>
-      <div>
-        {data.map((center) => (
-          <CounselingCenterCard key={center.id} counselingCenter={center} />
-        ))}
-      </div>
+      {data.length === 0 ? (
+        <p>Leider ergab die Suche keine Ergebnisse.</p>
+      ) : (
+        <div>
+          {data.map((center) => (
+            <CounselingCenterCard key={center.id} counselingCenter={center} />
+          ))}
+        </div>
+      )}
     </Wrapper>
   );
 }
