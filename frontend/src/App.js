@@ -5,6 +5,7 @@ import DetailsPage from "./pages/DetailsPage";
 import Layout from "./GlobalLayout/Layout";
 import FilterPage from "./pages/FilterPage";
 import { QueryClient, QueryClientProvider } from "react-query";
+import ResultsMapPage from "./pages/ResultsMapPage";
 
 export default function App() {
   const queryClient = new QueryClient();
@@ -15,6 +16,7 @@ export default function App() {
         <Switch>
           <Route component={LandingPage} path="/" exact />
           <Route component={ResultsListPage} path="/counseling" exact />
+          <Route component={ResultsMapPage} path="/counseling/map" exact />
           <Route component={FilterPage} path="/search" exact />
           <Route component={DetailsPage} path="/counseling/:id/details" exact />
         </Switch>
