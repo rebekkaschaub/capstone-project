@@ -6,6 +6,7 @@ import { useState } from "react";
 import ResultsMap from "../components/ResultsMap";
 import { Link } from "react-router-dom";
 import search from "../images/search_icon.png";
+import LoadingSpinner from "../components/FilterForm/LoadingSpinner";
 
 export default function ResultsPage() {
   const [displayMap, setDisplayMap] = useState(false);
@@ -15,7 +16,7 @@ export default function ResultsPage() {
   );
 
   if (isLoading) {
-    return <span>Loading...</span>;
+    return <LoadingSpinner />;
   }
 
   if (isError) {
@@ -40,13 +41,10 @@ export default function ResultsPage() {
 }
 
 const Wrapper = styled.div`
-  //position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #ffff;
-  //border-bottom-left-radius: 12px;
-  //border-bottom-right-radius: 12px;
 
   h2 {
     margin: 0;

@@ -49,7 +49,6 @@ const StyledMenu = styled.nav`
   a {
     color: #1c3648;
     text-decoration: none;
-    //transition: color 0.3s linear;
   }
 
   a:not(:first-child) {
