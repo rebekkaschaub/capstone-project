@@ -6,7 +6,7 @@ import { useState } from "react";
 import ResultsMap from "../components/ResultsMap";
 import { Link } from "react-router-dom";
 import search from "../images/search_icon.png";
-import LoadingSpinner from "../components/FilterForm/LoadingSpinner";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 export default function ResultsPage() {
   const [displayMap, setDisplayMap] = useState(false);
