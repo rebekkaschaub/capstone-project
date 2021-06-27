@@ -1,5 +1,5 @@
 import styled from "styled-components/macro";
-import logo from "../pictures/logo.png";
+import logo from "../images/logo.png";
 import { NavLink } from "react-router-dom";
 
 export default function Menu({ open, setOpen }) {
@@ -14,13 +14,13 @@ export default function Menu({ open, setOpen }) {
       <NavLink to="/search" onClick={() => setOpen(!open)}>
         Beratungsstelle finden
       </NavLink>
-      <NavLink NavLink to="/" onClick={() => setOpen(!open)}>
+      <NavLink to="/" onClick={() => setOpen(!open)}>
         Gemerkt
       </NavLink>
-      <NavLink NavLink to="/" onClick={() => setOpen(!open)}>
+      <NavLink to="/" onClick={() => setOpen(!open)}>
         Login
       </NavLink>
-      <NavLink NavLink to="/" onClick={() => setOpen(!open)}>
+      <NavLink to="/" onClick={() => setOpen(!open)}>
         Links
       </NavLink>
       <img
