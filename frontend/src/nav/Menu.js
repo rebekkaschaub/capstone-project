@@ -6,7 +6,7 @@ export default function Menu({ open }) {
     <StyledMenu open={open}>
       <a href="/">Sympathise</a>
       <a href="/">Notfallhilfe</a>
-      <a href="/counseling">Beratungsstelle finden</a>
+      <a href="/search">Beratungsstelle finden</a>
       <a href="/">Gemerkt</a>
       <a href="/">Login</a>
       <a href="/">Links</a>

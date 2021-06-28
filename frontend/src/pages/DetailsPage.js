@@ -1,35 +1,44 @@
 import { useHistory, useParams } from "react-router-dom";
-import useDetails from "../hooks/useDetails";
 import styled from "styled-components/macro";
 import Button from "../components/Button";
 import InfoLabels from "../components/InfoLabels";
+import { useQuery } from "react-query";
+import { loadCounselingCenterById } from "../service/CounselingCenterService";
 
 export default function DetailsPage() {
   const history = useHistory();
   const { id } = useParams();
-  const { details } = useDetails(id);
 
   const handleClick = () => history.goBack();
+  const { isLoading, isError, data, error } = useQuery(["details", id], () =>
+    loadCounselingCenterById(id)
+  );
+
+  if (isLoading) {
+    return <span>Loading...</span>;
+  }
+
+  if (isError) {
+    return <span>Error: {error.message}</span>;
+  }
 
   return (
     <Details>
       <Button onClick={handleClick}>Zurück zu den Ergebnissen</Button>
-      {details && (
-        <Wrapper>
-          <h3>{details.name}</h3>
-          <p>{details.address.street} </p>
-          <p>
-            {details.address.postalCode} {details.address.city}
-          </p>
-          <p>Telefon: {details.phoneNo}</p>
-          <p>Mail: {details.email}</p>
-          <a href={details.url}>Zur Website</a>
+      <Wrapper>
+        <h3>{data.name}</h3>
+        <p>{data.address.street} </p>
+        <p>
+          {data.address.postalCode} {data.address.city}
+        </p>
+        <p>Telefon: {data.phoneNo}</p>
+        <p>Mail: {data.email}</p>
+        <a href={data.url}>Zur Website</a>
 
-          <br />
+        <br />
 
-          <InfoLabels details={details} />
-        </Wrapper>
-      )}
+        <InfoLabels details={data} />
+      </Wrapper>
     </Details>
   );
 }

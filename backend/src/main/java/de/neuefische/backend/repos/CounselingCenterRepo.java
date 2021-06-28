@@ -1,5 +1,6 @@
 package de.neuefische.backend.repos;
 
+
 import de.neuefische.backend.model.CounselingCenter;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
@@ -10,4 +11,5 @@ import java.util.List;
 public interface CounselingCenterRepo extends PagingAndSortingRepository<CounselingCenter, String> {
 
     List<CounselingCenter> findAll();
+
 }

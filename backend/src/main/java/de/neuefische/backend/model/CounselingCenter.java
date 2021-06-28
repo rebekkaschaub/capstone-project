@@ -22,7 +22,8 @@ public class CounselingCenter {
     private String phoneNo;
     private String email;
     private String url;
-    private List<String> specializations;
+    private List<Specialization> specializations;
     private List<TargetGroup> targetGroup;
     private List<CounselingSetting> counselingSetting;
+    private boolean supportGroups;
 }

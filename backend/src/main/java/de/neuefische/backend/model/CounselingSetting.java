@@ -12,7 +12,8 @@ import java.util.NoSuchElementException;
 public enum CounselingSetting {
     INPERSON("persönlich"),
     PHONE("telefonisch"),
-    CHAT("chat");
+    CHAT("chat"),
+    GROUP("Gruppenarbeit");
 
     public String displayName;
 

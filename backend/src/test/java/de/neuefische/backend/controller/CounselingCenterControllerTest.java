@@ -1,9 +1,6 @@
 package de.neuefische.backend.controller;
 
-import de.neuefische.backend.model.Address;
-import de.neuefische.backend.model.CounselingCenter;
-import de.neuefische.backend.model.CounselingSetting;
-import de.neuefische.backend.model.TargetGroup;
+import de.neuefische.backend.model.*;
 import de.neuefische.backend.repos.CounselingCenterRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -42,15 +39,16 @@ class CounselingCenterControllerTest {
     public void listAllCounselingCentersTest(){
         //GIVEN
         repo.save(CounselingCenter.builder()
-                .id("123")
+                .id("1")
                 .name("SEEHAUS Suchtberatungs- und Behandlungszentrum Wandsbek")
                 .address(Address.builder().street("Hasselbrookstraße 94a").postalCode("22089").city("Hamburg").build())
                 .phoneNo("040 2000102000")
                 .email("info@seehaus-hh.de")
                 .url("http://www.therapiehilfe.de")
-                .specializations(List.of("Suchtberatung", "Vermittlung von Selbsthilfegruppen", "Gruppenarbeit", "Krisenintervention"))
+                .specializations(List.of(Specialization.SUCHT, Specialization.PSYCHISCH))
                 .targetGroup(List.of(TargetGroup.INDIVIDUAL))
-                .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE)).build());
+                .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE, CounselingSetting.GROUP))
+                .supportGroups(false).build());
         repo.save(CounselingCenter.builder()
                 .id("456")
                 .name("Erziehungsberatungsstelle Billstedt")
@@ -58,9 +56,10 @@ class CounselingCenterControllerTest {
                 .phoneNo("040 280140-620")
                 .email("erziehungsberatung@caritas-hamburg.de")
                 .url("http://www.caritas-hamburg.de ")
-                .specializations(List.of("Erziehungsberatung", "Beratung für Kinder", "Jugendliche und Eltern (einschl. Beratung bei Trennung und Scheidung)" ))
+                .specializations(List.of(Specialization.ERZIEHUNGSBERATUNG,Specialization.KINDER, Specialization.ALLEINERZIEHENDE))
                 .targetGroup(List.of(TargetGroup.INDIVIDUAL, TargetGroup.RELATIVES))
-                .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE)).build());
+                .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE))
+                .supportGroups(true).build());
 
         //WHEN
         ResponseEntity<CounselingCenter[]> response= testRestTemplate.getForEntity("http://localhost:"+ port +"/api/counseling", CounselingCenter[].class);
@@ -69,16 +68,16 @@ class CounselingCenterControllerTest {
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
         assertThat(response.getBody(), arrayContainingInAnyOrder(
                 CounselingCenter.builder()
-                        .id("123")
+                        .id("1")
                         .name("SEEHAUS Suchtberatungs- und Behandlungszentrum Wandsbek")
                         .address(Address.builder().street("Hasselbrookstraße 94a").postalCode("22089").city("Hamburg").build())
                         .phoneNo("040 2000102000")
                         .email("info@seehaus-hh.de")
                         .url("http://www.therapiehilfe.de")
-                        .specializations(List.of("Suchtberatung", "Vermittlung von Selbsthilfegruppen", "Gruppenarbeit", "Krisenintervention"))
+                        .specializations(List.of(Specialization.SUCHT, Specialization.PSYCHISCH))
                         .targetGroup(List.of(TargetGroup.INDIVIDUAL))
-                        .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE))
-                        .build(),
+                        .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE, CounselingSetting.GROUP))
+                        .supportGroups(false).build(),
                 CounselingCenter.builder()
                         .id("456")
                         .name("Erziehungsberatungsstelle Billstedt")
@@ -86,10 +85,10 @@ class CounselingCenterControllerTest {
                         .phoneNo("040 280140-620")
                         .email("erziehungsberatung@caritas-hamburg.de")
                         .url("http://www.caritas-hamburg.de ")
-                        .specializations(List.of("Erziehungsberatung", "Beratung für Kinder", "Jugendliche und Eltern (einschl. Beratung bei Trennung und Scheidung)" ))
+                        .specializations(List.of(Specialization.ERZIEHUNGSBERATUNG,Specialization.KINDER, Specialization.ALLEINERZIEHENDE))
                         .targetGroup(List.of(TargetGroup.INDIVIDUAL, TargetGroup.RELATIVES))
                         .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE))
-                        .build()));
+                        .supportGroups(true).build()));
     }
 
     @Test
@@ -103,9 +102,10 @@ class CounselingCenterControllerTest {
                 .phoneNo("040 2000102000")
                 .email("info@seehaus-hh.de")
                 .url("http://www.therapiehilfe.de")
-                .specializations(List.of("Suchtberatung", "Vermittlung von Selbsthilfegruppen", "Gruppenarbeit", "Krisenintervention"))
+                .specializations(List.of(Specialization.SUCHT, Specialization.PSYCHISCH))
                 .targetGroup(List.of(TargetGroup.INDIVIDUAL))
-                .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE)).build());
+                .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE, CounselingSetting.GROUP))
+                .supportGroups(false).build());
         repo.save(CounselingCenter.builder()
                 .id("456")
                 .name("Erziehungsberatungsstelle Billstedt")
@@ -113,9 +113,10 @@ class CounselingCenterControllerTest {
                 .phoneNo("040 280140-620")
                 .email("erziehungsberatung@caritas-hamburg.de")
                 .url("http://www.caritas-hamburg.de ")
-                .specializations(List.of("Erziehungsberatung", "Beratung für Kinder", "Jugendliche und Eltern (einschl. Beratung bei Trennung und Scheidung)" ))
+                .specializations(List.of(Specialization.ERZIEHUNGSBERATUNG,Specialization.KINDER, Specialization.ALLEINERZIEHENDE))
                 .targetGroup(List.of(TargetGroup.INDIVIDUAL, TargetGroup.RELATIVES))
-                .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE)).build());
+                .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE))
+                .supportGroups(true).build());
 
         //WHEN
         ResponseEntity<CounselingCenter> response= testRestTemplate.getForEntity("http://localhost:"+ port +"/api/counseling/1", CounselingCenter.class);
@@ -130,10 +131,10 @@ class CounselingCenterControllerTest {
                         .phoneNo("040 2000102000")
                         .email("info@seehaus-hh.de")
                         .url("http://www.therapiehilfe.de")
-                        .specializations(List.of("Suchtberatung", "Vermittlung von Selbsthilfegruppen", "Gruppenarbeit", "Krisenintervention"))
+                        .specializations(List.of(Specialization.SUCHT, Specialization.PSYCHISCH))
                         .targetGroup(List.of(TargetGroup.INDIVIDUAL))
-                        .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE))
-                        .build()));
+                        .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE, CounselingSetting.GROUP))
+                        .supportGroups(false).build()));
     }
 
 
@@ -148,9 +149,10 @@ class CounselingCenterControllerTest {
                 .phoneNo("040 2000102000")
                 .email("info@seehaus-hh.de")
                 .url("http://www.therapiehilfe.de")
-                .specializations(List.of("Suchtberatung", "Vermittlung von Selbsthilfegruppen", "Gruppenarbeit", "Krisenintervention"))
+                .specializations(List.of(Specialization.SUCHT, Specialization.PSYCHISCH))
                 .targetGroup(List.of(TargetGroup.INDIVIDUAL))
-                .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE)).build());
+                .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE, CounselingSetting.GROUP))
+                .supportGroups(false).build());
         repo.save(CounselingCenter.builder()
                 .id("456")
                 .name("Erziehungsberatungsstelle Billstedt")
@@ -158,9 +160,10 @@ class CounselingCenterControllerTest {
                 .phoneNo("040 280140-620")
                 .email("erziehungsberatung@caritas-hamburg.de")
                 .url("http://www.caritas-hamburg.de ")
-                .specializations(List.of("Erziehungsberatung", "Beratung für Kinder", "Jugendliche und Eltern (einschl. Beratung bei Trennung und Scheidung)" ))
+                .specializations(List.of(Specialization.ERZIEHUNGSBERATUNG,Specialization.KINDER, Specialization.ALLEINERZIEHENDE))
                 .targetGroup(List.of(TargetGroup.INDIVIDUAL, TargetGroup.RELATIVES))
-                .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE)).build());
+                .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE))
+                .supportGroups(true).build());
 
         //WHEN
         ResponseEntity<CounselingCenter> response= testRestTemplate.getForEntity("http://localhost:"+ port +"/api/counseling/5", CounselingCenter.class);
@@ -168,5 +171,52 @@ class CounselingCenterControllerTest {
         //THEN
         assertThat(response.getStatusCode(), is(HttpStatus.NOT_FOUND));
 
+    }
+
+    @Test
+    void searchCounselingCenter() {
+        //GIVEN
+        repo.save(CounselingCenter.builder()
+                .id("1")
+                .name("SEEHAUS Suchtberatungs- und Behandlungszentrum Wandsbek")
+                .address(Address.builder().street("Hasselbrookstraße 94a").postalCode("22089").city("Hamburg").build())
+                .phoneNo("040 2000102000")
+                .email("info@seehaus-hh.de")
+                .url("http://www.therapiehilfe.de")
+                .specializations(List.of(Specialization.SUCHT, Specialization.PSYCHISCH))
+                .targetGroup(List.of(TargetGroup.INDIVIDUAL))
+                .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE, CounselingSetting.GROUP))
+                .supportGroups(false).build());
+        repo.save(CounselingCenter.builder()
+                .id("456")
+                .name("Erziehungsberatungsstelle Billstedt")
+                .address(Address.builder().street("Öjendorfer Weg 10a").postalCode("22111").city("Hamburg").build())
+                .phoneNo("040 280140-620")
+                .email("erziehungsberatung@caritas-hamburg.de")
+                .url("http://www.caritas-hamburg.de ")
+                .specializations(List.of(Specialization.ERZIEHUNGSBERATUNG,Specialization.KINDER, Specialization.ALLEINERZIEHENDE))
+                .targetGroup(List.of(TargetGroup.INDIVIDUAL, TargetGroup.RELATIVES))
+                .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE))
+                .supportGroups(true).build());
+
+        //WHEN
+
+        String searchUrl = "?specialization=SUCHT&specialization=PSYCHISCH&city=Hamburg&targetGroup=INDIVIDUAL&counselingSetting=PHONE&counselingSetting=GROUP";
+        ResponseEntity<CounselingCenter[]> response = testRestTemplate.getForEntity("http://localhost:"+ port +"/api/counseling/search"+searchUrl, CounselingCenter[].class);
+
+        //THEN
+        assertThat(response.getStatusCode(), is(HttpStatus.OK));
+        assertThat(response.getBody(), arrayContainingInAnyOrder(
+                CounselingCenter.builder()
+                        .id("1")
+                        .name("SEEHAUS Suchtberatungs- und Behandlungszentrum Wandsbek")
+                        .address(Address.builder().street("Hasselbrookstraße 94a").postalCode("22089").city("Hamburg").build())
+                        .phoneNo("040 2000102000")
+                        .email("info@seehaus-hh.de")
+                        .url("http://www.therapiehilfe.de")
+                        .specializations(List.of(Specialization.SUCHT, Specialization.PSYCHISCH))
+                        .targetGroup(List.of(TargetGroup.INDIVIDUAL))
+                        .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE, CounselingSetting.GROUP))
+                        .supportGroups(false).build()));
     }
 }
