@@ -4,6 +4,7 @@ import ClickAwayListener from "react-click-away-listener";
 import styled from "styled-components/macro";
 import Button from "./Button";
 import marker from "../images/marker.png";
+import { Link } from "react-router-dom";
 
 export default function ResultsMap({ results, setDisplayMap }) {
   const [selectedCounselingCenter, setSelectedCounselingCenter] =
@@ -66,11 +67,12 @@ export default function ResultsMap({ results, setDisplayMap }) {
             longitude={selectedCounselingCenter.coordinates[1]}
             onClose={() => setSelectedCounselingCenter(null)}
             dynamicPosition={true}
+            closeOnClick={false}
           >
             <ClickAwayListener onClickAway={handleClickAway}>
-              <div>
+              <Link to={`/counseling/${selectedCounselingCenter.id}/details`}>
                 <h2>{selectedCounselingCenter.name}</h2>
-              </div>
+              </Link>
             </ClickAwayListener>
           </StyledPopup>
         ) : null}
