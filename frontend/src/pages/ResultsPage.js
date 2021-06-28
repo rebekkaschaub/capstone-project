@@ -22,6 +22,10 @@ export default function ResultsPage() {
     return <span>Error: {error.message}</span>;
   }
 
+  if (data.length === 0) {
+    return <p>Leider ergab die Suche keine Ergebnisse.</p>;
+  }
+
   return (
     <Wrapper>
       <h2>Beratungstellen in der Nähe</h2>
@@ -29,7 +33,6 @@ export default function ResultsPage() {
         <img src={search} alt="" />
         Suche anpassen
       </Link>
-
       {displayMap ? (
         <ResultsMap results={data} setDisplayMap={setDisplayMap} />
       ) : (
