@@ -32,7 +32,7 @@ export default function ResultsPage() {
       <h2>Beratungstellen in der Nähe</h2>
       <Link to={"/search"}>
         <img src={search} alt="" />
-        Suche anpassen
+        Neue Suche
       </Link>
       {displayMap ? (
         <ResultsMap results={data} setDisplayMap={setDisplayMap} />
