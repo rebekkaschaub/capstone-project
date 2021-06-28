@@ -34,7 +34,9 @@ export default function DetailsPage() {
         </p>
         <p>Telefon: {data.phoneNo}</p>
         <p>Mail: {data.email}</p>
-        <a href={data.url}>Zur Website</a>
+        <a href={data.url} target="_blank" rel="noreferrer">
+          Zur Website
+        </a>
 
         <br />
 
