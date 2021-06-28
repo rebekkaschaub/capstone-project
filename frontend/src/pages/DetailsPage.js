@@ -4,6 +4,7 @@ import Button from "../components/Button";
 import InfoLabels from "../components/InfoLabels";
 import { useQuery } from "react-query";
 import { loadCounselingCenterById } from "../service/CounselingCenterService";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 export default function DetailsPage() {
   const history = useHistory();
@@ -15,7 +16,7 @@ export default function DetailsPage() {
   );
 
   if (isLoading) {
-    return <span>Loading...</span>;
+    return <LoadingSpinner />;
   }
 
   if (isError) {
