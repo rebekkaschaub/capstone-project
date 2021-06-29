@@ -19,7 +19,6 @@ public class CounselingCenter {
     private String id;
     private String name;
     private Address address;
-    private Double [] coordinates;
     private String phoneNo;
     private String email;
     private String url;

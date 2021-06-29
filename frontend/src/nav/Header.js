@@ -15,7 +15,7 @@ export default function Header() {
           <NavLink to="/">Sympathise</NavLink>
         </h2>
       </div>
-      <Menu open={open} setOpen={setOpen} />
+      <Menu open={open} setOpen={() => setOpen(!open)} />
     </Wrapper>
   );
 }

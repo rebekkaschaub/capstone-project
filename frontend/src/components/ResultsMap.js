@@ -45,8 +45,8 @@ export default function ResultsMap({ results, setDisplayMap }) {
         {results.map((result) => (
           <Marker
             key={result.id}
-            latitude={result.coordinates[0]}
-            longitude={result.coordinates[1]}
+            latitude={result.address.latitude}
+            longitude={result.address.longitude}
             offsetTop={-26.5}
             offsetLeft={-15}
           >

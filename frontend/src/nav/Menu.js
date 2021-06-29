@@ -5,22 +5,22 @@ import { NavLink } from "react-router-dom";
 export default function Menu({ open, setOpen }) {
   return (
     <StyledMenu open={open}>
-      <NavLink to="/" onClick={() => setOpen(!open)}>
+      <NavLink to="/" onClick={setOpen}>
         Sympathise
       </NavLink>
-      <NavLink to="/" onClick={() => setOpen(!open)}>
+      <NavLink to="/" onClick={setOpen}>
         Notfallhilfe
       </NavLink>
-      <NavLink to="/search" onClick={() => setOpen(!open)}>
+      <NavLink to="/search" onClick={setOpen}>
         Beratungsstelle finden
       </NavLink>
-      <NavLink to="/" onClick={() => setOpen(!open)}>
+      <NavLink to="/" onClick={setOpen}>
         Gemerkt
       </NavLink>
-      <NavLink to="/" onClick={() => setOpen(!open)}>
+      <NavLink to="/" onClick={setOpen}>
         Login
       </NavLink>
-      <NavLink to="/" onClick={() => setOpen(!open)}>
+      <NavLink to="/" onClick={setOpen}>
         Links
       </NavLink>
       <img
