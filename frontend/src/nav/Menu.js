@@ -1,15 +1,28 @@
 import styled from "styled-components/macro";
-import logo from "../pictures/logo.png";
+import logo from "../images/logo.png";
+import { NavLink } from "react-router-dom";
 
-export default function Menu({ open }) {
+export default function Menu({ open, setOpen }) {
   return (
     <StyledMenu open={open}>
-      <a href="/">Sympathise</a>
-      <a href="/">Notfallhilfe</a>
-      <a href="/search">Beratungsstelle finden</a>
-      <a href="/">Gemerkt</a>
-      <a href="/">Login</a>
-      <a href="/">Links</a>
+      <NavLink to="/" onClick={setOpen}>
+        Sympathise
+      </NavLink>
+      <NavLink to="/" onClick={setOpen}>
+        Notfallhilfe
+      </NavLink>
+      <NavLink to="/search" onClick={setOpen}>
+        Beratungsstelle finden
+      </NavLink>
+      <NavLink to="/" onClick={setOpen}>
+        Gemerkt
+      </NavLink>
+      <NavLink to="/" onClick={setOpen}>
+        Login
+      </NavLink>
+      <NavLink to="/" onClick={setOpen}>
+        Links
+      </NavLink>
       <img
         src={logo}
         alt="sympathise logo: handwritten s on a blue background"
@@ -31,11 +44,11 @@ const StyledMenu = styled.nav`
   top: 0;
   left: 0;
   transition: transform 0.3s ease-in-out;
+  z-index: 9;
 
   a {
     color: #1c3648;
     text-decoration: none;
-    //transition: color 0.3s linear;
   }
 
   a:not(:first-child) {
