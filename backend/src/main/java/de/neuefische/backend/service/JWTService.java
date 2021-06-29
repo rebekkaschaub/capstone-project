@@ -14,7 +14,7 @@ import java.util.HashMap;
 public class JWTService {
 
     @Value("${jwt.secret:}")
-    private String secret;
+    private String jwtSecret;
 
     public String createToken(HashMap<String, Object> claims, String subject) {
     return Jwts.builder()
@@ -22,7 +22,7 @@ public class JWTService {
             .setSubject(subject)
             .setIssuedAt(Date.from(Instant.now()))
             .setExpiration(Date.from(Instant.now().plus(Duration.ofHours(1))))
-            .signWith(SignatureAlgorithm.HS256, secret)
+            .signWith(SignatureAlgorithm.HS256, jwtSecret)
             .compact();
     }
 }

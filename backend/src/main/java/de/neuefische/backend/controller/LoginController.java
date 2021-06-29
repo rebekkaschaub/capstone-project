@@ -1,5 +1,6 @@
 package de.neuefische.backend.controller;
 
+import de.neuefische.backend.dto.LoginData;
 import de.neuefische.backend.security.model.AppUser;
 import de.neuefische.backend.service.JWTService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class LoginController {
     }
 
     @PostMapping
-    public String login(@RequestBody AppUser data){
+    public String login(@RequestBody LoginData data){
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(data.getUsername(),data.getPassword());
         authenticationManager.authenticate(authentication);
 
