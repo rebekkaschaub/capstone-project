@@ -3,7 +3,6 @@ import styled from "styled-components/macro";
 export default function Location({ handleChange }) {
   return (
     <Wrapper>
-      {" "}
       <label className="location">
         <p>PLZ</p>
         <input type="text" id="postalCode" onChange={handleChange} />
