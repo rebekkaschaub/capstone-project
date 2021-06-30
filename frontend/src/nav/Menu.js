@@ -7,8 +7,6 @@ import AuthContext from "../context/AuthContext";
 export default function Menu({ open, setOpen }) {
   const { token } = useContext(AuthContext);
 
-  console.log(token);
-
   return (
     <StyledMenu open={open}>
       <NavLink to="/" onClick={setOpen}>
@@ -22,7 +20,7 @@ export default function Menu({ open, setOpen }) {
       </NavLink>
       {token ? (
         <>
-          <NavLink to="/" onClick={setOpen}>
+          <NavLink to="/bookmarked" onClick={setOpen}>
             Gemerkt
           </NavLink>
           <NavLink to="/logout" onClick={setOpen}>

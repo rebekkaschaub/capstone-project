@@ -1,18 +1,21 @@
-import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import AuthContext from "./AuthContext";
+import { useMutation } from "react-query";
 
 export default function AuthProvider({ children }) {
-  const history = useHistory();
   const [token, setToken] = useState();
-  const login = (credentials) =>
-    axios
-      .post("/auth/login", credentials)
-      .then((res) => res.data)
-      .then(setToken)
-      .then(() => history.push("/"))
-      .catch((err) => console.error(err.message));
+
+  const login = useMutation(
+    (credentials) => {
+      return axios.post("/auth/login", credentials).then((res) => res.data);
+    },
+    {
+      onSuccess: (data) => {
+        setToken(data);
+      },
+    }
+  );
 
   return (
     <AuthContext.Provider value={{ token, login }}>
