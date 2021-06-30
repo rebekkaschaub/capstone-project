@@ -101,6 +101,6 @@ const MarkerButton = styled.div`
 `;
 
 const StyledPopup = styled(Popup)`
-  max-width: 70%;
+  max-width: 65%;
   overflow-wrap: break-word;
 `;
