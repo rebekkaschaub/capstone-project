@@ -23,14 +23,12 @@ export default function TargetGroupCheckButtons({
       <p>Zielgruppe</p>
       <CheckButton
         id="INDIVIDUAL"
-        className="targetGroup"
         description={"Betroffene"}
         handleChange={handleChange}
       />
 
       <CheckButton
         id="RELATIVES"
-        className="targetGroup"
         description={"Angehörige"}
         handleChange={handleChange}
       />

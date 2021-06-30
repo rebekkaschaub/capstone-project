@@ -23,28 +23,24 @@ export default function CounselingSettingCheckButtons({
       <p>Art der Beratung</p>
       <CheckButton
         id={"INPERSON"}
-        className={"counselingSetting"}
         description={"persönlich"}
         handleChange={handleChange}
       />
 
       <CheckButton
         id={"PHONE"}
-        className={"counselingSetting"}
         description={"telefonisch"}
         handleChange={handleChange}
       />
 
       <CheckButton
         id={"CHAT"}
-        className={"counselingSetting"}
         description={"chat"}
         handleChange={handleChange}
       />
 
       <CheckButton
         id={"GROUP"}
-        className={"counselingSetting"}
         description={"Gruppenberatung"}
         handleChange={handleChange}
       />

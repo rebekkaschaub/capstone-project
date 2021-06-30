@@ -40,10 +40,18 @@ public class CounselingCenterService {
 
     public List<CounselingCenter> filterCounselingCenter(MultiValueMap<String,String> params){
         Query query = new Query();
-    try{
+        try{
+            addParamsToQuery(params, query);
+        }catch (IllegalArgumentException i){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+            return mongoTemplate.find(query, CounselingCenter.class);
+    }
+
+    private void addParamsToQuery(MultiValueMap<String, String> params, Query query) {
         if(params.containsKey("city")){
         query.addCriteria(Criteria.where("address.city").is(params.get("city").get(0)));
-    }
+        }
         if(params.containsKey("postalCode")){
             query.addCriteria(Criteria.where("address.postalCode").is(params.get("postalCode").get(0)));
         }
@@ -62,10 +70,5 @@ public class CounselingCenterService {
             query.addCriteria(Criteria.where("counselingSetting").in(counselingSettings));
         }
 
-
-    }catch (IllegalArgumentException i){
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-    }
-        return mongoTemplate.find(query, CounselingCenter.class);
     }
 }
