@@ -102,14 +102,6 @@ const Wrapper = styled.form`
     font-size: 16px;
   }
 
-  input {
-    border: 1px solid #1c3648;
-    border-radius: 4px;
-    background-color: #fff;
-    padding: 6px 2px;
-    font-size: 14px;
-  }
-
   button {
     width: 100%;
     padding: 8px 0;
