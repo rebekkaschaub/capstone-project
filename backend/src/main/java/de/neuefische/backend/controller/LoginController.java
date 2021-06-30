@@ -1,8 +1,7 @@
 package de.neuefische.backend.controller;
 
 import de.neuefische.backend.dto.LoginData;
-import de.neuefische.backend.security.model.AppUser;
-import de.neuefische.backend.service.JWTService;
+import de.neuefische.backend.security.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,10 +17,10 @@ import java.util.HashMap;
 public class LoginController {
 
     private final AuthenticationManager authenticationManager;
-    private final JWTService jwtService;
+    private final JwtService jwtService;
 
     @Autowired
-    public LoginController(AuthenticationManager authenticationManager, JWTService jwtService) {
+    public LoginController(AuthenticationManager authenticationManager, JwtService jwtService) {
         this.authenticationManager = authenticationManager;
         this.jwtService = jwtService;
     }

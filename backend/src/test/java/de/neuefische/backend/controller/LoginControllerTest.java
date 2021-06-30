@@ -61,7 +61,7 @@ class LoginControllerTest {
         ResponseEntity<String> response = testRestTemplate.postForEntity("http://localhost:"+port+"/auth/login", loginData, String.class);
 
         //THEN
-        assertThat(response.getStatusCode(), is(HttpStatus.UNAUTHORIZED));
+        assertThat(response.getStatusCode(), is(HttpStatus.FORBIDDEN));
 
     }
 }
