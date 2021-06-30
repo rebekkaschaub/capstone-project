@@ -7,6 +7,8 @@ import FilterPage from "./pages/FilterPage";
 import { QueryClient, QueryClientProvider } from "react-query";
 import LoginPage from "./pages/LoginPage";
 import AuthProvider from "./context/AuthProvider";
+import BookmarkedPage from "./pages/BookmarkedPage";
+import PrivateRoute from "./routing/PrivateRoute";
 
 export default function App() {
   const queryClient = new QueryClient();
@@ -21,6 +23,7 @@ export default function App() {
             <Route component={FilterPage} path="/search" />
             <Route component={DetailsPage} path="/counseling/:id/details" />
             <Route component={LoginPage} path={"/login"} />
+            <PrivateRoute component={BookmarkedPage} path={"/bookmarked"} />
           </Switch>
         </Layout>
       </AuthProvider>
