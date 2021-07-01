@@ -6,9 +6,18 @@ export default function CounselingCenterCard({ counselingCenter }) {
   const handleClick = () =>
     history.push(`/counseling/${counselingCenter.id}/details`);
 
+  const handleBookmarkClick = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <Wrapper onClick={handleClick}>
       <h3>{counselingCenter.name}</h3>
+      {/*<UseAnimations*/}
+      {/*  animation={bookmark}*/}
+      {/*  size={56}*/}
+      {/*  style={{ cursor: "pointer", padding: 100 }}*/}
+      {/*/>*/}
     </Wrapper>
   );
 }
@@ -27,5 +36,10 @@ const Wrapper = styled.button`
   &:hover {
     box-shadow: 0 15px 9px -7px rgba(0, 0, 0, 0.1);
     transform: scale(1.01, 1.01);
+  }
+
+  h3 {
+    display: inline-block;
+    width: 90%;
   }
 `;
