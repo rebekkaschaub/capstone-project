@@ -26,4 +26,5 @@ public class CounselingCenter {
     private List<TargetGroup> targetGroup;
     private List<CounselingSetting> counselingSetting;
     private boolean supportGroups;
+    private List<String> bookmarkedBy;
 }
