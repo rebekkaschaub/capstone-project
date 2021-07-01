@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @Component
 public class JwtAuthFilter extends OncePerRequestFilter {
@@ -33,7 +34,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
        if(token != null && !token.isBlank()){
            try{
-               Claims claims = jwtService.parseClaims(token);
+               Claims claims = this.jwtService.parseClaims(token);
                setSecurityContext(claims.getSubject());
            }catch(Exception e){
                throw new ResponseStatusException(HttpStatus.FORBIDDEN, "invalid token");
@@ -52,7 +53,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     }
 
     private void setSecurityContext(String subject) {
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(subject, "");
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(subject, "", List.of());
         SecurityContextHolder.getContext().setAuthentication(token);
     }
 }
