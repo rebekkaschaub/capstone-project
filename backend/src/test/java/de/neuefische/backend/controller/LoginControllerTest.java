@@ -1,6 +1,6 @@
 package de.neuefische.backend.controller;
 
-import de.neuefische.backend.dto.LoginData;
+import de.neuefische.backend.dto.LoginDataDto;
 import de.neuefische.backend.security.model.AppUser;
 import de.neuefische.backend.security.repository.AppUserRepository;
 import io.jsonwebtoken.Claims;
@@ -14,8 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.TestPropertySource;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -42,8 +40,8 @@ class LoginControllerTest {
         appUserRepository.save(AppUser.builder().username("Test User").password(passwordEncoder.encode("testPa$$word")).build());
 
         //WHEN
-        LoginData loginData = LoginData.builder().username("Test User").password("testPa$$word").build();
-        ResponseEntity<String> response = testRestTemplate.postForEntity("http://localhost:"+port+"/auth/login", loginData, String.class);
+        LoginDataDto loginDataDto = LoginDataDto.builder().username("Test User").password("testPa$$word").build();
+        ResponseEntity<String> response = testRestTemplate.postForEntity("http://localhost:"+port+"/auth/login", loginDataDto, String.class);
 
         //THEN
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
@@ -57,8 +55,8 @@ class LoginControllerTest {
         appUserRepository.save(AppUser.builder().username("Test User").password(passwordEncoder.encode("testPa$$word")).build());
 
         //WHEN
-        LoginData loginData = LoginData.builder().username("Test User").password("wrongPa$$word").build();
-        ResponseEntity<String> response = testRestTemplate.postForEntity("http://localhost:"+port+"/auth/login", loginData, String.class);
+        LoginDataDto loginDataDto = LoginDataDto.builder().username("Test User").password("wrongPa$$word").build();
+        ResponseEntity<String> response = testRestTemplate.postForEntity("http://localhost:"+port+"/auth/login", loginDataDto, String.class);
 
         //THEN
         assertThat(response.getStatusCode(), is(HttpStatus.FORBIDDEN));
