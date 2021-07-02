@@ -29,7 +29,7 @@ export default function DetailsPage() {
 
   return (
     <Details>
-      <Button onClick={handleClick}>Zurück zu den Ergebnissen</Button>
+      <Button onClick={handleClick}>Zurück</Button>
       <Wrapper>
         <h3>{data.name}</h3>
         {userData && (

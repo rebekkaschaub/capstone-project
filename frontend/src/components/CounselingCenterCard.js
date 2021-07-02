@@ -11,10 +11,6 @@ export default function CounselingCenterCard({ counselingCenter }) {
   const handleClick = () =>
     history.push(`/counseling/${counselingCenter.id}/details`);
 
-  // const handleBookmarkClick = (event) => {
-  //   event.preventDefault();
-  // };
-
   return (
     <Wrapper onClick={handleClick}>
       <h3>{counselingCenter.name}</h3>
