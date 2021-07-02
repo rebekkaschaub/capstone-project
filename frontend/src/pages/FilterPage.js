@@ -19,31 +19,24 @@ export default function FilterPage() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    let path = `/counseling?`;
-
-    path = path.concat(`specialization=${queryObject.specialization}`);
+    const path = ["/counseling?"];
+    path.push(`specialization=${queryObject.specialization}`);
     if (queryObject.city) {
-      path = path.concat(`&city=${queryObject.city}`);
+      path.push(`city=${queryObject.city}`);
     }
     if (queryObject.postalCode) {
-      path = path.concat(`&postalCode=${queryObject.postalCode}`);
+      path.push(`postalCode=${queryObject.postalCode}`);
     }
     if (queryObject.targetGroup) {
-      let queries = "";
-      queryObject.targetGroup.map(
-        (e) => (queries = queries.concat(`&targetGroup=${e}`))
-      );
-      path = path.concat(queries);
+      queryObject.targetGroup.map((e) => path.push(`targetGroup=${e}`));
     }
     if (queryObject.counselingSetting) {
-      let queries = "";
-      queryObject.counselingSetting.map(
-        (e) => (queries = queries.concat(`&counselingSetting=${e}`))
+      queryObject.counselingSetting.map((e) =>
+        path.push(`counselingSetting=${e}`)
       );
-      path = path.concat(queries);
     }
 
-    history.push(path);
+    history.push(path.join("&"));
   }
 
   function handleChange(event) {
@@ -107,14 +100,6 @@ const Wrapper = styled.form`
     margin-bottom: 4px;
     font-weight: bold;
     font-size: 16px;
-  }
-
-  input {
-    border: 1px solid #1c3648;
-    border-radius: 4px;
-    background-color: #fff;
-    padding: 6px 2px;
-    font-size: 14px;
   }
 
   button {

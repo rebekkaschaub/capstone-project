@@ -1,12 +1,7 @@
 import styled from "styled-components/macro";
 import { useState } from "react";
 
-export default function CheckButton({
-  id,
-  className,
-  description,
-  handleChange,
-}) {
+export default function CheckButton({ id, description, handleChange }) {
   const [isChecked, setIsChecked] = useState(false);
 
   function toggleCheckButton() {
@@ -20,7 +15,6 @@ export default function CheckButton({
         <input
           type="checkbox"
           id={id}
-          className={className}
           checked={isChecked}
           onChange={toggleCheckButton}
         />

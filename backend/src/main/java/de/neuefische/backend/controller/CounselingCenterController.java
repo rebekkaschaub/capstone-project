@@ -25,9 +25,7 @@ public class CounselingCenterController {
 
     @GetMapping
     public List<CounselingCenter> listAllCounselingCenters(){
-
         return service.listAllCounselingCenters();
-
     }
 
     @GetMapping("/{id}")

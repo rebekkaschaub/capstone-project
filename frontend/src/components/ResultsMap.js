@@ -63,8 +63,8 @@ export default function ResultsMap({ results, setDisplayMap }) {
 
         {selectedCounselingCenter ? (
           <StyledPopup
-            latitude={selectedCounselingCenter.coordinates[0]}
-            longitude={selectedCounselingCenter.coordinates[1]}
+            latitude={selectedCounselingCenter.address.latitude}
+            longitude={selectedCounselingCenter.address.longitude}
             onClose={() => setSelectedCounselingCenter(null)}
             dynamicPosition={true}
             closeOnClick={false}

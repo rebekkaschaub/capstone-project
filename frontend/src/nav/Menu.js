@@ -1,8 +1,12 @@
 import styled from "styled-components/macro";
 import logo from "../images/logo.png";
 import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import AuthContext from "../context/AuthContext";
 
 export default function Menu({ open, setOpen }) {
+  const { token } = useContext(AuthContext);
+
   return (
     <StyledMenu open={open}>
       <NavLink to="/" onClick={setOpen}>
@@ -14,12 +18,20 @@ export default function Menu({ open, setOpen }) {
       <NavLink to="/search" onClick={setOpen}>
         Beratungsstelle finden
       </NavLink>
-      <NavLink to="/" onClick={setOpen}>
-        Gemerkt
-      </NavLink>
-      <NavLink to="/" onClick={setOpen}>
-        Login
-      </NavLink>
+      {token ? (
+        <>
+          <NavLink to="/bookmarked" onClick={setOpen}>
+            Gemerkt
+          </NavLink>
+          <NavLink to="/logout" onClick={setOpen}>
+            Logout
+          </NavLink>
+        </>
+      ) : (
+        <NavLink to="/login" onClick={setOpen}>
+          Login
+        </NavLink>
+      )}
       <NavLink to="/" onClick={setOpen}>
         Links
       </NavLink>
