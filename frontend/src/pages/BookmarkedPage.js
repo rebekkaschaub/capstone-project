@@ -4,6 +4,7 @@ import styled from "styled-components/macro";
 import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
 import LoadingSpinner from "../components/LoadingSpinner";
+import CounselingCenterCard from "../components/CounselingCenterCard";
 
 export default function BookmarkedPage() {
   const { token } = useContext(AuthContext);
@@ -28,7 +29,7 @@ export default function BookmarkedPage() {
     <Wrapper>
       <h2>Gemerkt</h2>
       {data.map((el) => (
-        <div>{el.name}</div>
+        <CounselingCenterCard key={el.id} counselingCenter={el} />
       ))}
     </Wrapper>
   );
