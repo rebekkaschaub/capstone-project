@@ -24,14 +24,9 @@ public class BookmarkController {
     public List<CounselingCenter> listBookmarkedCounselingCenters(Principal principal){
         return service.listBookmarkedCounselingCenters(principal.getName());
     }
-    
-    @PostMapping
-    public CounselingCenter addUserToBookmarkedBy(@RequestBody CounselingCenterDto counselingCenterDto, Principal principal){
-        return service.addUserToBookmarkedBy(counselingCenterDto.getId(), principal.getName());
-    }
-    
-    @DeleteMapping
-    public CounselingCenter deleteUserFromBookmarkedBy(@RequestBody CounselingCenterDto counselingCenterDto, Principal principal){
-        return service.deleteUserFromBookmarkedBy(counselingCenterDto.getId(), principal.getName());
+
+    @PutMapping
+    public CounselingCenter updateBookmarkedBy(@RequestBody CounselingCenterDto counselingCenterDto, Principal principal){
+        return service.updateBookMarkedBy(counselingCenterDto.getId(), principal.getName());
     }
 }

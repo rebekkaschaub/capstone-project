@@ -27,28 +27,19 @@ public class BookmarkService {
         return counselingCenterRepo.findByBookmarkedBy(username);
     }
 
-    public CounselingCenter addUserToBookmarkedBy(String counselingCenterId, String username) {
+
+    public CounselingCenter updateBookMarkedBy(String counselingCenterId, String username) {
         CounselingCenter counselingCenterToUpdate = counselingCenterRepo.findById(counselingCenterId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "CounselingCenter not found"));
 
         if(counselingCenterToUpdate.getBookmarkedBy().contains(username)){
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Already bookmarked");
+            counselingCenterToUpdate.getBookmarkedBy().remove(username);
+        }else{
+            counselingCenterToUpdate.getBookmarkedBy().add(username);
         }
 
-        counselingCenterToUpdate.getBookmarkedBy().add(username);
         return counselingCenterRepo.save(counselingCenterToUpdate);
     }
 
-    public CounselingCenter deleteUserFromBookmarkedBy(String counselingCenterId, String username) {
-        CounselingCenter counselingCenterToUpdate = counselingCenterRepo.findById(counselingCenterId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "CounselingCenter not found"));
 
-        List<String> bookmarkedBy = counselingCenterToUpdate
-                .getBookmarkedBy().stream()
-                .filter((el)-> !el.equals(username))
-                .collect(Collectors.toList());
-
-        counselingCenterToUpdate.setBookmarkedBy(bookmarkedBy);
-        return counselingCenterRepo.save(counselingCenterToUpdate);
-    }
 }

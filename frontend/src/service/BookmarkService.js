@@ -12,8 +12,8 @@ export function listAllBookmarksOfUser(token) {
     .then((response) => response.data);
 }
 
-export function addNewBookmark(token, id) {
+export function updateBookmarks(token, id) {
   return axios
-    .post(`/api/bookmark`, { id }, config(token))
+    .put(`/api/bookmark`, { id }, config(token))
     .then((response) => response.data);
 }
