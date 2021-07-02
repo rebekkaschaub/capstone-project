@@ -2,7 +2,7 @@ import styled from "styled-components/macro";
 import { useMutation, useQueryClient } from "react-query";
 import { updateBookmarks } from "../service/BookmarkService";
 import bookmark_unmarked from "../images/bookmark_unmarked.png";
-import bookmark_marked from "../images/bookmark_marked_red.png";
+import bookmark_marked from "../images/bookmark_marked.png";
 
 export default function BookmarkButton({ marked, id, token }) {
   const queryClient = useQueryClient();
