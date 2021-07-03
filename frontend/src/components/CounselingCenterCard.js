@@ -1,6 +1,6 @@
 import styled from "styled-components/macro";
 import { useHistory } from "react-router-dom";
-import bookmark_marked from "../images/bookmark_marked_red.png";
+import bookmark_marked from "../images/bookmark_marked.png";
 import AuthContext from "../context/AuthContext";
 import { useContext } from "react";
 import bookmark_unmarked from "../images/bookmark_unmarked.png";
@@ -14,10 +14,15 @@ export default function CounselingCenterCard({ counselingCenter }) {
   return (
     <Wrapper onClick={handleClick}>
       <h3>{counselingCenter.name}</h3>
-      {counselingCenter.bookmarkedBy.includes(userData.sub) ? (
-        <img src={bookmark_marked} alt="red bookmark icon" />
-      ) : (
-        <img src={bookmark_unmarked} alt="bookmark icon with blue border" />
+
+      {userData && (
+        <>
+          {counselingCenter.bookmarkedBy.includes(userData.sub) ? (
+            <img src={bookmark_marked} alt="red bookmark icon" />
+          ) : (
+            <img src={bookmark_unmarked} alt="bookmark icon with blue border" />
+          )}
+        </>
       )}
     </Wrapper>
   );
@@ -39,6 +44,7 @@ const Wrapper = styled.button`
   img {
     width: 30px;
     height: 30px;
+    align-self: center;
   }
 
   &:hover {
@@ -47,7 +53,6 @@ const Wrapper = styled.button`
   }
 
   h3 {
-    display: inline-block;
-    width: 90%;
+    width: 100%;
   }
 `;

@@ -18,7 +18,7 @@ public class BookmarkService {
 
 
     @Autowired
-    public BookmarkService(CounselingCenterRepo counselingCenterRepo, MongoTemplate mongoTemplate) {
+    public BookmarkService(CounselingCenterRepo counselingCenterRepo) {
         this.counselingCenterRepo = counselingCenterRepo;
 
     }
