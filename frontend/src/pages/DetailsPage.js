@@ -8,16 +8,21 @@ import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
 import BookmarkButton from "../components/BookmarkButton";
 import backIcon from "../images/backIcon.png";
+import Reviews from "../components/Reviews";
+import StyledIconButton from "../components/StyledIconButton";
+import star from "../images/star.png";
 
 export default function DetailsPage() {
   const history = useHistory();
   const { id } = useParams();
-  const { token, userData } = useContext(AuthContext);
+  const { userData, token } = useContext(AuthContext);
   const { isLoading, isError, data, error } = useQuery(["details", id], () =>
     loadCounselingCenterById(id)
   );
 
   const handleClick = () => history.goBack();
+
+  const handleReviewButtonClick = () => history.push(`/review/${id}`);
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -35,25 +40,36 @@ export default function DetailsPage() {
       </Headline>
       <Wrapper>
         {userData && (
-          <BookmarkButton
-            marked={data.bookmarkedBy.includes(userData.sub)}
-            id={id}
-            token={token}
-          />
+          <Buttons>
+            <BookmarkButton
+              marked={data.bookmarkedBy.includes(userData.sub)}
+              id={id}
+              token={token}
+            />
+            <StyledIconButton onClick={handleReviewButtonClick}>
+              <img src={star} alt="yellow star" />
+              <p>bewerten</p>
+            </StyledIconButton>
+          </Buttons>
         )}
-        <p>{data.address.street} </p>
-        <p>
-          {data.address.postalCode} {data.address.city}
-        </p>
-        <p>Telefon: {data.phoneNo}</p>
-        <p>Mail: {data.email}</p>
-        <a href={data.url} target="_blank" rel="noreferrer">
-          Zur Website
-        </a>
-
-        <br />
+        <ContactDetails>
+          <p>{data.address.street} </p>
+          <p>
+            {data.address.postalCode} {data.address.city}
+          </p>
+          <p>Telefon: {data.phoneNo}</p>
+          <p>Mail: {data.email}</p>
+          <a href={data.url} target="_blank" rel="noreferrer">
+            Zur Website
+          </a>
+        </ContactDetails>
 
         <InfoLabels details={data} />
+        {userData && (
+          <section>
+            <h4>Erfahrungsberichte</h4> <Reviews id={id} />
+          </section>
+        )}
       </Wrapper>
     </Details>
   );
@@ -62,6 +78,11 @@ export default function DetailsPage() {
 const Wrapper = styled.div`
   overflow-wrap: anywhere;
   margin: 0 30px;
+
+  h4 {
+    margin-top: 30px;
+    margin-bottom: 0;
+  }
 `;
 
 const Details = styled.div`
@@ -86,5 +107,18 @@ const Headline = styled.div`
   h3 {
     margin: 0;
     margin-left: 30px;
+  }
+`;
+
+const Buttons = styled.section`
+  display: flex;
+`;
+
+const ContactDetails = styled.section`
+  margin: 20px 0;
+
+  p,
+  a {
+    margin: 5px;
   }
 `;
