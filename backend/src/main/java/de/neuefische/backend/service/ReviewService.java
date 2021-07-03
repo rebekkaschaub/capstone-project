@@ -28,11 +28,11 @@ public class ReviewService {
         return repo.findByCounselingCenterId(counselingCenterId);
     }
 
-    public Review addReview(ReviewDto reviewDto, String name) {
+    public Review addReview(ReviewDto reviewDto) {
         Review review = Review.builder()
                 .reviewId(idUtils.generateUuid())
                 .counselingCenterId(reviewDto.getCounselingCenterId())
-                .author(name)
+                .author(reviewDto.getAuthor())
                 .stars(reviewDto.getStars())
                 .comment(reviewDto.getComment()).build();
 
@@ -41,5 +41,18 @@ public class ReviewService {
 
     public void deleteReview(String reviewId) {
         repo.deleteById(reviewId);
+    }
+
+    public Review updateReview(String reviewId, ReviewDto reviewDto) {
+        if(!repo.existsById(reviewId)){
+            throw new IllegalArgumentException();
+        }
+        Review review = Review.builder()
+                .reviewId(reviewId)
+                .counselingCenterId(reviewDto.getCounselingCenterId())
+                .author(reviewDto.getAuthor())
+                .stars(reviewDto.getStars())
+                .comment(reviewDto.getComment()).build();
+        return repo.save(review);
     }
 }
