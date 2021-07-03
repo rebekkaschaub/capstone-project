@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ReviewDto {
     private String counselingCenterId;
+    private String counselingCenterName;
     private String title;
     private int rating;
     private String author;

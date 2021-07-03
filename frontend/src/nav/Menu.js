@@ -20,8 +20,11 @@ export default function Menu({ open, setOpen }) {
       </NavLink>
       {token ? (
         <>
-          <NavLink to="/bookmarked" onClick={setOpen}>
+          <NavLink to="/me/bookmarked" onClick={setOpen}>
             Gemerkt
+          </NavLink>
+          <NavLink to="/me/reviews" onClick={setOpen}>
+            Bewertet
           </NavLink>
           <NavLink to="/logout" onClick={setOpen}>
             Logout
@@ -32,9 +35,6 @@ export default function Menu({ open, setOpen }) {
           Login
         </NavLink>
       )}
-      <NavLink to="/" onClick={setOpen}>
-        Links
-      </NavLink>
       <img
         src={logo}
         alt="sympathise logo: handwritten s on a blue background"

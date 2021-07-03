@@ -17,6 +17,7 @@ public class Review {
     @Id
     private String reviewId;
     private String counselingCenterId;
+    private String counselingCenterName;
     private String author;
     private String title;
     private int rating;
