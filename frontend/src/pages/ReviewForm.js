@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useMutation, useQuery } from "react-query";
 import { loadCounselingCenterById } from "../service/CounselingCenterService";
 import LoadingSpinner from "../components/LoadingSpinner";
@@ -9,11 +9,16 @@ import styled from "styled-components/macro";
 import StarRating from "../components/StarRating";
 
 export default function ReviewForm() {
+  const history = useHistory();
   const { id } = useParams();
   const { userData, token } = useContext(AuthContext);
+  const { isLoading, isError, data, error } = useQuery(["details", id], () =>
+    loadCounselingCenterById(id)
+  );
 
   const initialState = {
     counselingCenterId: id,
+    counselingCenterName: data?.name,
     author: userData.sub,
     title: "",
     rating: 0,
@@ -21,21 +26,18 @@ export default function ReviewForm() {
   };
 
   const [review, setReview] = useState(initialState);
-  const { isLoading, isError, data, error } = useQuery(["details", id], () =>
-    loadCounselingCenterById(id)
-  );
+
   const sendReview = useMutation(() => {
     return addReview(token, review);
   });
-  console.log(review);
   function handleChange(event) {
-    console.log(event);
     setReview({ ...review, [event.target.name]: event.target.value });
   }
 
   function handleSubmit(event) {
     event.preventDefault();
     sendReview.mutate(review);
+    history.push("/me/reviews");
   }
 
   if (isLoading) {

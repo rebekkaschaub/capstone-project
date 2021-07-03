@@ -10,7 +10,7 @@ import BookmarkButton from "../components/BookmarkButton";
 import backIcon from "../images/backIcon.png";
 import Reviews from "../components/Reviews";
 import StyledIconButton from "../components/StyledIconButton";
-import star from "../images/star.png";
+import { FaStar } from "react-icons/fa";
 
 export default function DetailsPage() {
   const history = useHistory();
@@ -47,7 +47,7 @@ export default function DetailsPage() {
               token={token}
             />
             <StyledIconButton onClick={handleReviewButtonClick}>
-              <img src={star} alt="yellow star" />
+              <FaStar size={30} color={"#FFC107"} />
               <p>bewerten</p>
             </StyledIconButton>
           </Buttons>
@@ -112,6 +112,7 @@ const Headline = styled.div`
 
 const Buttons = styled.section`
   display: flex;
+  justify-content: space-between;
 `;
 
 const ContactDetails = styled.section`
