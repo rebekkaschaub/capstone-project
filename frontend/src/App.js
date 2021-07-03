@@ -9,6 +9,7 @@ import LoginPage from "./pages/LoginPage";
 import AuthProvider from "./context/AuthProvider";
 import BookmarkedPage from "./pages/BookmarkedPage";
 import PrivateRoute from "./routing/PrivateRoute";
+import ReviewForm from "./pages/ReviewForm";
 
 export default function App() {
   const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ export default function App() {
             <Route component={DetailsPage} path="/counseling/:id/details" />
             <Route component={LoginPage} path={"/login"} />
             <PrivateRoute component={BookmarkedPage} path={"/bookmarked"} />
+            <PrivateRoute component={ReviewForm} path={"/review/:id"} />
           </Switch>
         </Layout>
       </AuthProvider>
