@@ -18,7 +18,8 @@ public class Review {
     private String reviewId;
     private String counselingCenterId;
     private String author;
-    private int stars;
+    private String title;
+    private int rating;
     private String comment;
 
 }

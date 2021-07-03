@@ -12,7 +12,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ReviewDto {
     private String counselingCenterId;
-    private int stars;
+    private String title;
+    private int rating;
     private String author;
     private String comment;
 }

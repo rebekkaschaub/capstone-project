@@ -33,7 +33,8 @@ public class ReviewService {
                 .reviewId(idUtils.generateUuid())
                 .counselingCenterId(reviewDto.getCounselingCenterId())
                 .author(reviewDto.getAuthor())
-                .stars(reviewDto.getStars())
+                .title(reviewDto.getTitle())
+                .rating(reviewDto.getRating())
                 .comment(reviewDto.getComment()).build();
 
         return repo.save(review);
@@ -51,7 +52,8 @@ public class ReviewService {
                 .reviewId(reviewId)
                 .counselingCenterId(reviewDto.getCounselingCenterId())
                 .author(reviewDto.getAuthor())
-                .stars(reviewDto.getStars())
+                .title(reviewDto.getTitle())
+                .rating(reviewDto.getRating())
                 .comment(reviewDto.getComment()).build();
         return repo.save(review);
     }
