@@ -35,4 +35,9 @@ public class ReviewController {
     public Review addReview(@RequestBody ReviewDto reviewDto, Principal pricipal){
         return service.addReview(reviewDto, pricipal.getName());
     }
+
+    @DeleteMapping("/{reviewId}")
+    public void deleteReview(@PathVariable String reviewId){
+        service.deleteReview(reviewId);
+    }
 }

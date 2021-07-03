@@ -38,4 +38,8 @@ public class ReviewService {
 
         return repo.save(review);
     }
+
+    public void deleteReview(String reviewId) {
+        repo.deleteById(reviewId);
+    }
 }
