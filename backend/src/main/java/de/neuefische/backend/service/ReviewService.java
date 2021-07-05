@@ -48,11 +48,8 @@ public class ReviewService {
     }
 
     public void deleteReview(String reviewId, String username) {
-       Optional<Review> reviewToDelete= repo.findById(reviewId);
-       if(reviewToDelete.isEmpty()){
-           throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Review with id does not exist: "+reviewId);
-       }
-       if(!reviewToDelete.get().getAuthor().equals(username)){
+       Review reviewToDelete = repo.findById(reviewId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Review with id does not exist: "+reviewId));
+       if(!reviewToDelete.getAuthor().equals(username)){
            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Author and user do not match");
        }
         repo.deleteById(reviewId);
