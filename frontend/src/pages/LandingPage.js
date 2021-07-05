@@ -21,7 +21,7 @@ export default function LandingPage() {
             werden Dir Telefonnummern und Adressen für den Notfall
             bereitgestellt.
           </p>
-          <MdChevronRight size={30} color={"#1c3648"} />
+          <MdChevronRight className="react-icons" size={30} color={"#1c3648"} />
         </div>
       </Card>
 
@@ -34,13 +34,12 @@ export default function LandingPage() {
             Brauchst Du Hilfe in einer schwierigen Situation oder Hilfe für
             Angehörige, kannst du hier Beratungsstellen in der Nähe finden.
           </p>
-          <MdChevronRight size={30} color={"#1c3648"} />
+          <MdChevronRight className="react-icons" size={30} color={"#1c3648"} />
         </div>
       </Card>
 
       <Card onClick={() => history.push("/login")}>
         <img src={stones} alt="Stone tower with water in the background" />
-
         <div>
           <h2>Account anlegen</h2>
           <p>
@@ -48,7 +47,7 @@ export default function LandingPage() {
             Erfahrungsberichte von anderen Usern sehen und selbst
             Beratungsstelle zu bewerten.
           </p>
-          <MdChevronRight size={30} color={"#1c3648"} />
+          <MdChevronRight className="react-icons" size={30} color={"#1c3648"} />
         </div>
       </Card>
     </div>
@@ -80,5 +79,15 @@ const Card = styled.section`
   &:hover {
     box-shadow: 0 15px 9px -7px rgba(0, 0, 0, 0.1);
     transform: scale(1.01, 1.01);
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .react-icons {
+    align-self: flex-end;
   }
 `;
