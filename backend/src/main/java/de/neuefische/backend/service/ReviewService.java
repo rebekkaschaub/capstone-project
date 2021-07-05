@@ -5,9 +5,12 @@ import de.neuefische.backend.model.Review;
 import de.neuefische.backend.repos.ReviewRepo;
 import de.neuefische.backend.utils.IdUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ReviewService {
@@ -29,6 +32,9 @@ public class ReviewService {
     }
 
     public Review addReview(ReviewDto reviewDto) {
+       if(repo.existsByCounselingCenterIdAndAuthor(reviewDto.getCounselingCenterId(), reviewDto.getAuthor())){
+           throw new ResponseStatusException(HttpStatus.CONFLICT, "Review already exists");
+       }
         Review review = Review.builder()
                 .reviewId(idUtils.generateUuid())
                 .counselingCenterId(reviewDto.getCounselingCenterId())
@@ -41,7 +47,14 @@ public class ReviewService {
         return repo.save(review);
     }
 
-    public void deleteReview(String reviewId) {
+    public void deleteReview(String reviewId, String username) {
+       Optional<Review> reviewToDelete= repo.findById(reviewId);
+       if(reviewToDelete.isEmpty()){
+           throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Review with id does not exist: "+reviewId);
+       }
+       if(!reviewToDelete.get().getAuthor().equals(username)){
+           throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Author and user do not match");
+       }
         repo.deleteById(reviewId);
     }
 
