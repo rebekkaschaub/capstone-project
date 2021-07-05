@@ -1,31 +1,22 @@
-import { useQuery } from "react-query";
-import { loadReviewsById } from "../service/ReviewService";
-import { useContext } from "react";
-import AuthContext from "../context/AuthContext";
 import LoadingSpinner from "./LoadingSpinner";
 import ReviewCard from "./ReviewCard";
 
-export default function Reviews({ id }) {
-  const { token } = useContext(AuthContext);
-  const { isLoading, isError, data, error } = useQuery(["reviews", id], () =>
-    loadReviewsById(token, id)
-  );
-
-  if (isLoading) {
+export default function Reviews({ reviews }) {
+  if (reviews.isLoading) {
     return <LoadingSpinner />;
   }
 
-  if (isError) {
-    return <span>Error: {error.message}</span>;
+  if (reviews.isError) {
+    return <span>Error: {reviews.error.message}</span>;
   }
 
-  if (data.length === 0) {
+  if (reviews.data.length === 0) {
     return <p>Noch keine Erfahrungsberichte. Gib den ersten ab!</p>;
   }
 
   return (
     <div>
-      {data.map((review) => (
+      {reviews.data.map((review) => (
         <ReviewCard key={review.reviewId} review={review} />
       ))}
     </div>

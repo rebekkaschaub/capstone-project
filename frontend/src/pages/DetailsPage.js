@@ -11,63 +11,73 @@ import backIcon from "../images/backIcon.png";
 import Reviews from "../components/Reviews";
 import StyledIconButton from "../components/StyledIconButton";
 import { FaStar } from "react-icons/fa";
+import { loadReviewsById } from "../service/ReviewService";
 
 export default function DetailsPage() {
   const history = useHistory();
   const { id } = useParams();
   const { userData, token } = useContext(AuthContext);
-  const { isLoading, isError, data, error } = useQuery(["details", id], () =>
+  const counselingCenter = useQuery(["details", id], () =>
     loadCounselingCenterById(id)
   );
+
+  const reviews = useQuery(["reviews", id], () => loadReviewsById(token, id));
 
   const handleClick = () => history.goBack();
 
   const handleReviewButtonClick = () => history.push(`/review/${id}`);
 
-  if (isLoading) {
+  if (counselingCenter.isLoading) {
     return <LoadingSpinner />;
   }
 
-  if (isError) {
-    return <span>Error: {error.message}</span>;
+  if (counselingCenter.isError) {
+    return <span>Error: {counselingCenter.error.message}</span>;
   }
+
+  const reviewsContainLoggedInUser = reviews.data?.filter((review) =>
+    review.author.includes(userData.sub)
+  );
 
   return (
     <Details>
       <Headline onClick={handleClick}>
         <img src={backIcon} alt="Back Icon" />
-        <h3>{data.name}</h3>
+        <h3>{counselingCenter.data.name}</h3>
       </Headline>
       <Wrapper>
         {userData && (
           <Buttons>
             <BookmarkButton
-              marked={data.bookmarkedBy.includes(userData.sub)}
+              marked={counselingCenter.data.bookmarkedBy.includes(userData.sub)}
               id={id}
               token={token}
             />
-            <StyledIconButton onClick={handleReviewButtonClick}>
-              <FaStar size={30} color={"#FFC107"} />
-              <p>bewerten</p>
-            </StyledIconButton>
+            {reviewsContainLoggedInUser?.length === 0 && (
+              <StyledIconButton onClick={handleReviewButtonClick}>
+                <FaStar size={30} color={"#FFC107"} />
+                <p>bewerten</p>
+              </StyledIconButton>
+            )}
           </Buttons>
         )}
         <ContactDetails>
-          <p>{data.address.street} </p>
+          <p>{counselingCenter.data.address.street} </p>
           <p>
-            {data.address.postalCode} {data.address.city}
+            {counselingCenter.data.address.postalCode}
+            {counselingCenter.data.address.city}
           </p>
-          <p>Telefon: {data.phoneNo}</p>
-          <p>Mail: {data.email}</p>
-          <a href={data.url} target="_blank" rel="noreferrer">
+          <p>Telefon: {counselingCenter.data.phoneNo}</p>
+          <p>Mail: {counselingCenter.data.email}</p>
+          <a href={counselingCenter.data.url} target="_blank" rel="noreferrer">
             Zur Website
           </a>
         </ContactDetails>
 
-        <InfoLabels details={data} />
+        <InfoLabels details={counselingCenter.data} />
         {userData && (
           <section>
-            <h4>Erfahrungsberichte</h4> <Reviews id={id} />
+            <h4>Erfahrungsberichte</h4> <Reviews id={id} reviews={reviews} />
           </section>
         )}
       </Wrapper>
