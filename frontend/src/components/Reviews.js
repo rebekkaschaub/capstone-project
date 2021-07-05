@@ -26,7 +26,7 @@ export default function Reviews({ id }) {
   return (
     <div>
       {data.map((review) => (
-        <ReviewCard key={review.id} review={review} />
+        <ReviewCard key={review.reviewId} review={review} />
       ))}
     </div>
   );

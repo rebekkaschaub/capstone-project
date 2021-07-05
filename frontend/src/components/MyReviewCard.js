@@ -11,6 +11,7 @@ export default function MyReviewCard({ review }) {
         const ratingValue = index + 1;
         return (
           <FaStar
+            key={index}
             size={15}
             color={ratingValue <= review.rating ? "#FFC107" : "#c1c0b9"}
           />

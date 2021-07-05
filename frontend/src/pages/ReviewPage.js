@@ -28,7 +28,7 @@ export default function ReviewPage() {
     <div>
       <h2>Deine Erfahrungsberichte</h2>
       {data.map((el) => (
-        <MyReviewCard key={el.id} review={el} />
+        <MyReviewCard key={el.reviewId} review={el} />
       ))}
     </div>
   );
