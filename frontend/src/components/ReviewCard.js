@@ -1,11 +1,26 @@
 import styled from "styled-components/macro";
+import { FaStar } from "react-icons/fa";
 
 export default function ReviewCard({ review }) {
   return (
     <Wrapper>
-      <p>{review.title}</p>
-      <p>{review.author}</p>
-      <p>Stars: {review.rating}</p>
+      <h3>{review.title}</h3>
+      <Info>
+        <p>von {review.author}</p>
+        <section>
+          {[...Array(5)].map((star, index) => {
+            const ratingValue = index + 1;
+            return (
+              <FaStar
+                key={index}
+                size={15}
+                color={ratingValue <= review.rating ? "#FFC107" : "#c1c0b9"}
+              />
+            );
+          })}
+        </section>
+      </Info>
+
       <p>{review.comment}</p>
     </Wrapper>
   );
@@ -21,4 +36,17 @@ const Wrapper = styled.section`
   border: none;
   border-radius: 12px;
   width: 100%;
+
+  h3 {
+    font-size: 14px;
+    margin: 3px;
+  }
+`;
+
+const Info = styled.div`
+  display: flex;
+
+  p {
+    margin: 0 5px;
+  }
 `;
