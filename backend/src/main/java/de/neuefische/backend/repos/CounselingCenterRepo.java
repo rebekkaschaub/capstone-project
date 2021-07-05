@@ -12,4 +12,6 @@ public interface CounselingCenterRepo extends PagingAndSortingRepository<Counsel
 
     List<CounselingCenter> findAll();
 
+    List<CounselingCenter> findByBookmarkedBy(String username);
+
 }

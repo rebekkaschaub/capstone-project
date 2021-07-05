@@ -2,9 +2,11 @@ import { useState } from "react";
 import axios from "axios";
 import AuthContext from "./AuthContext";
 import { useMutation } from "react-query";
+import jwt_decode from "jwt-decode";
 
 export default function AuthProvider({ children }) {
   const [token, setToken] = useState();
+  const [userData, setUserData] = useState();
 
   const login = useMutation(
     (credentials) => {
@@ -13,12 +15,13 @@ export default function AuthProvider({ children }) {
     {
       onSuccess: (data) => {
         setToken(data);
+        setUserData(jwt_decode(data.toString()));
       },
     }
   );
 
   return (
-    <AuthContext.Provider value={{ token, login }}>
+    <AuthContext.Provider value={{ token, login, userData }}>
       {children}
     </AuthContext.Provider>
   );
