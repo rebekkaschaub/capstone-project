@@ -8,6 +8,7 @@ import de.neuefische.backend.security.model.AppUser;
 import de.neuefische.backend.security.repository.AppUserRepository;
 import de.neuefische.backend.utils.IdUtils;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,7 +23,6 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -57,6 +57,7 @@ class ReviewControllerTest {
     }
 
     @Test
+    @DisplayName("method listAllReviewsOfUser should return a list of all reviews from the logged in user")
     void listAllReviewsOfUser() {
         //GIVEN
         reviewRepo.saveAll(List.of(
@@ -118,6 +119,7 @@ class ReviewControllerTest {
     }
 
     @Test
+    @DisplayName("method listAllReviewsOfCounselingCenter should return a list of all reviews about the Counseling Center with id 445")
     void listAllReviewsOfCounselingCenter() {
         //GIVEN
         reviewRepo.saveAll(List.of(
@@ -179,6 +181,7 @@ class ReviewControllerTest {
     }
 
     @Test
+    @DisplayName("method addReview should add a new review to db")
     void addReview() {
         //GIVEN
         ReviewDto reviewDto = ReviewDto.builder()
@@ -221,6 +224,7 @@ class ReviewControllerTest {
     }
 
     @Test
+    @DisplayName("method addReview should throw HttpStatus FORBIDDEN, when author does not match the logged in user")
     void addReviewShouldThrowHttpStatusForbidden() {
         //GIVEN
         ReviewDto reviewDto = ReviewDto.builder()
@@ -242,6 +246,7 @@ class ReviewControllerTest {
     }
 
     @Test
+    @DisplayName("method updateReview should update review with id 42")
     void updateReview() {
         //GIVEN
         reviewRepo.saveAll(List.of(
@@ -302,6 +307,7 @@ class ReviewControllerTest {
 
 
     @Test
+    @DisplayName("method updateReview should throw HttpStatus FORBIDDEN, when author does not match the logged in user")
     void updateReviewShouldThrowHttpStatusForbidden() {
         //GIVEN
         ReviewDto reviewDto = ReviewDto.builder()
@@ -323,6 +329,7 @@ class ReviewControllerTest {
     }
 
     @Test
+    @DisplayName("method updateReview should throw HttpStatus NOT_FOUND, when review does not exist")
     void updateReviewShouldThrowHttpStatusNotFound() {
         //GIVEN
         reviewRepo.saveAll(List.of(
@@ -364,6 +371,7 @@ class ReviewControllerTest {
     }
 
     @Test
+    @DisplayName("method deleteReview should delete Review by id")
     void deleteReview() {
         //GIVEN
         reviewRepo.saveAll(List.of(
