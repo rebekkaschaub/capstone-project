@@ -9,7 +9,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -22,10 +21,6 @@ class ReviewServiceTest {
     private final IdUtils idUtils = mock(IdUtils.class);
     private final ReviewService service = new ReviewService(repo, idUtils);
 
-    @BeforeEach
-    public void clearDb() {
-        repo.deleteAll();
-    }
 
     @Test
     @DisplayName("method addReview should add a new Review to db")
@@ -82,25 +77,7 @@ class ReviewServiceTest {
     @Test
     @DisplayName("method deleteReview should delete review by id")
     void deleteReviewWithMatchingUsername() {
-        repo.saveAll(List.of(Review.builder()
-                    .reviewId("42")
-                    .counselingCenterId("123")
-                    .counselingCenterName("Phobieberatung")
-                    .author("DerBizeps")
-                    .title("War gut")
-                    .rating(5)
-                    .comment("Mega! 5 Sterne")
-                    .build(),
-                Review.builder()
-                    .reviewId("90")
-                    .counselingCenterId("765")
-                    .counselingCenterName("Suchtberatung")
-                    .author("DerTrizeps")
-                    .title("Supi")
-                    .rating(4)
-                    .comment("Alles ok")
-                    .build()));
-
+        //GIVEN
         when(repo.findById("42")).thenReturn(Optional.of(Review.builder()
                 .reviewId("42")
                 .counselingCenterId("123")
@@ -121,25 +98,7 @@ class ReviewServiceTest {
     @Test
     @DisplayName("method deleteReview should throw HttpStatus Forbidden, when review with not matching username should be deleted")
     void deleteReviewWithNotMatchingUsername() {
-        repo.saveAll(List.of(Review.builder()
-                        .reviewId("42")
-                        .counselingCenterId("123")
-                        .counselingCenterName("Phobieberatung")
-                        .author("DerBizeps")
-                        .title("War gut")
-                        .rating(5)
-                        .comment("Mega! 5 Sterne")
-                        .build(),
-                Review.builder()
-                        .reviewId("90")
-                        .counselingCenterId("765")
-                        .counselingCenterName("Suchtberatung")
-                        .author("DerTrizeps")
-                        .title("Supi")
-                        .rating(4)
-                        .comment("Alles ok")
-                        .build()));
-
+        //GIVEN
         when(repo.findById("42")).thenReturn(Optional.of(Review.builder()
                 .reviewId("42")
                 .counselingCenterId("123")
@@ -156,6 +115,53 @@ class ReviewServiceTest {
     }
 
     @Test
-    void updateReview() {
+    void updateReviewWithExistingId() {
+        //GIVEN
+        ReviewDto reviewDto = ReviewDto.builder()
+                .counselingCenterId("123")
+                .counselingCenterName("Phobieberatung")
+                .author("DerBizeps")
+                .title("War gut")
+                .rating(5)
+                .comment("Mega! 5 Sterne").build();
+
+        Review expected = Review.builder()
+                .reviewId("42")
+                .counselingCenterId("123")
+                .counselingCenterName("Phobieberatung")
+                .author("DerBizeps")
+                .title("War gut")
+                .rating(5)
+                .comment("Mega! 5 Sterne")
+                .build();
+
+        when(repo.existsById("42")).thenReturn(true);
+        when(repo.save(expected)).thenReturn(expected);
+
+        //WHEN
+        Review actual = service.updateReview("42", reviewDto);
+
+        //THEN
+        assertThat(actual, is(expected));
+        verify(repo).save(expected);
+    }
+
+    @Test
+    void updateReviewWithNotExistingID() {
+        //GIVEN
+        ReviewDto reviewDto = ReviewDto.builder()
+                .counselingCenterId("123")
+                .counselingCenterName("Phobieberatung")
+                .author("DerBizeps")
+                .title("War gut")
+                .rating(5)
+                .comment("Mega! 5 Sterne").build();
+
+
+        when(repo.existsById("42")).thenReturn(false);
+
+
+        //WHEN /THEN
+        assertThrows(IllegalArgumentException.class, ()->  service.updateReview("42", reviewDto));
     }
 }

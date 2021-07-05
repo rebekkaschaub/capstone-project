@@ -51,9 +51,6 @@ public class ReviewController {
         } catch (IllegalArgumentException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Review with id does not exist: "+reviewId);
         }
-
-
-
     }
 
     @DeleteMapping("/{reviewId}")
