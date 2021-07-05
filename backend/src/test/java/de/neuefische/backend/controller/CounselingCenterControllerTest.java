@@ -174,8 +174,7 @@ class CounselingCenterControllerTest {
     }
 
     @Test
-    @DisplayName("method searchCounselingCenter should return all counseling centers matching the search parameters")
-    void searchCounselingCenterWithValidSearchParamsAndMatchingResults() {
+    void searchCounselingCenter() {
         //GIVEN
         repo.save(CounselingCenter.builder()
                 .id("1")
@@ -219,78 +218,5 @@ class CounselingCenterControllerTest {
                         .targetGroup(List.of(TargetGroup.INDIVIDUAL))
                         .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE, CounselingSetting.GROUP))
                         .supportGroups(false).build()));
-    }
-
-    @Test
-    @DisplayName("method searchCounselingCenter should return empty list")
-    void searchCounselingCenterWithValidSearchParamsAndNoResults() {
-        //GIVEN
-        repo.save(CounselingCenter.builder()
-                .id("1")
-                .name("SEEHAUS Suchtberatungs- und Behandlungszentrum Wandsbek")
-                .address(Address.builder().street("Hasselbrookstraße 94a").postalCode("22089").city("Hamburg").build())
-                .phoneNo("040 2000102000")
-                .email("info@seehaus-hh.de")
-                .url("http://www.therapiehilfe.de")
-                .specializations(List.of(Specialization.SUCHT, Specialization.PSYCHISCH))
-                .targetGroup(List.of(TargetGroup.INDIVIDUAL))
-                .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE, CounselingSetting.GROUP))
-                .supportGroups(false).build());
-        repo.save(CounselingCenter.builder()
-                .id("456")
-                .name("Erziehungsberatungsstelle Billstedt")
-                .address(Address.builder().street("Öjendorfer Weg 10a").postalCode("22111").city("Hamburg").build())
-                .phoneNo("040 280140-620")
-                .email("erziehungsberatung@caritas-hamburg.de")
-                .url("http://www.caritas-hamburg.de ")
-                .specializations(List.of(Specialization.ERZIEHUNGSBERATUNG,Specialization.KINDER, Specialization.ALLEINERZIEHENDE))
-                .targetGroup(List.of(TargetGroup.INDIVIDUAL, TargetGroup.RELATIVES))
-                .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE))
-                .supportGroups(true).build());
-
-        //WHEN
-
-        String searchUrl = "?specialization=SUCHT&specialization=PSYCHISCH&city=Hamburg&targetGroup=INDIVIDUAL&counselingSetting=CHAT";
-        ResponseEntity<CounselingCenter[]> response = testRestTemplate.getForEntity("http://localhost:"+ port +"/api/counseling/search"+searchUrl, CounselingCenter[].class);
-
-        //THEN
-        assertThat(response.getStatusCode(), is(HttpStatus.OK));
-        assertThat(response.getBody(), emptyArray());
-    }
-
-    @Test
-    @DisplayName("method searchCounselingCenter should throw BADREQUEST")
-    void searchCounselingCenterWithInvalidSearchParams() {
-        //GIVEN
-        repo.save(CounselingCenter.builder()
-                .id("1")
-                .name("SEEHAUS Suchtberatungs- und Behandlungszentrum Wandsbek")
-                .address(Address.builder().street("Hasselbrookstraße 94a").postalCode("22089").city("Hamburg").build())
-                .phoneNo("040 2000102000")
-                .email("info@seehaus-hh.de")
-                .url("http://www.therapiehilfe.de")
-                .specializations(List.of(Specialization.SUCHT, Specialization.PSYCHISCH))
-                .targetGroup(List.of(TargetGroup.INDIVIDUAL))
-                .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE, CounselingSetting.GROUP))
-                .supportGroups(false).build());
-        repo.save(CounselingCenter.builder()
-                .id("456")
-                .name("Erziehungsberatungsstelle Billstedt")
-                .address(Address.builder().street("Öjendorfer Weg 10a").postalCode("22111").city("Hamburg").build())
-                .phoneNo("040 280140-620")
-                .email("erziehungsberatung@caritas-hamburg.de")
-                .url("http://www.caritas-hamburg.de ")
-                .specializations(List.of(Specialization.ERZIEHUNGSBERATUNG,Specialization.KINDER, Specialization.ALLEINERZIEHENDE))
-                .targetGroup(List.of(TargetGroup.INDIVIDUAL, TargetGroup.RELATIVES))
-                .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE))
-                .supportGroups(true).build());
-
-        //WHEN
-
-        String searchUrl = "?counselingSetting=NOTVALID";
-        ResponseEntity<CounselingCenter[]> response = testRestTemplate.getForEntity("http://localhost:"+ port +"/api/counseling/search"+searchUrl, CounselingCenter[].class);
-
-        //THEN
-        assertThat(response.getStatusCode(), is(HttpStatus.BAD_REQUEST));
     }
 }
