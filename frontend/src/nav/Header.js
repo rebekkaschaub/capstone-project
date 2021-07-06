@@ -9,12 +9,12 @@ export default function Header() {
 
   return (
     <Wrapper>
-      <div>
+      <nav>
         <BurgerMenuIcon open={open} setOpen={setOpen} />
         <h2>
           <NavLink to="/">Sympathise</NavLink>
         </h2>
-      </div>
+      </nav>
       <Menu open={open} setOpen={() => setOpen(!open)} />
     </Wrapper>
   );
