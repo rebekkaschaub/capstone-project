@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,7 +29,7 @@ class BookmarkServiceTest {
         when(repo.findById("42")).thenReturn(Optional.of( CounselingCenter.builder()
                 .id("42")
                 .name("Test Beratung ")
-                .bookmarkedBy(List.of("Michael", "Janosch", "Carsten"))
+                .bookmarkedBy(new ArrayList<>(List.of("Michael", "Janosch", "Carsten")))
                 .build()));
 
         CounselingCenter expected = CounselingCenter.builder()
@@ -54,7 +55,7 @@ class BookmarkServiceTest {
         when(repo.findById("42")).thenReturn(Optional.of( CounselingCenter.builder()
                 .id("42")
                 .name("Test Beratung ")
-                .bookmarkedBy(List.of("Michael", "Janosch", "Carsten", "Saskia"))
+                .bookmarkedBy(new ArrayList<>(List.of("Michael", "Janosch", "Carsten", "Saskia")))
                 .build()));
 
         CounselingCenter expected = CounselingCenter.builder()
