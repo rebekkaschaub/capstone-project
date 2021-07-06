@@ -24,6 +24,10 @@ export default function MyReviewCard({ review }) {
     }
   );
 
+  function handleEditButtonClick() {
+    history.push(`/review/${review.counselingCenterId}/${review.reviewId}`);
+  }
+
   return (
     <Wrapper>
       <h3>{review.counselingCenterName}</h3>
@@ -43,7 +47,7 @@ export default function MyReviewCard({ review }) {
           <MdDeleteForever size={25} color={"#1C3648"} />
           <p>Löschen</p>
         </StyledIconButton>
-        <StyledIconButton onClick={history.push(`/`)}>
+        <StyledIconButton onClick={handleEditButtonClick}>
           <MdModeEdit size={25} color={"#1C3648"} />
           <p>bearbeiten</p>
         </StyledIconButton>

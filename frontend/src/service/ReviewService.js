@@ -18,6 +18,12 @@ export function loadAllReviewsOfUSer(token) {
     .then((response) => response.data);
 }
 
+export function loadReviewByReviewId(token, reviewId) {
+  return axios
+    .get(`/api/reviews/review/${reviewId}`, config(token))
+    .then((response) => response.data);
+}
+
 export function addReview(token, review) {
   return axios
     .post(`/api/reviews`, review, config(token))
