@@ -48,7 +48,10 @@ const Wrapper = styled.button`
     width: 30px;
     height: 30px;
     justify-self: center;
-    // align-self: center;
+  }
+
+  > section {
+    margin: 0 0 5px 10px;
   }
 
   &:hover {

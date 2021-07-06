@@ -23,17 +23,30 @@ export default function ReviewStats({ id }) {
 
   return (
     <Wrapper>
-      <p>{data.average}</p>
-      <FaStar size={15} color={"#FFC107"} />
-      <p>({data.count} Bewertungen)</p>
+      {data.count > 0 && (
+        <>
+          <p>{data.average}</p>
+          <FaStar size={13} color={"#FFC107"} />
+          {data.count === 1 ? (
+            <p>({data.count} Bewertung)</p>
+          ) : (
+            <p>({data.count} Bewertungen)</p>
+          )}
+        </>
+      )}
     </Wrapper>
   );
 }
 
 const Wrapper = styled.section`
-  margin: 4px 10px;
   display: flex;
+  align-items: center;
   p {
-    margin: 0 0 0 10px;
+    font-size: 13px;
+    margin: 0;
+  }
+
+  p:nth-child(3) {
+    margin-left: 7px;
   }
 `;

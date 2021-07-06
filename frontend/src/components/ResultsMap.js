@@ -5,6 +5,7 @@ import styled from "styled-components/macro";
 import Button from "./Button";
 import marker from "../images/marker.png";
 import { Link } from "react-router-dom";
+import ReviewStats from "./ReviewStats";
 
 export default function ResultsMap({ results, setDisplayMap }) {
   const [selectedCounselingCenter, setSelectedCounselingCenter] =
@@ -72,6 +73,7 @@ export default function ResultsMap({ results, setDisplayMap }) {
             <ClickAwayListener onClickAway={handleClickAway}>
               <Link to={`/counseling/${selectedCounselingCenter.id}/details`}>
                 <h2>{selectedCounselingCenter.name}</h2>
+                <ReviewStats id={selectedCounselingCenter.id} />
               </Link>
             </ClickAwayListener>
           </StyledPopup>
@@ -85,9 +87,8 @@ const Wrapper = styled.div`
   position: absolute;
   top: 95px;
   left: 0;
-  //z-index: 5;
 
-  section {
+  div > section {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -103,4 +104,9 @@ const MarkerButton = styled.div`
 const StyledPopup = styled(Popup)`
   max-width: 65%;
   overflow-wrap: break-word;
+  a {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;

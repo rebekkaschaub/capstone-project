@@ -60,8 +60,6 @@ const Wrapper = styled.div`
     text-decoration: none;
     font-size: 11px;
     color: #666666;
-    display: flex;
-    align-items: center;
     img {
       margin-right: 3px;
     }
