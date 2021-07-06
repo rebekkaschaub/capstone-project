@@ -1,6 +1,5 @@
 import { useQuery } from "react-query";
 import { listAllBookmarksOfUser } from "../service/BookmarkService";
-import styled from "styled-components/macro";
 import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
 import LoadingSpinner from "../components/LoadingSpinner";
@@ -26,13 +25,11 @@ export default function BookmarkedPage() {
   }
 
   return (
-    <Wrapper>
+    <div>
       <h2>Gemerkt</h2>
       {data.map((el) => (
         <CounselingCenterCard key={el.id} counselingCenter={el} />
       ))}
-    </Wrapper>
+    </div>
   );
 }
-
-const Wrapper = styled.div``;
