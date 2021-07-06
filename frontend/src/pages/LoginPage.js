@@ -22,7 +22,7 @@ export default function LoginPage() {
     event.preventDefault();
     login.mutate(credentials, {
       onSuccess: () => {
-        history.push("/bookmarked");
+        history.push("/me/bookmarked");
       },
     });
   };
