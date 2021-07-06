@@ -3,6 +3,7 @@ package de.neuefische.backend.controller;
 import de.neuefische.backend.dto.LoginDataDto;
 import de.neuefische.backend.dto.ReviewDto;
 import de.neuefische.backend.model.Review;
+import de.neuefische.backend.model.ReviewStats;
 import de.neuefische.backend.repos.ReviewRepo;
 import de.neuefische.backend.security.model.AppUser;
 import de.neuefische.backend.security.repository.AppUserRepository;
@@ -19,6 +20,7 @@ import org.springframework.http.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.TestPropertySource;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -431,6 +433,58 @@ class ReviewControllerTest {
                 .build()));
     }
 
+    @Test
+    @DisplayName("method getReviewStats should return ReviewStats for a CounselingCenter with id 42")
+    void getReviewStats() {
+        //GIVEN
+        reviewRepo.saveAll(List.of(
+                Review.builder()
+                        .reviewId("42")
+                        .counselingCenterId("123")
+                        .counselingCenterName("Phobieberatung")
+                        .author("Franzi")
+                        .title("War gut")
+                        .rating(5)
+                        .comment("Mega! 5 Sterne")
+                        .build(),
+                Review.builder()
+                        .reviewId("90")
+                        .counselingCenterId("445")
+                        .counselingCenterName("Suchtberatung")
+                        .author("DerTrizeps")
+                        .title("Passt")
+                        .rating(3)
+                        .comment("Geht klar!")
+                        .build(),
+                Review.builder()
+                        .reviewId("42")
+                        .counselingCenterId("123")
+                        .counselingCenterName("Phobieberatung")
+                        .author("Franzi")
+                        .title("Test Title")
+                        .rating(3)
+                        .build(),
+                Review.builder()
+                        .reviewId("42")
+                        .counselingCenterId("123")
+                        .counselingCenterName("Phobieberatung")
+                        .author("Franzi")
+                        .title("testTitle")
+                        .rating(2)
+                        .build()));
+
+        String url = getUrl()+"/stats/42";
+
+        //WHEN
+        HttpHeaders headers = getHttpHeaderWithAuthToken();
+        ResponseEntity<ReviewStats> response = testRestTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(headers), ReviewStats.class);
+
+        //THEN
+        assertThat(response.getStatusCode(), is(HttpStatus.OK));
+        assertThat(response.getBody(), is(ReviewStats.builder().average(3).count(3).build()));
+
+
+    }
 
     private HttpHeaders getHttpHeaderWithAuthToken() {
         appUserRepository.save(AppUser.builder().username("Franzi").password(encoder.encode("test_password")).build());

@@ -2,13 +2,14 @@ package de.neuefische.backend.service;
 
 import de.neuefische.backend.dto.ReviewDto;
 import de.neuefische.backend.model.Review;
+import de.neuefische.backend.model.ReviewStats;
 import de.neuefische.backend.repos.ReviewRepo;
 import de.neuefische.backend.utils.IdUtils;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -163,5 +164,57 @@ class ReviewServiceTest {
 
         //WHEN /THEN
         assertThrows(IllegalArgumentException.class, ()->  service.updateReview("42", reviewDto));
+    }
+
+    @Test
+    @DisplayName("method calculateReviewStats should return ReviewStats")
+    void calculateReviewStatsWithReviews() {
+        //GIVEN
+        when(repo.findByCounselingCenterId("42")).thenReturn(List.of(Review.builder()
+                        .reviewId("42")
+                        .counselingCenterId("123")
+                        .counselingCenterName("Phobieberatung")
+                        .author("Franzi")
+                        .title("War gut")
+                        .rating(5)
+                        .comment("Mega! 5 Sterne")
+                        .build(),
+                Review.builder()
+                        .reviewId("42")
+                        .counselingCenterId("123")
+                        .counselingCenterName("Phobieberatung")
+                        .author("Franzi")
+                        .title("Test Title")
+                        .rating(3)
+                        .build(),
+                Review.builder()
+                        .reviewId("42")
+                        .counselingCenterId("123")
+                        .counselingCenterName("Phobieberatung")
+                        .author("Franzi")
+                        .title("testTitle")
+                        .rating(2)
+                        .build()));
+
+        //WHEN
+        ReviewStats actual = service.calculateReviewStats("42");
+
+        //THEN
+        assertThat(actual, is(ReviewStats.builder().average(3).count(3).build()));
+        verify(repo).findByCounselingCenterId("42");
+    }
+
+    @Test
+    @DisplayName("method calculateReviewStats should return ReviewStats with average=0 and count=0, when CounselingCenter has no reviews")
+    void calculateReviewStatsNoReviews() {
+        //GIVEN
+        when(repo.findByCounselingCenterId("42")).thenReturn(List.of());
+
+        //WHEN
+        ReviewStats actual = service.calculateReviewStats("42");
+
+        //THEN
+        assertThat(actual, is(ReviewStats.builder().average(0).count(0).build()));
+        verify(repo).findByCounselingCenterId("42");
     }
 }

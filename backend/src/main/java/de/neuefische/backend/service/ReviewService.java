@@ -73,8 +73,8 @@ public class ReviewService {
 
     public ReviewStats calculateReviewStats(String id) {
         List<Review> reviews = listAllReviewsOfCounselingCenter(id);
-        int count =reviews.size();
-        int sum= 0;
+        int count = reviews.size();
+        int sum = 0;
         for (Review review : reviews) {
             sum += review.getRating();
         }
