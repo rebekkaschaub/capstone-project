@@ -288,7 +288,7 @@ class CounselingCenterControllerTest {
         //WHEN
 
         String searchUrl = "?counselingSetting=NOTVALID";
-        ResponseEntity<CounselingCenter[]> response = testRestTemplate.getForEntity("http://localhost:"+ port +"/api/counseling/search"+searchUrl, CounselingCenter[].class);
+        ResponseEntity<Void> response = testRestTemplate.getForEntity("http://localhost:"+ port +"/api/counseling/search"+searchUrl, Void.class);
 
         //THEN
         assertThat(response.getStatusCode(), is(HttpStatus.BAD_REQUEST));
