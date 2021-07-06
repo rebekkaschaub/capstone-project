@@ -30,6 +30,6 @@ export function updateReview(token, id, review) {
     .then((response) => response.data);
 }
 
-export function deleteReview(token, id) {
+export function removeReview(token, id) {
   return axios.delete(`/api/reviews/${id}`, config(token));
 }

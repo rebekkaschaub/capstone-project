@@ -2,8 +2,28 @@ import styled from "styled-components/macro";
 import { FaStar } from "react-icons/fa";
 import { MdDeleteForever, MdModeEdit } from "react-icons/md";
 import StyledIconButton from "./StyledIconButton";
+import { useMutation, useQueryClient } from "react-query";
+import { removeReview } from "../service/ReviewService";
+import AuthContext from "../context/AuthContext";
+import { useContext } from "react";
+import { useHistory } from "react-router-dom";
 
 export default function MyReviewCard({ review }) {
+  const queryClient = useQueryClient();
+  const history = useHistory();
+  const { token } = useContext(AuthContext);
+
+  const deleteReview = useMutation(
+    () => {
+      return removeReview(token, review.reviewId);
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("myReviews");
+      },
+    }
+  );
+
   return (
     <Wrapper>
       <h3>{review.counselingCenterName}</h3>
@@ -19,11 +39,11 @@ export default function MyReviewCard({ review }) {
       })}
       <p>{review.comment}</p>
       <EditButtons>
-        <StyledIconButton>
+        <StyledIconButton onClick={deleteReview.mutate}>
           <MdDeleteForever size={25} color={"#1C3648"} />
           <p>Löschen</p>
         </StyledIconButton>
-        <StyledIconButton>
+        <StyledIconButton onClick={history.push(`/`)}>
           <MdModeEdit size={25} color={"#1C3648"} />
           <p>bearbeiten</p>
         </StyledIconButton>
