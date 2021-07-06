@@ -4,7 +4,7 @@ import { FaStar } from "react-icons/fa";
 export default function ReviewCard({ review }) {
   return (
     <Wrapper>
-      <h3>{review.title}</h3>
+      <p>{review.title}</p>
       <Info>
         <p>von {review.author}</p>
         <section>
@@ -27,7 +27,7 @@ export default function ReviewCard({ review }) {
 }
 
 const Wrapper = styled.section`
-  padding: 4px;
+  padding: 8px;
   margin: 8px 0;
   transition: 0.3s;
   box-shadow: 0 13px 10px -7px rgba(0, 0, 0, 0.1);
@@ -37,16 +37,16 @@ const Wrapper = styled.section`
   border-radius: 12px;
   width: 100%;
 
-  h3 {
+  > p:first-child {
     font-size: 14px;
-    margin: 3px;
+    font-weight: bold;
+    margin: 5px 0;
   }
 `;
 
 const Info = styled.div`
   display: flex;
-
   p {
-    margin: 0 5px;
+    margin: 0;
   }
 `;

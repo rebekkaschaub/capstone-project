@@ -2,6 +2,7 @@ import styled from "styled-components/macro";
 
 export default styled.button`
   margin-top: 10px;
+  margin-right: 10px;
   padding: 4px 0;
   background-color: transparent;
   border: none;
@@ -15,6 +16,6 @@ export default styled.button`
   }
 
   p {
-    margin: 0 0 0 2px;
+    margin: 0;
   }
 `;

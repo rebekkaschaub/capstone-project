@@ -30,7 +30,7 @@ export default function MyReviewCard({ review }) {
 
   return (
     <Wrapper>
-      <h3>{review.counselingCenterName}</h3>
+      <p>{review.counselingCenterName}</p>
       {[...Array(5)].map((star, index) => {
         const ratingValue = index + 1;
         return (
@@ -67,10 +67,6 @@ const Wrapper = styled.section`
   border-radius: 12px;
   width: 100%;
 
-  h3 {
-    margin: 5px 0;
-  }
-
   p {
     font-size: 14px;
     width: 100%;
@@ -80,12 +76,18 @@ const Wrapper = styled.section`
     white-space: nowrap;
     margin-bottom: 0;
   }
+
+  p: first-child {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 5px 0;
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+  }
 `;
 
 const EditButtons = styled.section`
   display: flex;
   justify-content: flex-end;
-  (StyledIconButton) {
-    margin: 0 10px;
-  }
 `;
