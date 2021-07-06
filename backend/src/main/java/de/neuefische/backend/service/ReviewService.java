@@ -2,6 +2,7 @@ package de.neuefische.backend.service;
 
 import de.neuefische.backend.dto.ReviewDto;
 import de.neuefische.backend.model.Review;
+import de.neuefische.backend.model.ReviewStats;
 import de.neuefische.backend.repos.ReviewRepo;
 import de.neuefische.backend.utils.IdUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,5 +69,16 @@ public class ReviewService {
                 .rating(reviewDto.getRating())
                 .comment(reviewDto.getComment()).build();
         return repo.save(review);
+    }
+
+    public ReviewStats calculateReviewStats(String id) {
+        List<Review> reviews = listAllReviewsOfCounselingCenter(id);
+        int count =reviews.size();
+        int sum= 0;
+        for (Review review : reviews) {
+            sum += review.getRating();
+        }
+
+        return ReviewStats.builder().count(count).average(sum/count).build();
     }
 }

@@ -3,6 +3,7 @@ package de.neuefische.backend.controller;
 import de.neuefische.backend.dto.ReviewDto;
 import de.neuefische.backend.model.CounselingCenter;
 import de.neuefische.backend.model.Review;
+import de.neuefische.backend.model.ReviewStats;
 import de.neuefische.backend.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -56,5 +57,10 @@ public class ReviewController {
     @DeleteMapping("/{reviewId}")
     public void deleteReview(@PathVariable String reviewId, Principal principal){
         service.deleteReview(reviewId, principal.getName());
+    }
+
+    @GetMapping("/{counselingCenterId}")
+    public ReviewStats getReviewStats(@PathVariable String counselingCenterId){
+        return service.calculateReviewStats(counselingCenterId);
     }
 }
