@@ -59,7 +59,7 @@ public class ReviewController {
         service.deleteReview(reviewId, principal.getName());
     }
 
-    @GetMapping("/{counselingCenterId}")
+    @GetMapping("/stats/{counselingCenterId}")
     public ReviewStats getReviewStats(@PathVariable String counselingCenterId){
         return service.calculateReviewStats(counselingCenterId);
     }

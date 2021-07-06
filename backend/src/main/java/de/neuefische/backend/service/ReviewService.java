@@ -78,7 +78,9 @@ public class ReviewService {
         for (Review review : reviews) {
             sum += review.getRating();
         }
-
+        if(count==0){
+            return ReviewStats.builder().count(count).build();
+        }
         return ReviewStats.builder().count(count).average(sum/count).build();
     }
 }

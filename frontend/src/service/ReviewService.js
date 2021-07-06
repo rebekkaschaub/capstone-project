@@ -39,3 +39,9 @@ export function updateReview(token, id, review) {
 export function removeReview(token, id) {
   return axios.delete(`/api/reviews/${id}`, config(token));
 }
+
+export function loadReviewStats(token, counselingCenterId) {
+  return axios
+    .get(`/api/reviews/stats/${counselingCenterId}`, config(token))
+    .then((response) => response.data);
+}

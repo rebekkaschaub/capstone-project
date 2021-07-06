@@ -4,6 +4,7 @@ import bookmark_marked from "../images/bookmark_marked.png";
 import AuthContext from "../context/AuthContext";
 import { useContext } from "react";
 import bookmark_unmarked from "../images/bookmark_unmarked.png";
+import ReviewStats from "./ReviewStats";
 
 export default function CounselingCenterCard({ counselingCenter }) {
   const history = useHistory();
@@ -22,6 +23,7 @@ export default function CounselingCenterCard({ counselingCenter }) {
           ) : (
             <img src={bookmark_unmarked} alt="bookmark icon with blue border" />
           )}
+          <ReviewStats id={counselingCenter.id} />
         </>
       )}
     </Wrapper>
@@ -38,21 +40,19 @@ const Wrapper = styled.button`
   border: none;
   border-radius: 12px;
   width: 100%;
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr min-content;
+  grid-template-rows: 1fr min-content;
 
   img {
     width: 30px;
     height: 30px;
-    align-self: center;
+    justify-self: center;
+    // align-self: center;
   }
 
   &:hover {
     box-shadow: 0 15px 9px -7px rgba(0, 0, 0, 0.1);
     transform: scale(1.01, 1.01);
-  }
-
-  h3 {
-    width: 100%;
   }
 `;
