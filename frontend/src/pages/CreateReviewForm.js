@@ -4,12 +4,12 @@ import { loadCounselingCenterById } from "../service/CounselingCenterService";
 import LoadingSpinner from "../components/LoadingSpinner";
 import AuthContext from "../context/AuthContext";
 import { useContext } from "react";
-import { updateReview } from "../service/ReviewService";
+import { addReview } from "../service/ReviewService";
 import styled from "styled-components/macro";
 import ReviewForm from "../components/ReviewForm";
 
-export default function UpdateReviewForm() {
-  const { id, reviewId } = useParams();
+export default function CreateReviewForm() {
+  const { id } = useParams();
   const { userData, token } = useContext(AuthContext);
   const { isLoading, isError, data, error } = useQuery(["details", id], () =>
     loadCounselingCenterById(id)
@@ -19,13 +19,13 @@ export default function UpdateReviewForm() {
     counselingCenterId: id,
     counselingCenterName: data?.name,
     author: userData.sub,
-    title: "testtitle",
-    rating: 5,
-    comment: "testcomment",
+    title: "",
+    rating: 0,
+    comment: "",
   };
 
   const sendReview = useMutation((review) => {
-    return updateReview(token, reviewId, review);
+    return addReview(token, review);
   });
 
   if (isLoading) {
@@ -38,9 +38,9 @@ export default function UpdateReviewForm() {
 
   return (
     <Wrapper>
-      <h2>Erfahrungsbericht zu {data.name} ändern</h2>
+      <h2>Dein Erfahrungsbericht zu {data.name}</h2>
       <ReviewForm
-        buttonLabel={"ändern"}
+        buttonLabel={"absenden"}
         initialState={initialState}
         sendReview={sendReview}
       />
