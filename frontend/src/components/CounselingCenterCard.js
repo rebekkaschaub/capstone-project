@@ -29,7 +29,7 @@ export default function CounselingCenterCard({ counselingCenter }) {
 }
 
 const Wrapper = styled.button`
-  padding: 4px;
+  padding: 0 8px;
   margin: 8px 0;
   transition: 0.3s;
   box-shadow: 0 13px 10px -7px rgba(0, 0, 0, 0.1);
