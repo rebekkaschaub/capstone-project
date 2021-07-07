@@ -1,11 +1,15 @@
 import StarRating from "./StarRating";
 import styled from "styled-components/macro";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 export default function ReviewForm({ buttonLabel, initialState, sendReview }) {
   const history = useHistory();
   const [review, setReview] = useState(initialState);
+
+  useEffect(() => {
+    setReview(initialState);
+  }, [initialState]);
 
   function handleChange(event) {
     setReview({ ...review, [event.target.name]: event.target.value });

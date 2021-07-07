@@ -1,57 +1,53 @@
 import { useParams } from "react-router-dom";
-import { useMutation, useQuery } from "react-query";
-import { loadCounselingCenterById } from "../service/CounselingCenterService";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import LoadingSpinner from "../components/LoadingSpinner";
 import AuthContext from "../context/AuthContext";
-import { useContext, useEffect} from "react";
+import { useContext } from "react";
 import { loadReviewByReviewId, updateReview } from "../service/ReviewService";
 import styled from "styled-components/macro";
 import ReviewForm from "../components/ReviewForm";
 
 export default function UpdateReviewForm() {
+  const queryClient = useQueryClient();
   const { id, reviewId } = useParams();
   const { userData, token } = useContext(AuthContext);
-  const details = useQuery(["details", id], () => loadCounselingCenterById(id));
-  const review = useQuery(["reviewById", reviewId], () =>
-    loadReviewByReviewId(token, reviewId)
-  );
 
-  console.log(review.data);
+  const { isLoading, isError, data, error } = useQuery(
+    ["reviewById", reviewId],
+    () => loadReviewByReviewId(token, reviewId)
+  );
 
   const initialState = {
     counselingCenterId: id,
-    counselingCenterName: details.data?.name,
+    counselingCenterName: data?.counselingCenterName,
     author: userData.sub,
-    title: review.data.title,
-    rating: review.data.rating,
-    comment: review.data.comment,
+    title: data?.title,
+    rating: data?.rating,
+    comment: data?.comment,
   };
 
-  useEffect(() => {
-    const reviewState = {
-      ...initialState,
-      title: review.data.title,
-      rating: review.data.rating,
-      comment: review.data.comment,
-    };
-    setInitialState(reviewState);
-  }, [review]);
+  const sendReview = useMutation(
+    (review) => {
+      return updateReview(token, reviewId, review);
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("myReviews");
+      },
+    }
+  );
 
-  const sendReview = useMutation((review) => {
-    return updateReview(token, reviewId, review);
-  });
-
-  if (details.isLoading) {
+  if (isLoading) {
     return <LoadingSpinner />;
   }
 
-  if (details.isError) {
-    return <span>Error: {details.error.message}</span>;
+  if (isError) {
+    return <span>Error: {error.message}</span>;
   }
 
   return (
     <Wrapper>
-      <h2>Erfahrungsbericht zu {details.data.name} ändern</h2>
+      <h2>Erfahrungsbericht zu {data?.counselingCenterName} ändern</h2>
       <ReviewForm
         buttonLabel={"ändern"}
         initialState={initialState}

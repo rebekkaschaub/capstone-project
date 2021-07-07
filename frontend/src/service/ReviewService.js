@@ -19,7 +19,6 @@ export function loadAllReviewsOfUSer(token) {
 }
 
 export function loadReviewByReviewId(token, reviewId) {
-  console.log(reviewId);
   return axios
     .get(`/api/reviews/review/${reviewId}`, config(token))
     .then((response) => response.data);
