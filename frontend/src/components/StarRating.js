@@ -1,10 +1,15 @@
 import { FaStar } from "react-icons/fa";
 import styled from "styled-components/macro";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function StarRating({ onChange, value }) {
   const [rating, setRating] = useState(value);
   const [hover, setHover] = useState(null);
+
+  useEffect(() => {
+    setRating(value);
+  }, [value]);
+
   const handleClick = (event) => {
     setRating(event.target.value);
     onChange(event);
