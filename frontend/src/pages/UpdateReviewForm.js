@@ -3,42 +3,55 @@ import { useMutation, useQuery } from "react-query";
 import { loadCounselingCenterById } from "../service/CounselingCenterService";
 import LoadingSpinner from "../components/LoadingSpinner";
 import AuthContext from "../context/AuthContext";
-import { useContext } from "react";
-import { updateReview } from "../service/ReviewService";
+import { useContext, useEffect} from "react";
+import { loadReviewByReviewId, updateReview } from "../service/ReviewService";
 import styled from "styled-components/macro";
 import ReviewForm from "../components/ReviewForm";
 
 export default function UpdateReviewForm() {
   const { id, reviewId } = useParams();
   const { userData, token } = useContext(AuthContext);
-  const { isLoading, isError, data, error } = useQuery(["details", id], () =>
-    loadCounselingCenterById(id)
+  const details = useQuery(["details", id], () => loadCounselingCenterById(id));
+  const review = useQuery(["reviewById", reviewId], () =>
+    loadReviewByReviewId(token, reviewId)
   );
+
+  console.log(review.data);
 
   const initialState = {
     counselingCenterId: id,
-    counselingCenterName: data?.name,
+    counselingCenterName: details.data?.name,
     author: userData.sub,
-    title: "testtitle",
-    rating: 5,
-    comment: "testcomment",
+    title: review.data.title,
+    rating: review.data.rating,
+    comment: review.data.comment,
   };
+
+  useEffect(() => {
+    const reviewState = {
+      ...initialState,
+      title: review.data.title,
+      rating: review.data.rating,
+      comment: review.data.comment,
+    };
+    setInitialState(reviewState);
+  }, [review]);
 
   const sendReview = useMutation((review) => {
     return updateReview(token, reviewId, review);
   });
 
-  if (isLoading) {
+  if (details.isLoading) {
     return <LoadingSpinner />;
   }
 
-  if (isError) {
-    return <span>Error: {error.message}</span>;
+  if (details.isError) {
+    return <span>Error: {details.error.message}</span>;
   }
 
   return (
     <Wrapper>
-      <h2>Erfahrungsbericht zu {data.name} ändern</h2>
+      <h2>Erfahrungsbericht zu {details.data.name} ändern</h2>
       <ReviewForm
         buttonLabel={"ändern"}
         initialState={initialState}

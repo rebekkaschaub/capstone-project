@@ -34,6 +34,11 @@ public class ReviewController {
         return service.listAllReviewsOfCounselingCenter(counselingCenterId);
     }
 
+    @GetMapping("/review/{reviewId}")
+    public Review getReviewById(@PathVariable String reviewId){
+        return service.getReviewById(reviewId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Review with id does not exist: "+reviewId));
+    }
+
     @PostMapping
     public Review addReview(@RequestBody ReviewDto reviewDto, Principal principal){
         if(!reviewDto.getAuthor().equals(principal.getName())){

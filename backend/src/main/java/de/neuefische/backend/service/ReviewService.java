@@ -32,6 +32,10 @@ public class ReviewService {
         return repo.findByCounselingCenterId(counselingCenterId);
     }
 
+    public Optional<Review> getReviewById(String reviewId) {
+        return repo.findById(reviewId);
+    }
+
     public Review addReview(ReviewDto reviewDto) {
        if(repo.existsByCounselingCenterIdAndAuthor(reviewDto.getCounselingCenterId(), reviewDto.getAuthor())){
            throw new ResponseStatusException(HttpStatus.CONFLICT, "Review already exists");
