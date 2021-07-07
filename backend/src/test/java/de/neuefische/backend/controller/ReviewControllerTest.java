@@ -457,7 +457,7 @@ class ReviewControllerTest {
                         .comment("Geht klar!")
                         .build(),
                 Review.builder()
-                        .reviewId("42")
+                        .reviewId("91")
                         .counselingCenterId("123")
                         .counselingCenterName("Phobieberatung")
                         .author("Franzi")
@@ -465,7 +465,7 @@ class ReviewControllerTest {
                         .rating(3)
                         .build(),
                 Review.builder()
-                        .reviewId("42")
+                        .reviewId("92")
                         .counselingCenterId("123")
                         .counselingCenterName("Phobieberatung")
                         .author("Franzi")
@@ -473,7 +473,7 @@ class ReviewControllerTest {
                         .rating(2)
                         .build()));
 
-        String url = getUrl()+"/stats/42";
+        String url = getUrl()+"/stats/123";
 
         //WHEN
         HttpHeaders headers = getHttpHeaderWithAuthToken();
