@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ReactMapGL, { Marker, NavigationControl, Popup } from "react-map-gl";
 import ClickAwayListener from "react-click-away-listener";
 import styled from "styled-components/macro";
@@ -6,8 +6,10 @@ import Button from "./Button";
 import marker from "../images/marker.png";
 import { Link } from "react-router-dom";
 import ReviewStats from "./ReviewStats";
+import AuthContext from "../context/AuthContext";
 
 export default function ResultsMap({ results, setDisplayMap }) {
+  const { userData } = useContext(AuthContext);
   const [selectedCounselingCenter, setSelectedCounselingCenter] =
     useState(null);
 
@@ -73,7 +75,7 @@ export default function ResultsMap({ results, setDisplayMap }) {
             <ClickAwayListener onClickAway={handleClickAway}>
               <Link to={`/counseling/${selectedCounselingCenter.id}/details`}>
                 <h2>{selectedCounselingCenter.name}</h2>
-                <ReviewStats id={selectedCounselingCenter.id} />
+                {userData && <ReviewStats id={selectedCounselingCenter.id} />}
               </Link>
             </ClickAwayListener>
           </StyledPopup>
