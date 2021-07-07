@@ -12,6 +12,7 @@ import PrivateRoute from "./routing/PrivateRoute";
 import CreateReviewForm from "./pages/CreateReviewForm";
 import ReviewPage from "./pages/ReviewPage";
 import UpdateReviewForm from "./pages/UpdateReviewForm";
+import SignUpPage from "./pages/SignUpPage";
 
 export default function App() {
   const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ export default function App() {
             <Route component={FilterPage} path="/search" />
             <Route component={DetailsPage} path="/counseling/:id/details" />
             <Route component={LoginPage} path={"/login"} />
+            <Route component={SignUpPage} path={"/signup"} />
             <PrivateRoute component={BookmarkedPage} path={"/me/bookmarked"} />
             <PrivateRoute component={ReviewPage} path={"/me/reviews"} />
             <PrivateRoute

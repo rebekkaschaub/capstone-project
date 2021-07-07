@@ -38,7 +38,7 @@ export default function LandingPage() {
         </div>
       </Card>
 
-      <Card onClick={() => history.push("/login")}>
+      <Card onClick={() => history.push("/signup")}>
         <img src={stones} alt="Stone tower with water in the background" />
         <div>
           <h2>Account anlegen</h2>
