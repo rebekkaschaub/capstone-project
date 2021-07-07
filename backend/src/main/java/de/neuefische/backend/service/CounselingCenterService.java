@@ -48,7 +48,7 @@ public class CounselingCenterService {
             return mongoTemplate.find(query, CounselingCenter.class);
     }
 
-    private void addParamsToQuery(MultiValueMap<String, String> params, Query query) {
+    public void addParamsToQuery(MultiValueMap<String, String> params, Query query) {
         if(params.containsKey("city")){
         query.addCriteria(Criteria.where("address.city").is(params.get("city").get(0)));
         }
