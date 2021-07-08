@@ -25,15 +25,15 @@ public class SignUpService {
 
     public UserDto signUp(LoginDataDto data) {
         if(repo.existsById(data.getUsername())){
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Username ist schon vergeben");
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Username already exists");
         }
 
         if(data.getUsername().length()<3){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username muss länger als Zeichen sein");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username not valid");
         }
 
         if(!validatePassword(data.getPassword())){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Passwort entspricht nicht den Anforderungen");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password not valid");
         }
 
         repo.save(AppUser.builder()
