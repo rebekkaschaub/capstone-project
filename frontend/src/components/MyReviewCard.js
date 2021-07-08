@@ -13,16 +13,9 @@ export default function MyReviewCard({ review }) {
   const history = useHistory();
   const { token } = useContext(AuthContext);
 
-  const deleteReview = useMutation(
-    () => {
-      return removeReview(token, review.reviewId);
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("myReviews");
-      },
-    }
-  );
+  const deleteReview = useMutation(() => removeReview(token, review.reviewId), {
+    onSuccess: () => queryClient.invalidateQueries("myReviews"),
+  });
 
   function handleEditButtonClick() {
     history.push(`/review/${review.counselingCenterId}/${review.reviewId}`);
@@ -77,7 +70,7 @@ const Wrapper = styled.section`
     margin-bottom: 0;
   }
 
-  p: first-child {
+  p:first-child {
     font-size: 16px;
     font-weight: bold;
     margin: 5px 0;
