@@ -14,7 +14,7 @@
     <name>backend</name>
     <description>Capstone Project</description>
     <properties>
-        <java.version>16</java.version>
+        <java.version>15</java.version>
     </properties>
     <dependencies>
         <dependency>
@@ -71,6 +71,7 @@
     </dependencies>
 
     <build>
+        <finalName>sympathise</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

@@ -79,12 +79,14 @@ public class ReviewService {
         List<Review> reviews = listAllReviewsOfCounselingCenter(id);
         int count = reviews.size();
         int sum = 0;
-        for (Review review : reviews) {
-            sum += review.getRating();
-        }
         if(count==0){
             return ReviewStats.builder().count(count).build();
         }
+
+        for (Review review : reviews) {
+            sum += review.getRating();
+        }
+
         return ReviewStats.builder().count(count).average(sum/count).build();
     }
 }
