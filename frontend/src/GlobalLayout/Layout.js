@@ -5,7 +5,7 @@ export default function Layout(props) {
   return (
     <PageLayout>
       <Header />
-      <div className="content">{props.children}</div>
+      <div>{props.children}</div>
     </PageLayout>
   );
 }
