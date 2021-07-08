@@ -66,7 +66,7 @@ const Wrapper = styled.div`
   height: 100%;
 
   h2 {
-    margin: 1px;
+    margin: 0;
     font-size: 20px;
   }
 `;
