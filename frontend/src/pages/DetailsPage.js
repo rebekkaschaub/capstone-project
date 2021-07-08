@@ -11,6 +11,7 @@ import backIcon from "../images/backIcon.png";
 import Reviews from "../components/Reviews";
 import StyledIconButton from "../components/StyledIconButton";
 import { FaStar } from "react-icons/fa";
+import { FiAtSign, FiExternalLink, FiPhone, FiHome } from "react-icons/fi";
 import { loadReviewsById } from "../service/ReviewService";
 
 export default function DetailsPage() {
@@ -62,16 +63,35 @@ export default function DetailsPage() {
           </Buttons>
         )}
         <ContactDetails>
-          <p>{counselingCenter.data.address.street} </p>
-          <p>
-            {counselingCenter.data.address.postalCode}
-            {counselingCenter.data.address.city}
-          </p>
-          <p>Telefon: {counselingCenter.data.phoneNo}</p>
-          <p>Mail: {counselingCenter.data.email}</p>
-          <a href={counselingCenter.data.url} target="_blank" rel="noreferrer">
-            Zur Website
-          </a>
+          <StyledSection>
+            <FiHome />
+            <div>
+              <p>{counselingCenter.data.address.street} </p>
+              <p>
+                {counselingCenter.data.address.postalCode + " "}
+                {counselingCenter.data.address.city}
+              </p>
+            </div>
+          </StyledSection>
+          <StyledSection>
+            <FiPhone />
+            <p>{counselingCenter.data.phoneNo}</p>
+          </StyledSection>
+          <StyledSection>
+            <FiAtSign />
+            <a href={"mailto:" + counselingCenter.data.email}>Mail schreiben</a>
+          </StyledSection>
+
+          <StyledSection>
+            <FiExternalLink />
+            <a
+              href={counselingCenter.data.url}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Zur Website
+            </a>
+          </StyledSection>
         </ContactDetails>
 
         <InfoLabels details={counselingCenter.data} />
@@ -126,10 +146,25 @@ const Buttons = styled.section`
 `;
 
 const ContactDetails = styled.section`
-  margin: 20px 0;
+  margin-top: 20px;
 
   p,
   a {
     margin: 5px;
+  }
+`;
+
+const StyledSection = styled.section`
+  display: flex;
+  align-items: center;
+  margin: 5px;
+
+  a {
+    text-decoration: none;
+    color: #007185;
+  }
+
+  a:visited {
+    color: #854e6c;
   }
 `;

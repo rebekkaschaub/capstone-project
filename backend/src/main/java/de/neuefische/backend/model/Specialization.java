@@ -13,7 +13,7 @@ public enum Specialization {
     PSYCHISCH("PSYCH", "Psychische Erkrankungen"),
     ESSSTOERUNG("ESS", "Essstörungen"),
     SUCHT("Sucht", "Suchtberatung"),
-    TRAUMA("Tr", "TRAUMA"),
+    TRAUMA("Tr", "Trauma"),
     KRISENINTERVENTION("KI", "Krisenintervention"),
     SOZIALBERATUNG("SozB","Sozialberatung"),
     LEBENSBERATUNG("LBB","Lebensberatung"),
