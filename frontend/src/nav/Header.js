@@ -9,25 +9,22 @@ export default function Header() {
 
   return (
     <Wrapper>
-      <div>
+      <nav>
         <BurgerMenuIcon open={open} setOpen={setOpen} />
-        <h2>
-          <NavLink to="/">Sympathise</NavLink>
-        </h2>
-      </div>
-      <Menu open={open} setOpen={() => setOpen(!open)} />
+        <Menu open={open} setOpen={() => setOpen(!open)} />
+      </nav>
+      <h2>
+        <NavLink to="/">Sympathise</NavLink>
+      </h2>
     </Wrapper>
   );
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.header`
   margin-bottom: 10px;
-
-  div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   h2 {
     font-family: "Mrs Saint Delafield", cursive;

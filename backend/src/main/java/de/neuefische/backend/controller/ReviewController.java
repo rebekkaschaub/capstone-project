@@ -3,6 +3,7 @@ package de.neuefische.backend.controller;
 import de.neuefische.backend.dto.ReviewDto;
 import de.neuefische.backend.model.CounselingCenter;
 import de.neuefische.backend.model.Review;
+import de.neuefische.backend.model.ReviewStats;
 import de.neuefische.backend.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,6 +34,11 @@ public class ReviewController {
         return service.listAllReviewsOfCounselingCenter(counselingCenterId);
     }
 
+    @GetMapping("/review/{reviewId}")
+    public Review getReviewById(@PathVariable String reviewId){
+        return service.getReviewById(reviewId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Review with id does not exist: "+reviewId));
+    }
+
     @PostMapping
     public Review addReview(@RequestBody ReviewDto reviewDto, Principal principal){
         if(!reviewDto.getAuthor().equals(principal.getName())){
@@ -56,5 +62,10 @@ public class ReviewController {
     @DeleteMapping("/{reviewId}")
     public void deleteReview(@PathVariable String reviewId, Principal principal){
         service.deleteReview(reviewId, principal.getName());
+    }
+
+    @GetMapping("/stats/{counselingCenterId}")
+    public ReviewStats getReviewStats(@PathVariable String counselingCenterId){
+        return service.calculateReviewStats(counselingCenterId);
     }
 }
