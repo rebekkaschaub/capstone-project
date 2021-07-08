@@ -25,25 +25,25 @@ public class SignUpService {
 
     public UserDto signUp(LoginDataDto data) {
         if(repo.existsById(data.getUsername())){
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "User already exists");
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Username ist schon vergeben");
         }
 
         if(data.getUsername().length()<3){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username not valid");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username muss länger als Zeichen sein");
         }
 
         if(!validatePassword(data.getPassword())){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password not valid");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Passwort entspricht nicht den Anforderungen");
         }
 
         repo.save(AppUser.builder()
                 .username(data.getUsername())
                 .password(encoder.encode(data.getPassword()))
                 .build());
-        return new UserDto(data.getPassword());
+        return new UserDto(data.getUsername());
     }
 
-    private boolean validatePassword(String password) {
+    public boolean validatePassword(String password) {
         return containsLowercase(password) && containsUppercase(password) && containsNumber(password) && hasMinLength(password);
     }
 

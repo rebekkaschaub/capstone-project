@@ -64,6 +64,10 @@ export default function SignUpPage() {
             required
           />
         </label>
+        {signUp.isError &&
+          signUp.error.message === "Request failed with status code 409" && (
+            <div>Username existiert bereits. Wähle einen anderen Usernamen</div>
+          )}
         <label>
           <p>Passwort</p>
           <input
@@ -85,7 +89,10 @@ export default function SignUpPage() {
           />
         </label>
         {error && <div>{error}</div>}
-        {signUp.isError && <div>An error occurred: {signUp.error.message}</div>}
+        {signUp.isError &&
+          signUp.error.message !== "Request failed with status code 409" && (
+            <div>{signUp.error.message}</div>
+          )}
         <button
           disabled={
             !signUpData.password1 ||
