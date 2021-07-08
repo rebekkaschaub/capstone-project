@@ -6,7 +6,7 @@ import {
   signUpWithCredentials,
   validatePasswords,
 } from "../service/SignUpService";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const initialState = {
   username: "",
@@ -87,12 +87,17 @@ export default function SignUpPage() {
             value={signUpData.password2}
             required
           />
+          <p className={"note"}>
+            Passwort muss mindestens 8 Zeichen lang sein, <br />1 Zahl, 1
+            Großbuchstaben und 1 Kleinbuchstaben enthalten
+          </p>
         </label>
         {error && <p>{error}</p>}
         {signUp.isError &&
           signUp.error.message !== "Request failed with status code 409" && (
             <p>{signUp.error.message}</p>
           )}
+
         <button
           disabled={
             !signUpData.password1 ||
@@ -103,14 +108,11 @@ export default function SignUpPage() {
           {signUp.isLoading ? <>Loading</> : <>Registrieren</>}
         </button>
       </Form>
+      <hr />
 
-      <Note>
-        <p>Hinweis:</p>
-        <p>
-          Passwort muss mindestens 8 Zeichen lang sein, 1 Zahl, 1 Großbuchstaben
-          und 1 Kleinbuchstaben enthalten
-        </p>
-      </Note>
+      <Link to={"/login"}>
+        Zurück zum <strong>Login</strong>
+      </Link>
     </Wrapper>
   );
 }
@@ -118,14 +120,25 @@ export default function SignUpPage() {
 const Wrapper = styled.div`
   padding-top: 20px;
   display: grid;
-  grid-template-rows: min-content min-content 1fr min-content;
-  row-gap: 10px;
+  grid-template-rows: min-content min-content 1fr min-content min-content min-content;
+  row-gap: 5px;
   justify-items: center;
   height: 100%;
 
   img {
     height: 80px;
     width: 80px;
+  }
+
+  hr {
+    border: 1px solid #1c3648;
+    width: 80%;
+  }
+
+  a {
+    text-decoration: none;
+    margin: 0 0;
+    color: #1c3648;
   }
 `;
 
@@ -145,6 +158,13 @@ const Form = styled.form`
     margin-bottom: 4px;
     font-weight: bold;
     font-size: 17px;
+  }
+
+  .note {
+    margin-top: 2px;
+    margin-bottom: 10px;
+    font-weight: normal;
+    font-size: 10px;
   }
 
   input {
@@ -168,13 +188,5 @@ const Form = styled.form`
 
   button:disabled {
     background-color: darkgray;
-  }
-`;
-
-const Note = styled.section`
-  font-size: 10px;
-
-  p {
-    margin: 0;
   }
 `;

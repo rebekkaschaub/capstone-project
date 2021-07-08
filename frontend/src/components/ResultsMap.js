@@ -69,6 +69,7 @@ export default function ResultsMap({ results, setDisplayMap }) {
             onClose={() => setSelectedCounselingCenter(null)}
             dynamicPosition={true}
             closeOnClick={false}
+            offsetLeft={-5}
           >
             <ClickAwayListener onClickAway={handleClickAway}>
               <Link to={`/counseling/${selectedCounselingCenter.id}/details`}>
