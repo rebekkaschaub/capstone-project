@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom";
 export default function LandingPage() {
   const history = useHistory();
   return (
-    <div>
+    <Wrapper>
       <h2>Finde Deine Beratungsstelle</h2>
       <Card onClick={() => history.push("/")}>
         <img src={emergency} alt="Life buoy" />
@@ -50,7 +50,7 @@ export default function LandingPage() {
           <MdChevronRight className="react-icons" size={30} color={"#1c3648"} />
         </div>
       </Card>
-    </div>
+    </Wrapper>
   );
 }
 
@@ -63,6 +63,7 @@ const Card = styled.section`
   border: none;
   border-radius: 12px;
   width: 100%;
+  max-width: 800px;
   overflow: hidden;
   padding-right: 10px;
   margin: 10px 0;
@@ -90,4 +91,10 @@ const Card = styled.section`
   .react-icons {
     align-self: flex-end;
   }
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
