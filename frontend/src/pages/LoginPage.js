@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import AuthContext from "../context/AuthContext";
 import styled from "styled-components/macro";
 import logo from "../images/logo.png";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const initialState = {
   username: "",
@@ -58,6 +58,11 @@ export default function LoginPage() {
           {login.isLoading ? <>Loading</> : <>Anmelden</>}
         </button>
       </Form>
+      <hr />
+
+      <Link to={"/signup"}>
+        Du hast noch keinen Account? <strong>Registrieren</strong>
+      </Link>
     </Wrapper>
   );
 }
@@ -65,7 +70,7 @@ export default function LoginPage() {
 const Wrapper = styled.div`
   padding-top: 20px;
   display: grid;
-  grid-template-rows: min-content min-content 1fr;
+  grid-template-rows: min-content min-content 1fr min-content min-content;
   row-gap: 10px;
   justify-items: center;
   height: 100%;
@@ -73,6 +78,17 @@ const Wrapper = styled.div`
   img {
     height: 80px;
     width: 80px;
+  }
+
+  hr {
+    border: 1px solid #1c3648;
+    width: 80%;
+  }
+
+  a {
+    text-decoration: none;
+    margin: 15px 0;
+    color: #1c3648;
   }
 `;
 
