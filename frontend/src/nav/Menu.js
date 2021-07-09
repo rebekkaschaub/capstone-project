@@ -26,7 +26,7 @@ export default function Menu({ open, setOpen }) {
           <NavLink to="/me/reviews" onClick={setOpen}>
             Bewertet
           </NavLink>
-          <NavLink to="/logout" onClick={setOpen}>
+          <NavLink to="/login" onClick={setOpen}>
             Logout
           </NavLink>
         </>

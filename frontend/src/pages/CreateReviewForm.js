@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { loadCounselingCenterById } from "../service/CounselingCenterService";
 import LoadingSpinner from "../components/LoadingSpinner";
 import AuthContext from "../context/AuthContext";
@@ -9,6 +9,7 @@ import styled from "styled-components/macro";
 import ReviewForm from "../components/ReviewForm";
 
 export default function CreateReviewForm() {
+  const queryClient = useQueryClient();
   const { id } = useParams();
   const { userData, token } = useContext(AuthContext);
   const { isLoading, isError, data, error } = useQuery(["details", id], () =>
@@ -24,9 +25,16 @@ export default function CreateReviewForm() {
     comment: "",
   };
 
-  const sendReview = useMutation((review) => {
-    return addReview(token, review);
-  });
+  const sendReview = useMutation(
+    (review) => {
+      return addReview(token, review);
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("myReviews");
+      },
+    }
+  );
 
   if (isLoading) {
     return <LoadingSpinner />;
