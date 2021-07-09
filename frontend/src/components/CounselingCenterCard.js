@@ -23,7 +23,7 @@ export default function CounselingCenterCard({ counselingCenter }) {
           ) : (
             <img src={bookmark_unmarked} alt="bookmark icon with blue border" />
           )}
-          <ReviewStats id={counselingCenter.id} />
+          <ReviewStatsStyled id={counselingCenter.id} />
         </>
       )}
     </Wrapper>
@@ -50,12 +50,12 @@ const Wrapper = styled.button`
     justify-self: center;
   }
 
-  > section {
-    margin: 0 0 5px 10px;
-  }
-
   &:hover {
     box-shadow: 0 15px 9px -7px rgba(0, 0, 0, 0.1);
     transform: scale(1.01, 1.01);
   }
+`;
+
+const ReviewStatsStyled = styled(ReviewStats)`
+  margin: 0 0 5px 10px;
 `;

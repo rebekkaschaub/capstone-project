@@ -6,7 +6,7 @@ import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
 import LoadingSpinner from "./LoadingSpinner";
 
-export default function ReviewStats({ id }) {
+export default function ReviewStats({ id, className }) {
   const { token } = useContext(AuthContext);
   const { isLoading, isError, data, error } = useQuery(
     ["ReviewStats", id],
@@ -22,7 +22,7 @@ export default function ReviewStats({ id }) {
   }
 
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       {data.count > 0 && (
         <>
           <p>{data.average}</p>
