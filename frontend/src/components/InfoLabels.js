@@ -4,13 +4,14 @@ import styled from "styled-components/macro";
 export default function InfoLabels({ details }) {
   return (
     <Labels>
+      <h4>Schwerpunkte</h4>
       {details.specializations && (
         <section>
           {details.specializations.map((specialization) => (
             <Label
               key={specialization.abbreviation}
               text={specialization.description}
-              color={"crimson"}
+              color={"#005E71"}
             />
           ))}
         </section>
@@ -21,7 +22,7 @@ export default function InfoLabels({ details }) {
             <Label
               key={group.displayName}
               text={group.displayName}
-              color={"green"}
+              color={"#38B389"}
             />
           ))}
         </section>
@@ -32,7 +33,7 @@ export default function InfoLabels({ details }) {
             <Label
               key={setting.displayName}
               text={setting.displayName}
-              color={"purple"}
+              color={"#656688"}
             />
           ))}
         </section>
@@ -44,5 +45,9 @@ export default function InfoLabels({ details }) {
 const Labels = styled.div`
   section {
     display: inline-block;
+  }
+
+  h4 {
+    margin-bottom: 8px;
   }
 `;
