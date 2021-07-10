@@ -9,6 +9,7 @@ import ReviewStats from "./ReviewStats";
 import AuthContext from "../context/AuthContext";
 
 export default function ResultsMap({ results, setDisplayMap }) {
+  const MAPBOX_API_KEY = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
   const { userData } = useContext(AuthContext);
   const [selectedCounselingCenter, setSelectedCounselingCenter] =
     useState(null);
@@ -34,7 +35,7 @@ export default function ResultsMap({ results, setDisplayMap }) {
       <ReactMapGL
         {...viewport}
         mapStyle="mapbox://styles/rebsch/ckq4wct340kdc18pk3hz5wx7d"
-        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
+        mapboxApiAccessToken={MAPBOX_API_KEY}
         onViewportChange={(viewport) => {
           setViewport(viewport);
         }}
