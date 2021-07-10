@@ -1,12 +1,12 @@
 import styled from "styled-components/macro";
 import { useQuery } from "react-query";
 import { loadCounselingCenterByQuery } from "../service/CounselingCenterService";
-import ResultsList from "../components/ResultsList";
+import ResultsList from "../components/Results/ResultsList";
 import { useState } from "react";
-import ResultsMap from "../components/ResultsMap";
+import ResultsMap from "../components/Results/ResultsMap";
 import { Link } from "react-router-dom";
 import search from "../images/search_icon.png";
-import LoadingSpinner from "../components/LoadingSpinner";
+import LoadingSpinner from "../commons/LoadingSpinner";
 
 export default function ResultsPage() {
   const [displayMap, setDisplayMap] = useState(false);

@@ -1,11 +1,11 @@
 import { useParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import LoadingSpinner from "../components/LoadingSpinner";
+import LoadingSpinner from "../commons/LoadingSpinner";
 import AuthContext from "../context/AuthContext";
 import { useContext } from "react";
 import { loadReviewByReviewId, updateReview } from "../service/ReviewService";
 import styled from "styled-components/macro";
-import ReviewForm from "../components/ReviewForm";
+import ReviewForm from "../components/Reviews/ReviewForm";
 
 export default function UpdateReviewForm() {
   const queryClient = useQueryClient();

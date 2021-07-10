@@ -1,4 +1,4 @@
-import LoadingSpinner from "./LoadingSpinner";
+import LoadingSpinner from "../../commons/LoadingSpinner";
 import ReviewCard from "./ReviewCard";
 
 export default function Reviews({ reviews }) {

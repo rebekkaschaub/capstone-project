@@ -1,8 +1,8 @@
 import AuthContext from "../context/AuthContext";
 import { useQuery } from "react-query";
-import LoadingSpinner from "../components/LoadingSpinner";
+import LoadingSpinner from "../commons/LoadingSpinner";
 import { useContext } from "react";
-import MyReviewCard from "../components/MyReviewCard";
+import MyReviewCard from "../components/Reviews/MyReviewCard";
 import { loadAllReviewsOfUSer } from "../service/ReviewService";
 
 export default function ReviewPage() {

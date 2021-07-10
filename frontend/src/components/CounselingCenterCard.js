@@ -4,7 +4,7 @@ import bookmark_marked from "../images/bookmark_marked.png";
 import AuthContext from "../context/AuthContext";
 import { useContext } from "react";
 import bookmark_unmarked from "../images/bookmark_unmarked.png";
-import ReviewStats from "./ReviewStats";
+import ReviewStats from "./Reviews/ReviewStats";
 
 export default function CounselingCenterCard({ counselingCenter }) {
   const history = useHistory();

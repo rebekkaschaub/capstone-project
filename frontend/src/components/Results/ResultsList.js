@@ -1,6 +1,6 @@
-import CounselingCenterCard from "./CounselingCenterCard";
+import CounselingCenterCard from "../CounselingCenterCard";
 import styled from "styled-components/macro";
-import Button from "./Button";
+import Button from "../../commons/Button";
 
 export default function ResultsList({ results, setDisplayMap }) {
   const handleClick = () => setDisplayMap(true);
