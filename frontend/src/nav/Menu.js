@@ -12,7 +12,7 @@ export default function Menu({ open, setOpen }) {
       <NavLink to="/" onClick={setOpen}>
         Sympathise
       </NavLink>
-      <NavLink to="/" onClick={setOpen}>
+      <NavLink to="/emergency" onClick={setOpen}>
         Notfallhilfe
       </NavLink>
       <NavLink to="/search" onClick={setOpen}>
@@ -26,9 +26,9 @@ export default function Menu({ open, setOpen }) {
           <NavLink to="/me/reviews" onClick={setOpen}>
             Bewertet
           </NavLink>
-          <NavLink to="/login" onClick={setOpen}>
+          <a href="/login" onClick={setOpen}>
             Logout
-          </NavLink>
+          </a>
         </>
       ) : (
         <NavLink to="/login" onClick={setOpen}>

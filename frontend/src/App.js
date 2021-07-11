@@ -13,6 +13,7 @@ import CreateReviewForm from "./pages/CreateReviewForm";
 import ReviewPage from "./pages/ReviewPage";
 import UpdateReviewForm from "./pages/UpdateReviewForm";
 import SignUpPage from "./pages/SignUpPage";
+import EmergencyPage from "./pages/EmergencyPage";
 
 export default function App() {
   const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ export default function App() {
             <Route component={ResultsPage} path="/counseling" exact />
             <Route component={FilterPage} path="/search" />
             <Route component={DetailsPage} path="/counseling/:id/details" />
+            <Route component={EmergencyPage} path="/emergency" />
             <Route component={LoginPage} path={"/login"} />
             <Route component={SignUpPage} path={"/signup"} />
             <PrivateRoute component={BookmarkedPage} path={"/me/bookmarked"} />
