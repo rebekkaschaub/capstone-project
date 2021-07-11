@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import LoadingSpinner from "../commons/LoadingSpinner";
 import AuthContext from "../context/AuthContext";
@@ -6,8 +6,11 @@ import { useContext } from "react";
 import { loadReviewByReviewId, updateReview } from "../service/ReviewService";
 import styled from "styled-components/macro";
 import ReviewForm from "../components/Reviews/ReviewForm";
+import backIcon from "../images/backIcon.png";
+import Headline from "../commons/Headline";
 
 export default function UpdateReviewForm() {
+  const history = useHistory();
   const queryClient = useQueryClient();
   const { id, reviewId } = useParams();
   const { userData, token } = useContext(AuthContext);
@@ -37,6 +40,8 @@ export default function UpdateReviewForm() {
     }
   );
 
+  const handleClick = () => history.goBack();
+
   if (isLoading) {
     return <LoadingSpinner />;
   }
@@ -47,7 +52,10 @@ export default function UpdateReviewForm() {
 
   return (
     <Wrapper>
-      <h2>Erfahrungsbericht zu {data?.counselingCenterName} ändern</h2>
+      <Headline onClick={handleClick}>
+        <img src={backIcon} alt="Back Icon" />
+        <h3>Erfahrungsbericht zu {data?.counselingCenterName} ändern</h3>
+      </Headline>
       <ReviewForm
         buttonLabel={"ändern"}
         initialState={initialState}

@@ -1,9 +1,9 @@
-import LoadingSpinner from "../../commons/LoadingSpinner";
+import LoadingSpinnerSmall from "../../commons/LoadingSpinner";
 import ReviewCard from "./ReviewCard";
 
 export default function Reviews({ reviews }) {
   if (reviews.isLoading) {
-    return <LoadingSpinner />;
+    return <LoadingSpinnerSmall />;
   }
 
   if (reviews.isError) {
