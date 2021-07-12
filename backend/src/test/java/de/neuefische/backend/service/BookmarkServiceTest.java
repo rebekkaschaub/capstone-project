@@ -28,7 +28,7 @@ class BookmarkServiceTest {
         //GIVEN
         when(repo.findById("42")).thenReturn(Optional.of(CounselingCenter.builder()
                 .id("42")
-                .name("Test Beratung ")
+                .name("Test Beratung")
                 .bookmarkedBy(new ArrayList<>(List.of("Michael", "Janosch", "Carsten")))
                 .build()));
 
