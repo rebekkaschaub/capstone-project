@@ -2,11 +2,11 @@ import { useContext, useState } from "react";
 import ReactMapGL, { Marker, NavigationControl, Popup } from "react-map-gl";
 import ClickAwayListener from "react-click-away-listener";
 import styled from "styled-components/macro";
-import Button from "./Button";
-import marker from "../images/marker.png";
+import Button from "../../commons/Button";
+import marker from "../../images/marker.png";
 import { Link } from "react-router-dom";
-import ReviewStats from "./ReviewStats";
-import AuthContext from "../context/AuthContext";
+import ReviewStats from "../Reviews/ReviewStats";
+import AuthContext from "../../context/AuthContext";
 
 export default function ResultsMap({ results, setDisplayMap }) {
   const { userData } = useContext(AuthContext);

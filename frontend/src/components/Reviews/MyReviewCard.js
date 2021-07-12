@@ -1,10 +1,10 @@
 import styled from "styled-components/macro";
 import { FaStar } from "react-icons/fa";
 import { MdDeleteForever, MdModeEdit } from "react-icons/md";
-import StyledIconButton from "./StyledIconButton";
+import StyledIconButton from "../../commons/StyledIconButton";
 import { useMutation, useQueryClient } from "react-query";
-import { removeReview } from "../service/ReviewService";
-import AuthContext from "../context/AuthContext";
+import { removeReview } from "../../service/ReviewService";
+import AuthContext from "../../context/AuthContext";
 import { useContext } from "react";
 import { useHistory } from "react-router-dom";
 

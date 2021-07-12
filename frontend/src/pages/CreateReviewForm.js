@@ -1,14 +1,17 @@
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { loadCounselingCenterById } from "../service/CounselingCenterService";
-import LoadingSpinner from "../components/LoadingSpinner";
+import LoadingSpinner from "../commons/LoadingSpinner";
 import AuthContext from "../context/AuthContext";
 import { useContext } from "react";
 import { addReview } from "../service/ReviewService";
 import styled from "styled-components/macro";
-import ReviewForm from "../components/ReviewForm";
+import ReviewForm from "../components/Reviews/ReviewForm";
+import backIcon from "../images/backIcon.png";
+import Headline from "../commons/Headline";
 
 export default function CreateReviewForm() {
+  const history = useHistory();
   const queryClient = useQueryClient();
   const { id } = useParams();
   const { userData, token } = useContext(AuthContext);
@@ -31,6 +34,8 @@ export default function CreateReviewForm() {
     },
   });
 
+  const handleClick = () => history.goBack();
+
   if (isLoading) {
     return <LoadingSpinner />;
   }
@@ -41,7 +46,10 @@ export default function CreateReviewForm() {
 
   return (
     <Wrapper>
-      <h2>Dein Erfahrungsbericht zu {data.name}</h2>
+      <Headline onClick={handleClick}>
+        <img src={backIcon} alt="Back Icon" />
+        <h3>Dein Erfahrungsbericht zu {data.name}</h3>
+      </Headline>
       <ReviewForm
         buttonLabel={"absenden"}
         initialState={initialState}

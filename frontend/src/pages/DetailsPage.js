@@ -3,16 +3,17 @@ import styled from "styled-components/macro";
 import InfoLabels from "../components/InfoLabels";
 import { useQuery } from "react-query";
 import { loadCounselingCenterById } from "../service/CounselingCenterService";
-import LoadingSpinner from "../components/LoadingSpinner";
+import LoadingSpinner from "../commons/LoadingSpinner";
 import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
-import BookmarkButton from "../components/BookmarkButton";
+import BookmarkButton from "../commons/BookmarkButton";
 import backIcon from "../images/backIcon.png";
-import Reviews from "../components/Reviews";
-import StyledIconButton from "../components/StyledIconButton";
+import Reviews from "../components/Reviews/Reviews";
+import StyledIconButton from "../commons/StyledIconButton";
 import { FaStar } from "react-icons/fa";
 import { FiAtSign, FiExternalLink, FiPhone, FiHome } from "react-icons/fi";
 import { loadReviewsById } from "../service/ReviewService";
+import Headline from "../commons/Headline";
 
 export default function DetailsPage() {
   const history = useHistory();
@@ -119,25 +120,6 @@ const Details = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-const Headline = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  img {
-    width: 20px;
-    height: 20px;
-    position: fixed;
-    left: 5px;
-  }
-
-  h3 {
-    margin: 0;
-    margin-left: 30px;
-  }
 `;
 
 const Buttons = styled.section`

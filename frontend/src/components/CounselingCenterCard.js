@@ -1,10 +1,9 @@
 import styled from "styled-components/macro";
 import { useHistory } from "react-router-dom";
-import bookmark_marked from "../images/bookmark_marked.png";
 import AuthContext from "../context/AuthContext";
 import { useContext } from "react";
-import bookmark_unmarked from "../images/bookmark_unmarked.png";
-import ReviewStats from "./ReviewStats";
+import ReviewStats from "./Reviews/ReviewStats";
+import { IoBookmarkSharp } from "react-icons/io5";
 
 export default function CounselingCenterCard({ counselingCenter }) {
   const history = useHistory();
@@ -18,11 +17,15 @@ export default function CounselingCenterCard({ counselingCenter }) {
 
       {userData && (
         <>
-          {counselingCenter.bookmarkedBy.includes(userData.sub) ? (
-            <img src={bookmark_marked} alt="red bookmark icon" />
-          ) : (
-            <img src={bookmark_unmarked} alt="bookmark icon with blue border" />
-          )}
+          <IoBookmarkSharp
+            size={30}
+            color={
+              counselingCenter.bookmarkedBy.includes(userData.sub)
+                ? "#1c3648"
+                : "#c1c0b9"
+            }
+          />
+
           <ReviewStatsStyled id={counselingCenter.id} />
         </>
       )}

@@ -1,8 +1,7 @@
 import { useMutation, useQueryClient } from "react-query";
 import { updateBookmarks } from "../service/BookmarkService";
-import bookmark_unmarked from "../images/bookmark_unmarked.png";
-import bookmark_marked from "../images/bookmark_marked.png";
 import StyledIconButton from "./StyledIconButton";
+import { IoBookmarkSharp } from "react-icons/io5";
 
 export default function BookmarkButton({ marked, id, token }) {
   const queryClient = useQueryClient();
@@ -21,7 +20,7 @@ export default function BookmarkButton({ marked, id, token }) {
   if (marked) {
     return (
       <StyledIconButton onClick={updateBookmark.mutate}>
-        <img src={bookmark_marked} alt="red bookmark icon" />
+        <IoBookmarkSharp size={30} color={"#c1c0b9"} />
         <p>entfernen</p>
       </StyledIconButton>
     );
@@ -29,7 +28,7 @@ export default function BookmarkButton({ marked, id, token }) {
 
   return (
     <StyledIconButton onClick={updateBookmark.mutate}>
-      <img src={bookmark_unmarked} alt="bookmark icon with blue border" />
+      <IoBookmarkSharp size={30} color={"#1c3648"} />
       <p>merken</p>
     </StyledIconButton>
   );

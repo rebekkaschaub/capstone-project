@@ -6,7 +6,6 @@ export default styled.button`
   padding: 4px 0;
   background-color: transparent;
   border: none;
-  border-radius: 4px;
   display: flex;
   align-items: center;
 

@@ -11,7 +11,7 @@ export default function LandingPage() {
   return (
     <Wrapper>
       <h2>Finde Deine Beratungsstelle</h2>
-      <Card onClick={() => history.push("/")}>
+      <Card onClick={() => history.push("/emergency")}>
         <img src={emergency} alt="Life buoy" />
 
         <div>

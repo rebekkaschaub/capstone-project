@@ -1,10 +1,10 @@
 import { FaStar } from "react-icons/fa";
 import styled from "styled-components/macro";
 import { useQuery } from "react-query";
-import { loadReviewStats } from "../service/ReviewService";
+import { loadReviewStats } from "../../service/ReviewService";
 import { useContext } from "react";
-import AuthContext from "../context/AuthContext";
-import LoadingSpinner from "./LoadingSpinner";
+import AuthContext from "../../context/AuthContext";
+import LoadingSpinnerSmall from "../../commons/LoadingSpinnerSmall";
 
 export default function ReviewStats({ id, className }) {
   const { token } = useContext(AuthContext);
@@ -14,7 +14,7 @@ export default function ReviewStats({ id, className }) {
   );
 
   if (isLoading) {
-    return <LoadingSpinner />;
+    return <LoadingSpinnerSmall />;
   }
 
   if (isError) {

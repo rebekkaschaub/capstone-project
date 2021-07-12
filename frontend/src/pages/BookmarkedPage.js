@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import { listAllBookmarksOfUser } from "../service/BookmarkService";
 import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
-import LoadingSpinner from "../components/LoadingSpinner";
+import LoadingSpinner from "../commons/LoadingSpinner";
 import CounselingCenterCard from "../components/CounselingCenterCard";
 
 export default function BookmarkedPage() {
