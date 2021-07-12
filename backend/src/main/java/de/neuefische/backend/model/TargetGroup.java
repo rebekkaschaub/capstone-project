@@ -9,7 +9,6 @@ import java.util.NoSuchElementException;
 
 
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
-
 public enum TargetGroup {
 
     RELATIVES("Angehörige"),

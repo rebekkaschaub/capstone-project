@@ -201,7 +201,6 @@ class CounselingCenterControllerTest {
                 .supportGroups(true).build());
 
         //WHEN
-
         String searchUrl = "?specialization=SUCHT&specialization=PSYCHISCH&city=Hamburg&targetGroup=INDIVIDUAL&counselingSetting=PHONE&counselingSetting=GROUP";
         ResponseEntity<CounselingCenter[]> response = testRestTemplate.getForEntity("http://localhost:"+ port +"/api/counseling/search"+searchUrl, CounselingCenter[].class);
 

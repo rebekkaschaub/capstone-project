@@ -158,9 +158,7 @@ class ReviewServiceTest {
                 .rating(5)
                 .comment("Mega! 5 Sterne").build();
 
-
         when(repo.existsById("42")).thenReturn(false);
-
 
         //WHEN /THEN
         assertThrows(IllegalArgumentException.class, ()->  service.updateReview("42", reviewDto));

@@ -50,7 +50,7 @@ public class CounselingCenterService {
 
     public void addParamsToQuery(MultiValueMap<String, String> params, Query query) {
         if(params.containsKey("city")){
-        query.addCriteria(Criteria.where("address.city").is(params.get("city").get(0)));
+            query.addCriteria(Criteria.where("address.city").is(params.get("city").get(0)));
         }
         if(params.containsKey("postalCode")){
             query.addCriteria(Criteria.where("address.postalCode").is(params.get("postalCode").get(0)));
@@ -69,6 +69,5 @@ public class CounselingCenterService {
             List<CounselingSetting> counselingSettings = params.get("counselingSetting").stream().map(CounselingSetting::valueOf).collect(Collectors.toList());
             query.addCriteria(Criteria.where("counselingSetting").in(counselingSettings));
         }
-
     }
 }

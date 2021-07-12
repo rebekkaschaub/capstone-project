@@ -80,7 +80,7 @@ public class ReviewService {
         int count = reviews.size();
         int sum = 0;
         if(count==0){
-            return ReviewStats.builder().count(count).build();
+            return ReviewStats.builder().count(0).average(0).build();
         }
 
         for (Review review : reviews) {

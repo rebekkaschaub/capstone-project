@@ -46,7 +46,6 @@ class SignUpControllerTest {
                 .build());
     }
 
-
     @Test
     public void signUpWithValidCredentials(){
         //GIVEN

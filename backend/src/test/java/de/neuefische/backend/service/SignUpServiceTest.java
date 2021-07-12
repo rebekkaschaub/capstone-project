@@ -12,8 +12,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.server.ResponseStatusException;
 
 
-import java.util.Optional;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.*;
@@ -62,8 +60,6 @@ class SignUpServiceTest {
         assertThrows(ResponseStatusException.class, ()->signUpService.signUp(newUser));
     }
 
-
-
     @ParameterizedTest(name = "when password is {0}, then validatePassword should return: {1}")
     @CsvSource({
             "12345abCD, true",
@@ -81,6 +77,4 @@ class SignUpServiceTest {
         // THEN
         assertEquals(expected, response);
     }
-
-
 }
