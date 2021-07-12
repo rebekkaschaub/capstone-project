@@ -102,6 +102,7 @@ export default function SignUpPage() {
           disabled={
             !signUpData.password1 ||
             !signUpData.password1 ||
+            signUpData.password1 !== signUpData.password2 ||
             signUpData.username.length < 3
           }
         >

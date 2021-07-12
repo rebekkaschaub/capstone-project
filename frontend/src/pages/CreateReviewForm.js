@@ -28,16 +28,11 @@ export default function CreateReviewForm() {
     comment: "",
   };
 
-  const sendReview = useMutation(
-    (review) => {
-      return addReview(token, review);
+  const sendReview = useMutation((review) => addReview(token, review), {
+    onSuccess: () => {
+      queryClient.invalidateQueries("myReviews");
     },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("myReviews");
-      },
-    }
-  );
+  });
 
   const handleClick = () => history.goBack();
 

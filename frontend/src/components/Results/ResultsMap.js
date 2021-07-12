@@ -21,11 +21,6 @@ export default function ResultsMap({ results, setDisplayMap }) {
     zoom: 10,
   });
 
-  const navControlStyle = {
-    right: 10,
-    top: 10,
-  };
-
   const handleClick = () => setDisplayMap(false);
 
   const handleClickAway = () => setSelectedCounselingCenter(null);
@@ -43,7 +38,7 @@ export default function ResultsMap({ results, setDisplayMap }) {
           <Button onClick={handleClick}>Auf Liste ansehen</Button>
         </section>
 
-        <NavigationControl style={navControlStyle} />
+        <NavigationControl className={"navigation"} />
 
         {results.map((result) => (
           <Marker
@@ -96,6 +91,13 @@ const Wrapper = styled.div`
     flex-direction: column;
     align-items: center;
     margin-top: 8px;
+  }
+
+  .navigation {
+    width: min-content;
+    position: absolute;
+    right: 10px;
+    top: 10px;
   }
 `;
 
