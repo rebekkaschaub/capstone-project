@@ -1,7 +1,6 @@
 package de.neuefische.backend.controller;
 
 import de.neuefische.backend.dto.ReviewDto;
-import de.neuefische.backend.model.CounselingCenter;
 import de.neuefische.backend.model.Review;
 import de.neuefische.backend.model.ReviewStats;
 import de.neuefische.backend.service.ReviewService;
