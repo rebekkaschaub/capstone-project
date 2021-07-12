@@ -5,8 +5,8 @@ import { useMutation } from "react-query";
 import jwt_decode from "jwt-decode";
 
 export default function AuthProvider({ children }) {
-  const [token, setToken] = useState();
-  const [userData, setUserData] = useState();
+  const [token, setToken] = useState(null);
+  const [userData, setUserData] = useState(null);
 
   const login = useMutation(
     (credentials) => {

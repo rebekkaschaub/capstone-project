@@ -19,11 +19,14 @@ export default function DetailsPage() {
   const history = useHistory();
   const { id } = useParams();
   const { userData, token } = useContext(AuthContext);
+
   const counselingCenter = useQuery(["details", id], () =>
     loadCounselingCenterById(id)
   );
 
-  const reviews = useQuery(["reviews", id], () => loadReviewsById(token, id));
+  const reviews = useQuery(["reviews", id], () => loadReviewsById(token, id), {
+    enabled: token !== null,
+  });
 
   const handleClick = () => history.goBack();
 
