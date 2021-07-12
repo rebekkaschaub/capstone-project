@@ -16,23 +16,20 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.TestPropertySource;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource(properties = "jwt.secret=topSecret")
 class LoginControllerTest {
 
-    @LocalServerPort
-    private int port;
-
-    @Autowired
-    private AppUserRepository appUserRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     @Autowired
     TestRestTemplate testRestTemplate;
+    @LocalServerPort
+    private int port;
+    @Autowired
+    private AppUserRepository appUserRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Test
     void loginWithValidCredentialsShouldReturnValidJwtToken() {
@@ -41,7 +38,7 @@ class LoginControllerTest {
 
         //WHEN
         LoginDataDto loginDataDto = LoginDataDto.builder().username("Test User").password("testPa$$word").build();
-        ResponseEntity<String> response = testRestTemplate.postForEntity("http://localhost:"+port+"/auth/login", loginDataDto, String.class);
+        ResponseEntity<String> response = testRestTemplate.postForEntity("http://localhost:" + port + "/auth/login", loginDataDto, String.class);
 
         //THEN
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
@@ -56,7 +53,7 @@ class LoginControllerTest {
 
         //WHEN
         LoginDataDto loginDataDto = LoginDataDto.builder().username("Test User").password("wrongPa$$word").build();
-        ResponseEntity<String> response = testRestTemplate.postForEntity("http://localhost:"+port+"/auth/login", loginDataDto, String.class);
+        ResponseEntity<String> response = testRestTemplate.postForEntity("http://localhost:" + port + "/auth/login", loginDataDto, String.class);
 
         //THEN
         assertThat(response.getStatusCode(), is(HttpStatus.FORBIDDEN));

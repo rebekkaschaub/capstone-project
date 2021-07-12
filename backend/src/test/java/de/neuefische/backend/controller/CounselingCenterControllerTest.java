@@ -36,7 +36,7 @@ class CounselingCenterControllerTest {
 
     @Test
     @DisplayName("Method listAllCounselingCenters should return a list of all centers in repo")
-    public void listAllCounselingCentersTest(){
+    public void listAllCounselingCentersTest() {
         //GIVEN
         repo.save(CounselingCenter.builder()
                 .id("1")
@@ -56,13 +56,13 @@ class CounselingCenterControllerTest {
                 .phoneNo("040 280140-620")
                 .email("erziehungsberatung@caritas-hamburg.de")
                 .url("http://www.caritas-hamburg.de ")
-                .specializations(List.of(Specialization.ERZIEHUNGSBERATUNG,Specialization.KINDER, Specialization.ALLEINERZIEHENDE))
+                .specializations(List.of(Specialization.ERZIEHUNGSBERATUNG, Specialization.KINDER, Specialization.ALLEINERZIEHENDE))
                 .targetGroup(List.of(TargetGroup.INDIVIDUAL, TargetGroup.RELATIVES))
                 .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE))
                 .supportGroups(true).build());
 
         //WHEN
-        ResponseEntity<CounselingCenter[]> response= testRestTemplate.getForEntity("http://localhost:"+ port +"/api/counseling", CounselingCenter[].class);
+        ResponseEntity<CounselingCenter[]> response = testRestTemplate.getForEntity("http://localhost:" + port + "/api/counseling", CounselingCenter[].class);
 
         //THEN
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
@@ -85,7 +85,7 @@ class CounselingCenterControllerTest {
                         .phoneNo("040 280140-620")
                         .email("erziehungsberatung@caritas-hamburg.de")
                         .url("http://www.caritas-hamburg.de ")
-                        .specializations(List.of(Specialization.ERZIEHUNGSBERATUNG,Specialization.KINDER, Specialization.ALLEINERZIEHENDE))
+                        .specializations(List.of(Specialization.ERZIEHUNGSBERATUNG, Specialization.KINDER, Specialization.ALLEINERZIEHENDE))
                         .targetGroup(List.of(TargetGroup.INDIVIDUAL, TargetGroup.RELATIVES))
                         .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE))
                         .supportGroups(true).build()));
@@ -113,13 +113,13 @@ class CounselingCenterControllerTest {
                 .phoneNo("040 280140-620")
                 .email("erziehungsberatung@caritas-hamburg.de")
                 .url("http://www.caritas-hamburg.de ")
-                .specializations(List.of(Specialization.ERZIEHUNGSBERATUNG,Specialization.KINDER, Specialization.ALLEINERZIEHENDE))
+                .specializations(List.of(Specialization.ERZIEHUNGSBERATUNG, Specialization.KINDER, Specialization.ALLEINERZIEHENDE))
                 .targetGroup(List.of(TargetGroup.INDIVIDUAL, TargetGroup.RELATIVES))
                 .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE))
                 .supportGroups(true).build());
 
         //WHEN
-        ResponseEntity<CounselingCenter> response= testRestTemplate.getForEntity("http://localhost:"+ port +"/api/counseling/1", CounselingCenter.class);
+        ResponseEntity<CounselingCenter> response = testRestTemplate.getForEntity("http://localhost:" + port + "/api/counseling/1", CounselingCenter.class);
 
         //THEN
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
@@ -160,13 +160,13 @@ class CounselingCenterControllerTest {
                 .phoneNo("040 280140-620")
                 .email("erziehungsberatung@caritas-hamburg.de")
                 .url("http://www.caritas-hamburg.de ")
-                .specializations(List.of(Specialization.ERZIEHUNGSBERATUNG,Specialization.KINDER, Specialization.ALLEINERZIEHENDE))
+                .specializations(List.of(Specialization.ERZIEHUNGSBERATUNG, Specialization.KINDER, Specialization.ALLEINERZIEHENDE))
                 .targetGroup(List.of(TargetGroup.INDIVIDUAL, TargetGroup.RELATIVES))
                 .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE))
                 .supportGroups(true).build());
 
         //WHEN
-        ResponseEntity<CounselingCenter> response= testRestTemplate.getForEntity("http://localhost:"+ port +"/api/counseling/5", CounselingCenter.class);
+        ResponseEntity<CounselingCenter> response = testRestTemplate.getForEntity("http://localhost:" + port + "/api/counseling/5", CounselingCenter.class);
 
         //THEN
         assertThat(response.getStatusCode(), is(HttpStatus.NOT_FOUND));
@@ -195,15 +195,14 @@ class CounselingCenterControllerTest {
                 .phoneNo("040 280140-620")
                 .email("erziehungsberatung@caritas-hamburg.de")
                 .url("http://www.caritas-hamburg.de ")
-                .specializations(List.of(Specialization.ERZIEHUNGSBERATUNG,Specialization.KINDER, Specialization.ALLEINERZIEHENDE))
+                .specializations(List.of(Specialization.ERZIEHUNGSBERATUNG, Specialization.KINDER, Specialization.ALLEINERZIEHENDE))
                 .targetGroup(List.of(TargetGroup.INDIVIDUAL, TargetGroup.RELATIVES))
                 .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE))
                 .supportGroups(true).build());
 
         //WHEN
-
         String searchUrl = "?specialization=SUCHT&specialization=PSYCHISCH&city=Hamburg&targetGroup=INDIVIDUAL&counselingSetting=PHONE&counselingSetting=GROUP";
-        ResponseEntity<CounselingCenter[]> response = testRestTemplate.getForEntity("http://localhost:"+ port +"/api/counseling/search"+searchUrl, CounselingCenter[].class);
+        ResponseEntity<CounselingCenter[]> response = testRestTemplate.getForEntity("http://localhost:" + port + "/api/counseling/search" + searchUrl, CounselingCenter[].class);
 
         //THEN
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
@@ -243,7 +242,7 @@ class CounselingCenterControllerTest {
                 .phoneNo("040 280140-620")
                 .email("erziehungsberatung@caritas-hamburg.de")
                 .url("http://www.caritas-hamburg.de ")
-                .specializations(List.of(Specialization.ERZIEHUNGSBERATUNG,Specialization.KINDER, Specialization.ALLEINERZIEHENDE))
+                .specializations(List.of(Specialization.ERZIEHUNGSBERATUNG, Specialization.KINDER, Specialization.ALLEINERZIEHENDE))
                 .targetGroup(List.of(TargetGroup.INDIVIDUAL, TargetGroup.RELATIVES))
                 .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE))
                 .supportGroups(true).build());
@@ -251,7 +250,7 @@ class CounselingCenterControllerTest {
         //WHEN
 
         String searchUrl = "?specialization=SUCHT&specialization=PSYCHISCH&city=Hamburg&targetGroup=INDIVIDUAL&counselingSetting=CHAT";
-        ResponseEntity<CounselingCenter[]> response = testRestTemplate.getForEntity("http://localhost:"+ port +"/api/counseling/search"+searchUrl, CounselingCenter[].class);
+        ResponseEntity<CounselingCenter[]> response = testRestTemplate.getForEntity("http://localhost:" + port + "/api/counseling/search" + searchUrl, CounselingCenter[].class);
 
         //THEN
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
@@ -280,7 +279,7 @@ class CounselingCenterControllerTest {
                 .phoneNo("040 280140-620")
                 .email("erziehungsberatung@caritas-hamburg.de")
                 .url("http://www.caritas-hamburg.de ")
-                .specializations(List.of(Specialization.ERZIEHUNGSBERATUNG,Specialization.KINDER, Specialization.ALLEINERZIEHENDE))
+                .specializations(List.of(Specialization.ERZIEHUNGSBERATUNG, Specialization.KINDER, Specialization.ALLEINERZIEHENDE))
                 .targetGroup(List.of(TargetGroup.INDIVIDUAL, TargetGroup.RELATIVES))
                 .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE))
                 .supportGroups(true).build());
@@ -288,7 +287,7 @@ class CounselingCenterControllerTest {
         //WHEN
 
         String searchUrl = "?counselingSetting=NOTVALID";
-        ResponseEntity<Void> response = testRestTemplate.getForEntity("http://localhost:"+ port +"/api/counseling/search"+searchUrl, Void.class);
+        ResponseEntity<Void> response = testRestTemplate.getForEntity("http://localhost:" + port + "/api/counseling/search" + searchUrl, Void.class);
 
         //THEN
         assertThat(response.getStatusCode(), is(HttpStatus.BAD_REQUEST));

@@ -46,8 +46,8 @@ export default function CreateReviewForm() {
 
   return (
     <Wrapper>
-      <Headline onClick={handleClick}>
-        <img src={backIcon} alt="Back Icon" />
+      <Headline>
+        <img src={backIcon} alt="Back Icon" onClick={handleClick} />
         <h3>Dein Erfahrungsbericht zu {data.name}</h3>
       </Headline>
       <ReviewForm

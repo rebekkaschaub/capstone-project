@@ -19,13 +19,16 @@ export default function DetailsPage() {
   const history = useHistory();
   const { id } = useParams();
   const { userData, token } = useContext(AuthContext);
+
   const counselingCenter = useQuery(["details", id], () =>
     loadCounselingCenterById(id)
   );
 
-  const reviews = useQuery(["reviews", id], () => loadReviewsById(token, id));
+  const reviews = useQuery(["reviews", id], () => loadReviewsById(token, id), {
+    enabled: token !== null,
+  });
 
-  const handleClick = () => history.goBack();
+  const handleBackClick = () => history.goBack();
 
   const handleReviewButtonClick = () => history.push(`/review/${id}`);
 
@@ -43,8 +46,8 @@ export default function DetailsPage() {
 
   return (
     <Details>
-      <Headline onClick={handleClick}>
-        <img src={backIcon} alt="Back Icon" />
+      <Headline>
+        <img src={backIcon} alt="Back Icon" onClick={handleBackClick} />
         <h3>{counselingCenter.data.name}</h3>
       </Headline>
       <Wrapper>

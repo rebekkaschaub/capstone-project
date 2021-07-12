@@ -13,7 +13,8 @@ import org.springframework.util.MultiValueMap;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
@@ -35,12 +36,12 @@ class CounselingCenterServiceTest {
         query.addCriteria(Criteria.where("counselingSetting").in(List.of(CounselingSetting.GROUP, CounselingSetting.INPERSON)));
 
         MultiValueMap<String, String> queryMap = new LinkedMultiValueMap<>();
-        queryMap.add("city","Hamburg");
-        queryMap.add("postalCode","21109");
-        queryMap.add("specialization","PSYCHISCH");
-        queryMap.add("targetGroup","INDIVIDUAL");
-        queryMap.add("counselingSetting","GROUP");
-        queryMap.add("counselingSetting","INPERSON");
+        queryMap.add("city", "Hamburg");
+        queryMap.add("postalCode", "21109");
+        queryMap.add("specialization", "PSYCHISCH");
+        queryMap.add("targetGroup", "INDIVIDUAL");
+        queryMap.add("counselingSetting", "GROUP");
+        queryMap.add("counselingSetting", "INPERSON");
 
         when(mongoTemplate.find(query, CounselingCenter.class)).thenReturn(List.of(
                 CounselingCenter.builder()
@@ -50,7 +51,7 @@ class CounselingCenterServiceTest {
                         .phoneNo("000")
                         .email("IloveChocolate@gmx.de")
                         .url("beste url")
-                        .specializations(List.of(Specialization.ERZIEHUNGSBERATUNG,Specialization.PSYCHISCH, Specialization.ALLEINERZIEHENDE))
+                        .specializations(List.of(Specialization.ERZIEHUNGSBERATUNG, Specialization.PSYCHISCH, Specialization.ALLEINERZIEHENDE))
                         .targetGroup(List.of(TargetGroup.INDIVIDUAL, TargetGroup.RELATIVES))
                         .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE))
                         .supportGroups(true).build(),
@@ -90,7 +91,7 @@ class CounselingCenterServiceTest {
                         .phoneNo("000")
                         .email("IloveChocolate@gmx.de")
                         .url("beste url")
-                        .specializations(List.of(Specialization.ERZIEHUNGSBERATUNG,Specialization.PSYCHISCH, Specialization.ALLEINERZIEHENDE))
+                        .specializations(List.of(Specialization.ERZIEHUNGSBERATUNG, Specialization.PSYCHISCH, Specialization.ALLEINERZIEHENDE))
                         .targetGroup(List.of(TargetGroup.INDIVIDUAL, TargetGroup.RELATIVES))
                         .counselingSetting(List.of(CounselingSetting.INPERSON, CounselingSetting.PHONE))
                         .supportGroups(true).build(),
@@ -134,12 +135,12 @@ class CounselingCenterServiceTest {
         expected.addCriteria(Criteria.where("counselingSetting").in(List.of(CounselingSetting.GROUP, CounselingSetting.INPERSON)));
 
         MultiValueMap<String, String> queryMap = new LinkedMultiValueMap<>();
-        queryMap.add("city","Hamburg");
-        queryMap.add("postalCode","21109");
-        queryMap.add("specialization","PSYCHISCH");
-        queryMap.add("targetGroup","INDIVIDUAL");
-        queryMap.add("counselingSetting","GROUP");
-        queryMap.add("counselingSetting","INPERSON");
+        queryMap.add("city", "Hamburg");
+        queryMap.add("postalCode", "21109");
+        queryMap.add("specialization", "PSYCHISCH");
+        queryMap.add("targetGroup", "INDIVIDUAL");
+        queryMap.add("counselingSetting", "GROUP");
+        queryMap.add("counselingSetting", "INPERSON");
 
 
         //WHEN
@@ -163,16 +164,16 @@ class CounselingCenterServiceTest {
         expected.addCriteria(Criteria.where("counselingSetting").in(List.of(CounselingSetting.GROUP, CounselingSetting.INPERSON)));
 
         MultiValueMap<String, String> queryMap = new LinkedMultiValueMap<>();
-        queryMap.add("city","Hamburg");
-        queryMap.add("postalCode","21109");
-        queryMap.add("specialization","PSYCHISCH");
-        queryMap.add("targetGroup","INDIVIDUAL");
-        queryMap.add("counselingSetting","GROUP");
-        queryMap.add("counselingSetting","NOTVALID");
+        queryMap.add("city", "Hamburg");
+        queryMap.add("postalCode", "21109");
+        queryMap.add("specialization", "PSYCHISCH");
+        queryMap.add("targetGroup", "INDIVIDUAL");
+        queryMap.add("counselingSetting", "GROUP");
+        queryMap.add("counselingSetting", "NOTVALID");
 
 
         //WHEN/THEN
-        assertThrows(IllegalArgumentException.class, ()->service.addParamsToQuery(queryMap, actual));
+        assertThrows(IllegalArgumentException.class, () -> service.addParamsToQuery(queryMap, actual));
     }
 
 }

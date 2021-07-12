@@ -16,8 +16,8 @@ public class SignUpController {
     private final SignUpService service;
 
     @PostMapping
-    public UserDto signUp(@RequestBody LoginDataDto data){
-       return service.signUp(data);
+    public UserDto signUp(@RequestBody LoginDataDto data) {
+        return service.signUp(data);
     }
 
 }

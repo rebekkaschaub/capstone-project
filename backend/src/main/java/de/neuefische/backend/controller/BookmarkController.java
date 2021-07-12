@@ -21,12 +21,12 @@ public class BookmarkController {
     }
 
     @GetMapping
-    public List<CounselingCenter> listBookmarkedCounselingCenters(Principal principal){
+    public List<CounselingCenter> listBookmarkedCounselingCenters(Principal principal) {
         return service.listBookmarkedCounselingCenters(principal.getName());
     }
 
     @PutMapping
-    public CounselingCenter updateBookmarkedBy(@RequestBody CounselingCenterDto counselingCenterDto, Principal principal){
+    public CounselingCenter updateBookmarkedBy(@RequestBody CounselingCenterDto counselingCenterDto, Principal principal) {
         return service.updateBookMarkedBy(counselingCenterDto.getId(), principal.getName());
     }
 }

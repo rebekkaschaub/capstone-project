@@ -38,37 +38,37 @@ public class CounselingCenterService {
         return repo.findById(id);
     }
 
-    public List<CounselingCenter> filterCounselingCenter(MultiValueMap<String,String> params){
+    public List<CounselingCenter> filterCounselingCenter(MultiValueMap<String, String> params) {
         Query query = new Query();
-        try{
+        try {
             addParamsToQuery(params, query);
-        }catch (IllegalArgumentException i){
+        } catch (IllegalArgumentException i) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
-            return mongoTemplate.find(query, CounselingCenter.class);
+        return mongoTemplate.find(query, CounselingCenter.class);
     }
 
     public void addParamsToQuery(MultiValueMap<String, String> params, Query query) {
-        if(params.containsKey("city")){
-        query.addCriteria(Criteria.where("address.city").is(params.get("city").get(0)));
+        if (params.containsKey("city")) {
+            query.addCriteria(Criteria.where("address.city").is(params.get("city").get(0)));
         }
-        if(params.containsKey("postalCode")){
+        if (params.containsKey("postalCode")) {
             query.addCriteria(Criteria.where("address.postalCode").is(params.get("postalCode").get(0)));
         }
-        if(params.containsKey("specialization")){
+        if (params.containsKey("specialization")) {
             List<Specialization> specialization = params.get("specialization").stream().map(Specialization::valueOf).collect(Collectors.toList());
-            if(!specialization.contains(Specialization.ALL)){
-                query.addCriteria(Criteria.where("specializations").in(specialization));}
+            if (!specialization.contains(Specialization.ALL)) {
+                query.addCriteria(Criteria.where("specializations").in(specialization));
+            }
         }
-        if(params.containsKey("targetGroup")){
+        if (params.containsKey("targetGroup")) {
             List<TargetGroup> targetGroups = params.get("targetGroup").stream().map(TargetGroup::valueOf).collect(Collectors.toList());
             query.addCriteria(Criteria.where("targetGroup").in(targetGroups));
         }
 
-        if(params.containsKey("counselingSetting")){
+        if (params.containsKey("counselingSetting")) {
             List<CounselingSetting> counselingSettings = params.get("counselingSetting").stream().map(CounselingSetting::valueOf).collect(Collectors.toList());
             query.addCriteria(Criteria.where("counselingSetting").in(counselingSettings));
         }
-
     }
 }

@@ -20,28 +20,28 @@ export default function EmergencyPage() {
         </p>
       </ImportantCard>
       <Card>
-        <h2>Rettungswagen/Feuerwehr</h2>
+        <Title>Rettungswagen/Feuerwehr</Title>
         <StyledSection>
           <FiPhone />
           <p>112</p>
         </StyledSection>
       </Card>
       <Card>
-        <h2>Polizei</h2>
+        <Title>Polizei</Title>
         <StyledSection>
           <FiPhone />
           <p>110</p>
         </StyledSection>
       </Card>
       <Card>
-        <h2>Giftnoruf</h2>
+        <Title>Giftnoruf</Title>
         <StyledSection>
           <FiPhone size={15} />
           <p>+49 551 19240</p>
         </StyledSection>
       </Card>
       <Card>
-        <h2>Psychatrische Notaufnahme</h2>
+        <Title>Psychatrische Notaufnahme</Title>
         <StyledSection>
           <FiHome size={40} />
           <p>
@@ -66,7 +66,7 @@ export default function EmergencyPage() {
         </StyledSection>
       </Card>
       <Card>
-        <h2>Telefonseelsorge</h2>
+        <Title>Telefonseelsorge</Title>
         <p>Anonyme, kostenlose Beratung zu jeder Tages- und Nachtzeit.</p>
         <StyledSection>
           <FiPhone />
@@ -91,14 +91,13 @@ export default function EmergencyPage() {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
 `;
 
 const Card = styled.section`
-  padding: 0 8px;
-  margin: 8px 0;
+  padding: 8px;
+  margin: 5px 0;
   box-shadow: 0 13px 10px -7px rgba(0, 0, 0, 0.1);
-  font-size: 15px;
+  font-size: medium;
   background-color: #f7f6e7;
   border: none;
   border-radius: 12px;
@@ -146,4 +145,9 @@ const ImportantCard = styled.section`
     font-size: 15px;
     margin: 0;
   }
+`;
+
+const Title = styled.p`
+  font-weight: bold;
+  font-size: larger;
 `;

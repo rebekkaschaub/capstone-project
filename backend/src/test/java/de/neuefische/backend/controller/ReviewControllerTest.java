@@ -30,12 +30,10 @@ import static org.mockito.Mockito.when;
 @TestPropertySource(properties = "jwt.secret=testSecret")
 class ReviewControllerTest {
 
-    @LocalServerPort
-    private int port;
-
     @Autowired
     TestRestTemplate testRestTemplate;
-
+    @LocalServerPort
+    private int port;
     @Autowired
     private ReviewRepo reviewRepo;
 
@@ -48,8 +46,8 @@ class ReviewControllerTest {
     @MockBean
     private IdUtils idUtils;
 
-    private String getUrl(){
-        return "http://localhost:"+ port +"/api/reviews";
+    private String getUrl() {
+        return "http://localhost:" + port + "/api/reviews";
     }
 
     @BeforeEach
@@ -95,7 +93,7 @@ class ReviewControllerTest {
 
         //WHEN
         HttpHeaders headers = getHttpHeaderWithAuthToken();
-        ResponseEntity<Review[]> response = testRestTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(headers),Review[].class);
+        ResponseEntity<Review[]> response = testRestTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(headers), Review[].class);
 
         //THEN
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
@@ -153,15 +151,15 @@ class ReviewControllerTest {
                         .build()
         ));
 
-        String url = getUrl()+"/445";
+        String url = getUrl() + "/445";
 
         //WHEN
         HttpHeaders headers = getHttpHeaderWithAuthToken();
-        ResponseEntity<Review[]> response = testRestTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(headers),Review[].class);
+        ResponseEntity<Review[]> response = testRestTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(headers), Review[].class);
 
         //THEN
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
-        assertThat(response.getBody(), arrayContainingInAnyOrder(  Review.builder()
+        assertThat(response.getBody(), arrayContainingInAnyOrder(Review.builder()
                         .reviewId("90")
                         .counselingCenterId("445")
                         .counselingCenterName("Suchtberatung")
@@ -198,7 +196,7 @@ class ReviewControllerTest {
 
         //WHEN
         HttpHeaders headers = getHttpHeaderWithAuthToken();
-        ResponseEntity<Review> response = testRestTemplate.exchange(url, HttpMethod.POST, new HttpEntity<>(reviewDto, headers),Review.class);
+        ResponseEntity<Review> response = testRestTemplate.exchange(url, HttpMethod.POST, new HttpEntity<>(reviewDto, headers), Review.class);
 
         //THEN
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
@@ -240,7 +238,7 @@ class ReviewControllerTest {
 
         //WHEN
         HttpHeaders headers = getHttpHeaderWithAuthToken();
-        ResponseEntity<Review> response = testRestTemplate.exchange(url, HttpMethod.POST, new HttpEntity<>(reviewDto, headers),Review.class);
+        ResponseEntity<Review> response = testRestTemplate.exchange(url, HttpMethod.POST, new HttpEntity<>(reviewDto, headers), Review.class);
 
         //THEN
         assertThat(response.getStatusCode(), is(HttpStatus.FORBIDDEN));
@@ -278,11 +276,11 @@ class ReviewControllerTest {
                 .rating(3)
                 .comment("changed comment").build();
 
-        String url = getUrl()+"/42";
+        String url = getUrl() + "/42";
 
         //WHEN
         HttpHeaders headers = getHttpHeaderWithAuthToken();
-        ResponseEntity<Review> response = testRestTemplate.exchange(url, HttpMethod.PUT, new HttpEntity<>(reviewDto, headers),Review.class);
+        ResponseEntity<Review> response = testRestTemplate.exchange(url, HttpMethod.PUT, new HttpEntity<>(reviewDto, headers), Review.class);
 
         //THEN
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
@@ -319,11 +317,11 @@ class ReviewControllerTest {
                 .rating(3)
                 .comment("changed comment").build();
 
-        String url = getUrl()+"/42";
+        String url = getUrl() + "/42";
 
         //WHEN
         HttpHeaders headers = getHttpHeaderWithAuthToken();
-        ResponseEntity<Review> response = testRestTemplate.exchange(url, HttpMethod.PUT, new HttpEntity<>(reviewDto, headers),Review.class);
+        ResponseEntity<Review> response = testRestTemplate.exchange(url, HttpMethod.PUT, new HttpEntity<>(reviewDto, headers), Review.class);
 
         //THEN
         assertThat(response.getStatusCode(), is(HttpStatus.FORBIDDEN));
@@ -361,11 +359,11 @@ class ReviewControllerTest {
                 .rating(3)
                 .comment("changed comment").build();
 
-        String url = getUrl()+"/43";
+        String url = getUrl() + "/43";
 
         //WHEN
         HttpHeaders headers = getHttpHeaderWithAuthToken();
-        ResponseEntity<Review> response = testRestTemplate.exchange(url, HttpMethod.PUT, new HttpEntity<>(reviewDto, headers),Review.class);
+        ResponseEntity<Review> response = testRestTemplate.exchange(url, HttpMethod.PUT, new HttpEntity<>(reviewDto, headers), Review.class);
 
         //THEN
         assertThat(response.getStatusCode(), is(HttpStatus.NOT_FOUND));
@@ -404,11 +402,11 @@ class ReviewControllerTest {
                         .comment("testComment")
                         .build()));
 
-        String url = getUrl()+"/42";
+        String url = getUrl() + "/42";
 
         //WHEN
         HttpHeaders headers = getHttpHeaderWithAuthToken();
-        testRestTemplate.exchange(url, HttpMethod.DELETE, new HttpEntity<>( headers),void.class);
+        testRestTemplate.exchange(url, HttpMethod.DELETE, new HttpEntity<>(headers), void.class);
 
 
         //THEN
@@ -421,7 +419,7 @@ class ReviewControllerTest {
                 .title("Passt")
                 .rating(3)
                 .comment("Geht klar!")
-                .build(),Review.builder()
+                .build(), Review.builder()
                 .reviewId("95")
                 .counselingCenterId("445")
                 .counselingCenterName("Suchtberatung")
@@ -472,7 +470,7 @@ class ReviewControllerTest {
                         .rating(2)
                         .build()));
 
-        String url = getUrl()+"/stats/123";
+        String url = getUrl() + "/stats/123";
 
         //WHEN
         HttpHeaders headers = getHttpHeaderWithAuthToken();
