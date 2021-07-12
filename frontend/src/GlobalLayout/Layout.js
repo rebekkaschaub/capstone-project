@@ -1,5 +1,5 @@
 import styled from "styled-components/macro";
-import Header from "../nav/Header";
+import Header from "../components/Header";
 
 export default function Layout(props) {
   return (

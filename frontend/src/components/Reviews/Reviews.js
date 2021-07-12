@@ -1,5 +1,5 @@
 import LoadingSpinnerSmall from "../../commons/LoadingSpinner";
-import ReviewCard from "./ReviewCard";
+import CounselingCenterReviewCard from "./CounselingCenterReviewCard";
 
 export default function Reviews({ reviews }) {
   if (reviews.isLoading) {
@@ -17,7 +17,7 @@ export default function Reviews({ reviews }) {
   return (
     <div>
       {reviews.data.map((review) => (
-        <ReviewCard key={review.reviewId} review={review} />
+        <CounselingCenterReviewCard key={review.reviewId} review={review} />
       ))}
     </div>
   );

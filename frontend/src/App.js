@@ -39,7 +39,7 @@ export default function App() {
             />
             <PrivateRoute
               component={UpdateReviewForm}
-              path={"/review/:id/:reviewId"}
+              path={"/review/:counselingCenterId/:reviewId"}
             />
           </Switch>
         </Layout>

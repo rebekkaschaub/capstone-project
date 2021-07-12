@@ -1,14 +1,14 @@
-import Label from "./Label";
+import Tag from "./Tag";
 import styled from "styled-components/macro";
 
-export default function InfoLabels({ details }) {
+export default function InfoTags({ details }) {
   return (
-    <Labels>
+    <Tags>
       <h4>Schwerpunkte</h4>
       {details.specializations && (
         <section>
           {details.specializations.map((specialization) => (
-            <Label
+            <Tag
               key={specialization.abbreviation}
               text={specialization.description}
               color={"#005E71"}
@@ -19,7 +19,7 @@ export default function InfoLabels({ details }) {
       {details.targetGroup && (
         <section>
           {details.targetGroup.map((group) => (
-            <Label
+            <Tag
               key={group.displayName}
               text={group.displayName}
               color={"#38B389"}
@@ -30,7 +30,7 @@ export default function InfoLabels({ details }) {
       {details.counselingSetting && (
         <section>
           {details.counselingSetting.map((setting) => (
-            <Label
+            <Tag
               key={setting.displayName}
               text={setting.displayName}
               color={"#656688"}
@@ -38,11 +38,11 @@ export default function InfoLabels({ details }) {
           ))}
         </section>
       )}
-    </Labels>
+    </Tags>
   );
 }
 
-const Labels = styled.div`
+const Tags = styled.div`
   section {
     display: inline-block;
   }

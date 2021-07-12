@@ -12,7 +12,7 @@ import Headline from "../commons/Headline";
 export default function UpdateReviewForm() {
   const history = useHistory();
   const queryClient = useQueryClient();
-  const { id, reviewId } = useParams();
+  const { counselingCenterId, reviewId } = useParams();
   const { userData, token } = useContext(AuthContext);
 
   const { isLoading, isError, data, error } = useQuery(
@@ -21,7 +21,7 @@ export default function UpdateReviewForm() {
   );
 
   const initialState = {
-    counselingCenterId: id,
+    counselingCenterId: counselingCenterId,
     counselingCenterName: data?.counselingCenterName,
     author: userData.sub,
     title: data?.title,
@@ -34,9 +34,7 @@ export default function UpdateReviewForm() {
       return updateReview(token, reviewId, review);
     },
     {
-      onSuccess: () => {
-        queryClient.invalidateQueries("myReviews");
-      },
+      onSuccess: () => queryClient.invalidateQueries("myReviews"),
     }
   );
 

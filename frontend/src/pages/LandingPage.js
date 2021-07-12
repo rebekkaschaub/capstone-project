@@ -1,7 +1,6 @@
 import emergency from "../images/remi-boyer-5pthQnMi5hY-unsplash.jpg";
 import compass from "../images/ali-kazal-2mg-3crJFgk-unsplash.jpg";
 import stones from "../images/deniz-altindas-t1XLQvDqt_4-unsplash.jpg";
-
 import styled from "styled-components/macro";
 import { MdChevronRight } from "react-icons/md";
 import { useHistory } from "react-router-dom";

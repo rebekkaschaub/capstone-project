@@ -1,6 +1,6 @@
 import styled from "styled-components/macro";
 
-export default function Label({ text, color }) {
+export default function Tag({ text, color }) {
   return <Item color={color}>{text}</Item>;
 }
 
