@@ -8,6 +8,7 @@ import { IoBookmarkSharp } from "react-icons/io5";
 export default function CounselingCenterCard({ counselingCenter }) {
   const history = useHistory();
   const { userData } = useContext(AuthContext);
+
   const handleClick = () =>
     history.push(`/counseling/${counselingCenter.id}/details`);
 

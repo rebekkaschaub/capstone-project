@@ -1,6 +1,6 @@
 import { useHistory, useParams } from "react-router-dom";
 import styled from "styled-components/macro";
-import InfoLabels from "../components/InfoLabels";
+import InfoTags from "../components/InfoTags";
 import { useQuery } from "react-query";
 import { loadCounselingCenterById } from "../service/CounselingCenterService";
 import LoadingSpinner from "../commons/LoadingSpinner";
@@ -9,7 +9,7 @@ import AuthContext from "../context/AuthContext";
 import BookmarkButton from "../commons/BookmarkButton";
 import backIcon from "../images/backIcon.png";
 import Reviews from "../components/Reviews/Reviews";
-import StyledIconButton from "../commons/StyledIconButton";
+import IconButton from "../commons/IconButton";
 import { FaStar } from "react-icons/fa";
 import { FiAtSign, FiExternalLink, FiPhone, FiHome } from "react-icons/fi";
 import { loadReviewsById } from "../service/ReviewService";
@@ -59,10 +59,10 @@ export default function DetailsPage() {
               token={token}
             />
             {reviewsContainLoggedInUser?.length === 0 && (
-              <StyledIconButton onClick={handleReviewButtonClick}>
+              <IconButton onClick={handleReviewButtonClick}>
                 <FaStar size={30} color={"#FFC107"} />
                 <p>bewerten</p>
-              </StyledIconButton>
+              </IconButton>
             )}
           </Buttons>
         )}
@@ -98,7 +98,7 @@ export default function DetailsPage() {
           </StyledSection>
         </ContactDetails>
 
-        <InfoLabels details={counselingCenter.data} />
+        <InfoTags details={counselingCenter.data} />
         {userData && (
           <section>
             <h4>Erfahrungsberichte</h4> <Reviews id={id} reviews={reviews} />

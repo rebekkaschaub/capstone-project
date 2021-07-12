@@ -22,8 +22,8 @@ export default function ResultsMap({ results, setDisplayMap }) {
   });
 
   const handleClick = () => setDisplayMap(false);
-
   const handleClickAway = () => setSelectedCounselingCenter(null);
+
   return (
     <Wrapper>
       <ReactMapGL
@@ -34,9 +34,9 @@ export default function ResultsMap({ results, setDisplayMap }) {
           setViewport(viewport);
         }}
       >
-        <section>
+        <CenteredButton>
           <Button onClick={handleClick}>Auf Liste ansehen</Button>
-        </section>
+        </CenteredButton>
 
         <NavigationControl className={"navigation"} />
 
@@ -86,13 +86,6 @@ const Wrapper = styled.div`
   top: 95px;
   left: 0;
 
-  div > section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 8px;
-  }
-
   .navigation {
     width: min-content;
     position: absolute;
@@ -114,4 +107,10 @@ const StyledPopup = styled(Popup)`
     flex-direction: column;
     align-items: flex-start;
   }
+`;
+
+const CenteredButton = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
 `;

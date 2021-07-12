@@ -1,7 +1,7 @@
 import styled from "styled-components/macro";
 import { FaStar } from "react-icons/fa";
 import { MdDeleteForever, MdModeEdit } from "react-icons/md";
-import StyledIconButton from "../../commons/StyledIconButton";
+import IconButton from "../../commons/IconButton";
 import { useMutation, useQueryClient } from "react-query";
 import { removeReview } from "../../service/ReviewService";
 import AuthContext from "../../context/AuthContext";
@@ -36,14 +36,14 @@ export default function MyReviewCard({ review }) {
       })}
       <p>{review.comment}</p>
       <EditButtons>
-        <StyledIconButton onClick={deleteReview.mutate}>
+        <IconButton onClick={deleteReview.mutate}>
           <MdDeleteForever size={25} color={"#1C3648"} />
           <p>Löschen</p>
-        </StyledIconButton>
-        <StyledIconButton onClick={handleEditButtonClick}>
+        </IconButton>
+        <IconButton onClick={handleEditButtonClick}>
           <MdModeEdit size={25} color={"#1C3648"} />
           <p>bearbeiten</p>
-        </StyledIconButton>
+        </IconButton>
       </EditButtons>
     </Wrapper>
   );
@@ -52,7 +52,6 @@ export default function MyReviewCard({ review }) {
 const Wrapper = styled.section`
   padding: 4px;
   margin: 8px 0;
-  transition: 0.3s;
   box-shadow: 0 13px 10px -7px rgba(0, 0, 0, 0.1);
   font-size: small;
   background-color: #f7f6e7;

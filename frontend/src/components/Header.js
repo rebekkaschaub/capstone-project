@@ -1,5 +1,5 @@
-import BurgerMenuIcon from "./BurgerMenuIcon";
-import Menu from "./Menu";
+import BurgerMenuIcon from "../nav/BurgerMenuIcon";
+import Menu from "../nav/Menu";
 import styled from "styled-components/macro";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";

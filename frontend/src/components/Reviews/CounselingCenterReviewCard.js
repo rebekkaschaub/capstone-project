@@ -1,10 +1,10 @@
 import styled from "styled-components/macro";
 import { FaStar } from "react-icons/fa";
 
-export default function ReviewCard({ review }) {
+export default function CounselingCenterReviewCard({ review }) {
   return (
     <Wrapper>
-      <p>{review.title}</p>
+      <Title>{review.title}</Title>
       <Info>
         <p>von {review.author}</p>
         <section>
@@ -36,12 +36,6 @@ const Wrapper = styled.section`
   border: none;
   border-radius: 12px;
   width: 100%;
-
-  > p:first-child {
-    font-size: 14px;
-    font-weight: bold;
-    margin: 5px 0;
-  }
 `;
 
 const Info = styled.div`
@@ -49,4 +43,10 @@ const Info = styled.div`
   p {
     margin: 0;
   }
+`;
+
+const Title = styled.p`
+  font-size: 14px;
+  font-weight: bold;
+  margin: 5px 0;
 `;

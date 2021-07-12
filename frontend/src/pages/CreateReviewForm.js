@@ -29,9 +29,7 @@ export default function CreateReviewForm() {
   };
 
   const sendReview = useMutation((review) => addReview(token, review), {
-    onSuccess: () => {
-      queryClient.invalidateQueries("myReviews");
-    },
+    onSuccess: () => queryClient.invalidateQueries("myReviews"),
   });
 
   const handleClick = () => history.goBack();
