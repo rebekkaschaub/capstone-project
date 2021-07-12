@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import ReactMapGL, { Marker, Popup } from "react-map-gl";
+import ReactMapGL, { Marker, NavigationControl, Popup } from "react-map-gl";
 import ClickAwayListener from "react-click-away-listener";
 import styled from "styled-components/macro";
 import Button from "./Button";
@@ -37,6 +37,8 @@ export default function ResultsMap({ results, setDisplayMap }) {
         <section>
           <Button onClick={handleClick}>Auf Liste ansehen</Button>
         </section>
+
+        <NavigationControl className={"navigation"} />
 
         {results.map((result) => (
           <Marker
@@ -89,6 +91,13 @@ const Wrapper = styled.div`
     flex-direction: column;
     align-items: center;
     margin-top: 8px;
+  }
+
+  .navigation {
+    width: min-content;
+    position: absolute;
+    right: 10px;
+    top: 10px;
   }
 `;
 
