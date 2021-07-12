@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import ReactMapGL, { Marker, NavigationControl, Popup } from "react-map-gl";
+import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import ClickAwayListener from "react-click-away-listener";
 import styled from "styled-components/macro";
 import Button from "./Button";
@@ -21,11 +21,6 @@ export default function ResultsMap({ results, setDisplayMap }) {
     zoom: 10,
   });
 
-  const navControlStyle = {
-    right: 10,
-    top: 10,
-  };
-
   const handleClick = () => setDisplayMap(false);
 
   const handleClickAway = () => setSelectedCounselingCenter(null);
@@ -42,8 +37,6 @@ export default function ResultsMap({ results, setDisplayMap }) {
         <section>
           <Button onClick={handleClick}>Auf Liste ansehen</Button>
         </section>
-
-        <NavigationControl style={navControlStyle} />
 
         {results.map((result) => (
           <Marker
