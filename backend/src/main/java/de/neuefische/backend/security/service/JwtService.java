@@ -18,13 +18,13 @@ public class JwtService {
     private String jwtSecret;
 
     public String createToken(HashMap<String, Object> claims, String subject) {
-    return Jwts.builder()
-            .addClaims(claims)
-            .setSubject(subject)
-            .setIssuedAt(Date.from(Instant.now()))
-            .setExpiration(Date.from(Instant.now().plus(Duration.ofHours(3))))
-            .signWith(SignatureAlgorithm.HS256, jwtSecret)
-            .compact();
+        return Jwts.builder()
+                .addClaims(claims)
+                .setSubject(subject)
+                .setIssuedAt(Date.from(Instant.now()))
+                .setExpiration(Date.from(Instant.now().plus(Duration.ofHours(3))))
+                .signWith(SignatureAlgorithm.HS256, jwtSecret)
+                .compact();
     }
 
     public Claims parseClaims(String token) {

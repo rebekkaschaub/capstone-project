@@ -15,8 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.hamcrest.Matchers.is;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class SignUpControllerTest {
@@ -25,16 +24,16 @@ class SignUpControllerTest {
     int port;
 
     @Autowired
-    private AppUserRepository repo;
-
-    @Autowired
     PasswordEncoder encoder;
 
     @Autowired
     TestRestTemplate testRestTemplate;
 
-    private String getUrl(){
-        return "http://localhost:"+ port +"/auth/signup";
+    @Autowired
+    private AppUserRepository repo;
+
+    private String getUrl() {
+        return "http://localhost:" + port + "/auth/signup";
     }
 
     @BeforeEach
@@ -47,7 +46,7 @@ class SignUpControllerTest {
     }
 
     @Test
-    public void signUpWithValidCredentials(){
+    public void signUpWithValidCredentials() {
         //GIVEN
         String url = getUrl();
         LoginDataDto newUser = LoginDataDto.builder().username("crazy_cat_lady").password("IloveCats12").build();
@@ -61,7 +60,7 @@ class SignUpControllerTest {
     }
 
     @Test
-    public void signUpWithInValidPassword(){
+    public void signUpWithInValidPassword() {
         //GIVEN
         String url = getUrl();
         LoginDataDto newUser = LoginDataDto.builder().username("crazy_cat_lady").password("IloveCats").build();
@@ -74,7 +73,7 @@ class SignUpControllerTest {
     }
 
     @Test
-    public void signUpWithInValidUsername(){
+    public void signUpWithInValidUsername() {
         //GIVEN
         String url = getUrl();
         LoginDataDto newUser = LoginDataDto.builder().username("LO").password("IloveCats").build();
@@ -87,7 +86,7 @@ class SignUpControllerTest {
     }
 
     @Test
-    public void signUpWithUsernameThatAlreadyExists(){
+    public void signUpWithUsernameThatAlreadyExists() {
         //GIVEN
         String url = getUrl();
         LoginDataDto newUser = LoginDataDto.builder().username("Lola123").password("IloveCats1").build();

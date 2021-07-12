@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface ReviewRepo extends PagingAndSortingRepository<Review, String> {
 
-  List<Review> findByAuthor(String name);
+    List<Review> findByAuthor(String name);
 
-  List<Review> findByCounselingCenterId(String id);
+    List<Review> findByCounselingCenterId(String id);
 
-  boolean existsByCounselingCenterIdAndAuthor(String id, String Author);
+    boolean existsByCounselingCenterIdAndAuthor(String id, String Author);
 
 }

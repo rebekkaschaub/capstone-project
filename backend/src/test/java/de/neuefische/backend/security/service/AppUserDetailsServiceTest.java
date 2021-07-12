@@ -10,8 +10,9 @@ import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class AppUserDetailsServiceTest {
 
@@ -19,7 +20,7 @@ class AppUserDetailsServiceTest {
     private final AppUserDetailsService appUserDetailsService = new AppUserDetailsService(appUserRepository);
 
     @Test
-    public void findUSerByName(){
+    public void findUSerByName() {
         //GIVEN
         when(appUserRepository.findById("Jürni")).thenReturn(Optional.of(AppUser.builder().username("Jürni").password("SuperPasswort").build()));
 
@@ -32,12 +33,12 @@ class AppUserDetailsServiceTest {
     }
 
     @Test
-    public void throwsWhenUsernameIsNotFound(){
+    public void throwsWhenUsernameIsNotFound() {
         //GIVEN
         when(appUserRepository.findById("Jürni")).thenReturn(Optional.empty());
 
         //WHEN/THEN
-        assertThrows(UsernameNotFoundException.class, ()-> appUserDetailsService.loadUserByUsername("Jürni"));
+        assertThrows(UsernameNotFoundException.class, () -> appUserDetailsService.loadUserByUsername("Jürni"));
     }
 
 

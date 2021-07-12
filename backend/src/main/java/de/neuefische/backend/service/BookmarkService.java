@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
 import java.util.List;
 
 
@@ -29,9 +30,9 @@ public class BookmarkService {
         CounselingCenter counselingCenterToUpdate = counselingCenterRepo.findById(counselingCenterId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "CounselingCenter not found"));
 
-        if(counselingCenterToUpdate.getBookmarkedBy().contains(username)){
+        if (counselingCenterToUpdate.getBookmarkedBy().contains(username)) {
             counselingCenterToUpdate.getBookmarkedBy().remove(username);
-        }else{
+        } else {
             counselingCenterToUpdate.getBookmarkedBy().add(username);
         }
 

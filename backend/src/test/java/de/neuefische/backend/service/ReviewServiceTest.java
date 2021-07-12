@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
@@ -72,7 +72,7 @@ class ReviewServiceTest {
         when(repo.existsByCounselingCenterIdAndAuthor(reviewDto.getCounselingCenterId(), reviewDto.getAuthor())).thenReturn(true);
 
         //WHEN/THEN
-        assertThrows(ResponseStatusException.class, ()-> service.addReview(reviewDto));
+        assertThrows(ResponseStatusException.class, () -> service.addReview(reviewDto));
     }
 
     @Test
@@ -111,7 +111,7 @@ class ReviewServiceTest {
                 .build()));
 
         //WHEN/THEN
-        assertThrows(ResponseStatusException.class, ()->  service.deleteReview("42", "DerTrizeps"));
+        assertThrows(ResponseStatusException.class, () -> service.deleteReview("42", "DerTrizeps"));
         verify(repo, never()).deleteById("42");
     }
 
@@ -161,7 +161,7 @@ class ReviewServiceTest {
         when(repo.existsById("42")).thenReturn(false);
 
         //WHEN /THEN
-        assertThrows(IllegalArgumentException.class, ()->  service.updateReview("42", reviewDto));
+        assertThrows(IllegalArgumentException.class, () -> service.updateReview("42", reviewDto));
     }
 
     @Test

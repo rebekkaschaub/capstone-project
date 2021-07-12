@@ -37,9 +37,9 @@ public class ReviewService {
     }
 
     public Review addReview(ReviewDto reviewDto) {
-       if(repo.existsByCounselingCenterIdAndAuthor(reviewDto.getCounselingCenterId(), reviewDto.getAuthor())){
-           throw new ResponseStatusException(HttpStatus.CONFLICT, "Review already exists");
-       }
+        if (repo.existsByCounselingCenterIdAndAuthor(reviewDto.getCounselingCenterId(), reviewDto.getAuthor())) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Review already exists");
+        }
         Review review = Review.builder()
                 .reviewId(idUtils.generateUuid())
                 .counselingCenterId(reviewDto.getCounselingCenterId())
@@ -53,15 +53,15 @@ public class ReviewService {
     }
 
     public void deleteReview(String reviewId, String username) {
-       Review reviewToDelete = repo.findById(reviewId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Review with id does not exist: "+reviewId));
-       if(!reviewToDelete.getAuthor().equals(username)){
-           throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Author and user do not match");
-       }
+        Review reviewToDelete = repo.findById(reviewId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Review with id does not exist: " + reviewId));
+        if (!reviewToDelete.getAuthor().equals(username)) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Author and user do not match");
+        }
         repo.deleteById(reviewId);
     }
 
     public Review updateReview(String reviewId, ReviewDto reviewDto) {
-        if(!repo.existsById(reviewId)){
+        if (!repo.existsById(reviewId)) {
             throw new IllegalArgumentException();
         }
         Review review = Review.builder()
@@ -79,7 +79,7 @@ public class ReviewService {
         List<Review> reviews = listAllReviewsOfCounselingCenter(id);
         int count = reviews.size();
         int sum = 0;
-        if(count==0){
+        if (count == 0) {
             return ReviewStats.builder().count(0).average(0).build();
         }
 
@@ -87,6 +87,6 @@ public class ReviewService {
             sum += review.getRating();
         }
 
-        return ReviewStats.builder().count(count).average(sum/count).build();
+        return ReviewStats.builder().count(count).average(sum / count).build();
     }
 }

@@ -1,6 +1,6 @@
 package de.neuefische.backend.service;
 
-import de.neuefische.backend.model.*;
+import de.neuefische.backend.model.CounselingCenter;
 import de.neuefische.backend.repos.CounselingCenterRepo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 
@@ -26,17 +26,17 @@ class BookmarkServiceTest {
     @DisplayName("method updateBookmarkBy should add user to bookmarked by, when user is not yet in bookmarkedBy list")
     void updateBookMarkedByAdd() {
         //GIVEN
-        when(repo.findById("42")).thenReturn(Optional.of( CounselingCenter.builder()
+        when(repo.findById("42")).thenReturn(Optional.of(CounselingCenter.builder()
                 .id("42")
                 .name("Test Beratung ")
                 .bookmarkedBy(new ArrayList<>(List.of("Michael", "Janosch", "Carsten")))
                 .build()));
 
         CounselingCenter expected = CounselingCenter.builder()
-            .id("42")
-            .name("Test Beratung ")
-            .bookmarkedBy(List.of("Michael", "Janosch", "Carsten","Saskia"))
-            .build();
+                .id("42")
+                .name("Test Beratung")
+                .bookmarkedBy(List.of("Michael", "Janosch", "Carsten", "Saskia"))
+                .build();
 
         when(repo.save(expected)).thenReturn(expected);
 
@@ -52,7 +52,7 @@ class BookmarkServiceTest {
     @DisplayName("method updateBookmarkBy should remove user to bookmarked by, when user is in bookmarkedBy list")
     void updateBookMarkedByRemove() {
         //GIVEN
-        when(repo.findById("42")).thenReturn(Optional.of( CounselingCenter.builder()
+        when(repo.findById("42")).thenReturn(Optional.of(CounselingCenter.builder()
                 .id("42")
                 .name("Test Beratung ")
                 .bookmarkedBy(new ArrayList<>(List.of("Michael", "Janosch", "Carsten", "Saskia")))
@@ -81,7 +81,7 @@ class BookmarkServiceTest {
         when(repo.findById("42")).thenReturn(Optional.empty());
 
         //WHEN/THEN
-        assertThrows(ResponseStatusException.class, ()->service.updateBookMarkedBy("42", "John"));
+        assertThrows(ResponseStatusException.class, () -> service.updateBookMarkedBy("42", "John"));
 
     }
 }

@@ -14,7 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 public class SignUpService {
 
     private final AppUserRepository repo;
-    private final  PasswordEncoder encoder;
+    private final PasswordEncoder encoder;
 
     @Autowired
     public SignUpService(AppUserRepository repo, PasswordEncoder encoder) {
@@ -24,15 +24,15 @@ public class SignUpService {
 
 
     public UserDto signUp(LoginDataDto data) {
-        if(repo.existsById(data.getUsername())){
+        if (repo.existsById(data.getUsername())) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Username already exists");
         }
 
-        if(data.getUsername().length()<3){
+        if (data.getUsername().length() < 3) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username not valid");
         }
 
-        if(!validatePassword(data.getPassword())){
+        if (!validatePassword(data.getPassword())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password not valid");
         }
 
@@ -48,11 +48,11 @@ public class SignUpService {
     }
 
     private boolean hasMinLength(String password) {
-        return password.length()>=8;
+        return password.length() >= 8;
     }
 
     private boolean containsLowercase(String password) {
-       return password.matches(".*[a-z].*");
+        return password.matches(".*[a-z].*");
     }
 
     private boolean containsUppercase(String password) {

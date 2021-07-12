@@ -24,17 +24,17 @@ public class CounselingCenterController {
     }
 
     @GetMapping
-    public List<CounselingCenter> listAllCounselingCenters(){
+    public List<CounselingCenter> listAllCounselingCenters() {
         return service.listAllCounselingCenters();
     }
 
     @GetMapping("/{id}")
-    public CounselingCenter getCounselingCenterById(@PathVariable String id){
-    return service.getCounselingCenterById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "id does not exist"));
+    public CounselingCenter getCounselingCenterById(@PathVariable String id) {
+        return service.getCounselingCenterById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "id does not exist"));
     }
 
     @GetMapping("/search")
-    public List<CounselingCenter> searchCounselingCenterByQuery(@RequestParam MultiValueMap<String,String> params) {
+    public List<CounselingCenter> searchCounselingCenterByQuery(@RequestParam MultiValueMap<String, String> params) {
         return service.filterCounselingCenter(params);
     }
 }

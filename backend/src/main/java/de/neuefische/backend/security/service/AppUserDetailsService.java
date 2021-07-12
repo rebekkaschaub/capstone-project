@@ -25,6 +25,6 @@ public class AppUserDetailsService implements UserDetailsService {
                         .withUsername(username)
                         .password(appUser.getPassword())
                         .authorities("User")
-                        .build()).orElseThrow(()-> new UsernameNotFoundException("Username does not exist: "+username));
+                        .build()).orElseThrow(() -> new UsernameNotFoundException("Username does not exist: " + username));
     }
 }

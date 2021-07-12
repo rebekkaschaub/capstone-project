@@ -3,6 +3,7 @@ package de.neuefische.backend.model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
@@ -14,23 +15,23 @@ public enum Specialization {
     SUCHT("Sucht", "Suchtberatung"),
     TRAUMA("Tr", "Trauma"),
     KRISENINTERVENTION("KI", "Krisenintervention"),
-    SOZIALBERATUNG("SozB","Sozialberatung"),
-    LEBENSBERATUNG("LBB","Lebensberatung"),
+    SOZIALBERATUNG("SozB", "Sozialberatung"),
+    LEBENSBERATUNG("LBB", "Lebensberatung"),
     ALLEINERZIEHENDE("AMV", "Alleinerziehende"),
     ERZIEHUNGSBERATUNG("EZB", "Erziehung"),
     EHEBERATUNG("EB", "Ehe"),
-    PARTNERSCHAFT("PB","Partnerschaft"),
+    PARTNERSCHAFT("PB", "Partnerschaft"),
     TRENNUNG_UND_SCHEIDUNG("TS", "Trennung und Scheidung"),
     FAMILIENBERATUNG("FB", "Familie"),
     FRAUEN("Fr", "Frauen"),
     GEWALTOPFER("GewO", "Opfer jeglicher Gewalt"),
     GEWALTTAETER("GewT", "Gewalttäter*innen"),
-    STI("STI","HIV- und STI-Beratung"),
-    SEXUALBERATUNG("Sex","Sexualberatung"),
-    JUGENDBERATUNG("JB","Jugendberatung"),
+    STI("STI", "HIV- und STI-Beratung"),
+    SEXUALBERATUNG("Sex", "Sexualberatung"),
+    JUGENDBERATUNG("JB", "Jugendberatung"),
     KINDER("KiJu", "Kinder und Jugendliche"),
     LSBTIQ("LSB", "LSBTI"),
-    MIGRATION("Migr","Migration, Flüchtlinge und Spätaussiedler*innen");
+    MIGRATION("Migr", "Migration, Flüchtlinge und Spätaussiedler*innen");
 
     public String abbreviation;
     public String description;

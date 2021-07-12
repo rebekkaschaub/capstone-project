@@ -30,24 +30,24 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-       String token = getAuthToken(request);
+        String token = getAuthToken(request);
 
-       if(token != null && !token.isBlank()){
-           try{
-               Claims claims = this.jwtService.parseClaims(token);
-               setSecurityContext(claims.getSubject());
-           }catch(Exception e){
-               throw new ResponseStatusException(HttpStatus.FORBIDDEN, "invalid token");
-           }
-       }
+        if (token != null && !token.isBlank()) {
+            try {
+                Claims claims = this.jwtService.parseClaims(token);
+                setSecurityContext(claims.getSubject());
+            } catch (Exception e) {
+                throw new ResponseStatusException(HttpStatus.FORBIDDEN, "invalid token");
+            }
+        }
 
         filterChain.doFilter(request, response);
     }
 
     private String getAuthToken(HttpServletRequest request) {
         String authorization = request.getHeader("Authorization");
-        if(authorization != null){
-           return authorization.replace("Bearer", "").trim();
+        if (authorization != null) {
+            return authorization.replace("Bearer", "").trim();
         }
         return null;
     }

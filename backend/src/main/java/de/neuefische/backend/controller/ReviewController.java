@@ -24,47 +24,47 @@ public class ReviewController {
     }
 
     @GetMapping
-    public List<Review> listAllReviewsOfUser(Principal principal){
+    public List<Review> listAllReviewsOfUser(Principal principal) {
         return service.listAllReviewsOfUser(principal.getName());
     }
 
     @GetMapping("/{counselingCenterId}")
-    public List<Review> listAllReviewsOfCounselingCenter(@PathVariable String counselingCenterId){
+    public List<Review> listAllReviewsOfCounselingCenter(@PathVariable String counselingCenterId) {
         return service.listAllReviewsOfCounselingCenter(counselingCenterId);
     }
 
     @GetMapping("/review/{reviewId}")
-    public Review getReviewById(@PathVariable String reviewId){
-        return service.getReviewById(reviewId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Review with id does not exist: "+reviewId));
+    public Review getReviewById(@PathVariable String reviewId) {
+        return service.getReviewById(reviewId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Review with id does not exist: " + reviewId));
     }
 
     @PostMapping
-    public Review addReview(@RequestBody ReviewDto reviewDto, Principal principal){
-        if(!reviewDto.getAuthor().equals(principal.getName())){
+    public Review addReview(@RequestBody ReviewDto reviewDto, Principal principal) {
+        if (!reviewDto.getAuthor().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
         }
         return service.addReview(reviewDto);
     }
 
     @PutMapping("/{reviewId}")
-    public Review updateReview(@PathVariable String reviewId,  @RequestBody ReviewDto reviewDto, Principal principal){
-        if(!reviewDto.getAuthor().equals(principal.getName())){
+    public Review updateReview(@PathVariable String reviewId, @RequestBody ReviewDto reviewDto, Principal principal) {
+        if (!reviewDto.getAuthor().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
         }
         try {
             return service.updateReview(reviewId, reviewDto);
         } catch (IllegalArgumentException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Review with id does not exist: "+reviewId);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Review with id does not exist: " + reviewId);
         }
     }
 
     @DeleteMapping("/{reviewId}")
-    public void deleteReview(@PathVariable String reviewId, Principal principal){
+    public void deleteReview(@PathVariable String reviewId, Principal principal) {
         service.deleteReview(reviewId, principal.getName());
     }
 
     @GetMapping("/stats/{counselingCenterId}")
-    public ReviewStats getReviewStats(@PathVariable String counselingCenterId){
+    public ReviewStats getReviewStats(@PathVariable String counselingCenterId) {
         return service.calculateReviewStats(counselingCenterId);
     }
 }

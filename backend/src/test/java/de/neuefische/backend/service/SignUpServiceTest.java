@@ -11,16 +11,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.server.ResponseStatusException;
 
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class SignUpServiceTest {
 
-    private final PasswordEncoder encoder= new BCryptPasswordEncoder();
+    private final PasswordEncoder encoder = new BCryptPasswordEncoder();
     private final AppUserRepository repo = mock(AppUserRepository.class);
     private final SignUpService signUpService = new SignUpService(repo, encoder);
 
@@ -46,7 +46,7 @@ class SignUpServiceTest {
         LoginDataDto newUser = LoginDataDto.builder().username("Lucy").password("1234abCD").build();
 
         // When/ Then
-        assertThrows(ResponseStatusException.class, ()->signUpService.signUp(newUser));
+        assertThrows(ResponseStatusException.class, () -> signUpService.signUp(newUser));
     }
 
     @Test
@@ -57,7 +57,7 @@ class SignUpServiceTest {
         LoginDataDto newUser = LoginDataDto.builder().username("Lucy").password("123").build();
 
         // When/ Then
-        assertThrows(ResponseStatusException.class, ()->signUpService.signUp(newUser));
+        assertThrows(ResponseStatusException.class, () -> signUpService.signUp(newUser));
     }
 
     @ParameterizedTest(name = "when password is {0}, then validatePassword should return: {1}")
