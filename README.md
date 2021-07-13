@@ -1,9 +1,8 @@
 # sympathise
 
-### Über die App
+### About the app
 
-sympathise macht es einfach qualifizierte Beratungsstellen für Rat, Unterstützung und professionelle Hilfe in persönlichen Notlagen oder für nahestehende Personen zu finden. 
-Schnell und zuverlässig findet man Adressen, Telefonnummern und Online Beratungsangebote mit Erfahrungsberichten aus der Community.
+sympathise makes it easy to find qualified social counseling centers for advice, support and professional help in a personal crisis or for your loved ones. You can quickly and reliably find addresses, phone numbers and online counseling services with reviews from the community.
 
 ![map](images/sympathise_map.png)
 
